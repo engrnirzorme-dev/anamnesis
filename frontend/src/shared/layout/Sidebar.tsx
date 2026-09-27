@@ -18,6 +18,7 @@ import {
   IconHistory,
   IconFileExport,
   IconShieldLock,
+  IconBrain,
   type Icon,
 } from '@tabler/icons-react';
 import clsx from 'clsx';
@@ -70,6 +71,7 @@ const CATALOG_GROUP: NavItemDef[] = [
 ];
 
 const TOOLS_GROUP: NavItemDef[] = [
+  { to: '/more/nirzor', label: 'NIRZOR ИИ', icon: IconBrain },
   { to: '/more/ai-chat', label: 'AI чат', icon: IconMessageChatbot },
   { to: '/more/search', label: 'Поиск', icon: IconSearch },
   { to: '/graph', label: 'Карта здоровья', icon: IconTopologyStar3, prefix: true },

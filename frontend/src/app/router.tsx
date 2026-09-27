@@ -28,6 +28,7 @@ import SearchModal from '@/features/more/modals/SearchModal';
 import AiChatSheet from '@/features/more/modals/AiChatSheet';
 import HistoryModal from '@/features/more/modals/HistoryModal';
 import SecurityModal from '@/features/more/modals/SecurityModal';
+import NirzorModal from '@/features/more/modals/NirzorModal';
 import { HealthGraphPage } from '@/features/health-graph/HealthGraphPage';
 
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
@@ -96,6 +97,7 @@ export const router = createBrowserRouter(
             { path: 'reminders', Component: RemindersModal },
             { path: 'search', Component: SearchModal },
             { path: 'ai-chat', Component: AiChatSheet },
+            { path: 'nirzor', Component: NirzorModal },
             { path: 'history', Component: HistoryModal },
             { path: 'security', Component: SecurityModal },
           ],

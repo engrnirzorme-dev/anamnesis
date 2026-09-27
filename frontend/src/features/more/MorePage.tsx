@@ -15,6 +15,7 @@ import {
   IconChevronRight,
   IconHistory,
   IconShieldLock,
+  IconBrain,
 } from '@tabler/icons-react';
 import { PageContainer } from '@/shared/layout/PageContainer';
 import { PatientCard } from '@/features/dashboard/components/PatientCard';
@@ -41,6 +42,7 @@ interface MenuItem {
 
 const MENU: MenuItem[] = [
   { id: 'search', label: 'Поиск', icon: IconSearch, iconBg: 'var(--purple)', action: 'route', target: '/more/search' },
+  { id: 'nirzor', label: 'NIRZOR ИИ', icon: IconBrain, iconBg: 'linear-gradient(135deg,#007AFF,#5AC8FA)', action: 'route', target: '/more/nirzor' },
   { id: 'ai-chat', label: 'Чат с AI', icon: IconMessageChatbot, iconBg: 'linear-gradient(135deg,#007AFF,#5AC8FA)', action: 'route', target: '/more/ai-chat' },
   { id: 'specialists', label: 'Специалисты', icon: IconStethoscope, iconBg: 'var(--blue)', action: 'route', target: '/more/specialists' },
   { id: 'medications', label: 'Все препараты', icon: IconPill, iconBg: 'var(--green)', action: 'route', target: '/more/medications' },

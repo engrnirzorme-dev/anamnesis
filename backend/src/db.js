@@ -860,6 +860,51 @@ try {
 // PIN хранится как хеш — если БД утечёт, PIN не восстановить.
 // Ключ: 'pin_hash_{pid}'. Если отсутствует — берём из APP_PIN .env (legacy).
 
+// ── v4.0 NIRZOR Clinical Intelligence ───────────────────────
+db.exec(`
+  CREATE TABLE IF NOT EXISTS clinical_drafts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    patient_id INTEGER NOT NULL DEFAULT 1,
+    title TEXT NOT NULL,
+    clinical_question TEXT,
+    
+    patient_state_snapshot TEXT,
+    evidence_used TEXT,
+    
+    pre_safety_status TEXT DEFAULT 'pending',
+    pre_safety_detail TEXT,
+    
+    reasoning_result TEXT,
+    scv_status TEXT DEFAULT 'pending',
+    scv_detail TEXT,
+    post_safety_status TEXT DEFAULT 'pending',
+    post_safety_detail TEXT,
+    
+    ai_recommendation_draft TEXT,
+    status TEXT DEFAULT 'draft',
+    human_review_note TEXT,
+    reviewed_at TEXT,
+    reviewed_by TEXT,
+    
+    created_at TEXT DEFAULT (datetime('now')),
+    updated_at TEXT DEFAULT (datetime('now'))
+  );
+  CREATE INDEX IF NOT EXISTS idx_clinical_drafts_patient ON clinical_drafts(patient_id);
+  CREATE INDEX IF NOT EXISTS idx_clinical_drafts_status ON clinical_drafts(status);
+
+  CREATE TABLE IF NOT EXISTS clinical_decision_ledger (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    draft_id INTEGER REFERENCES clinical_drafts(id),
+    patient_id INTEGER NOT NULL DEFAULT 1,
+    clinical_question TEXT,
+    action TEXT NOT NULL,
+    actor TEXT NOT NULL,
+    final_outcome TEXT,
+    timestamp TEXT DEFAULT (datetime('now'))
+  );
+  CREATE INDEX IF NOT EXISTS idx_decision_ledger_patient ON clinical_decision_ledger(patient_id);
+`);
+
 // ── PostgreSQL compatibility wrapper ────────────────────────
 
 const pool = {

@@ -36,6 +36,7 @@ const patientContextRoutes = require('./routes/patient-context');
 const adminToolsRoutes = require('./routes/admin-tools');
 const webauthnRoutes = require('./routes/webauthn');
 const historyRoutes = require('./routes/history');
+const nirzorRoutes = require('./routes/nirzor');
 
 const app = express();
 
@@ -539,6 +540,7 @@ app.use('/api/visit-diagnoses', visitDiagnosesRoutes);
 app.use('/api/patient-context', patientContextRoutes);
 app.use('/api/webauthn', webauthnRoutes);
 app.use('/api/history', historyRoutes);
+app.use('/api/nirzor', nirzorRoutes);
 
 // SPA fallback
 app.get('*', (_req, res) => {
