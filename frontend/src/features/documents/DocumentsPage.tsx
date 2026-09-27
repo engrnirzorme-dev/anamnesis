@@ -26,13 +26,13 @@ import { haptic } from '@/shared/lib/haptic';
 import type { Timeline, Document } from '@/shared/types';
 
 /**
- * Documents page — timeline визитов и документов.
+ * Documents page — timeline вofитов и документов.
  *
  * MVP (этот PR): список с фильтрами + клик открывает route-based модалку
  * `/documents/visit/:visitId`.
  *
- * Будущее (Sonnet): формы создания визита, загрузки документа, редактирования,
- * транскрипции, запроса AI. См. комментарий в router.tsx.
+ * Будущее (Sonnet): формы создания вofита, загрузки документа, редактирования,
+ * транскрипции, зAprоса AI. См. комментарий в router.tsx.
  */
 export function DocumentsPage() {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ export function DocumentsPage() {
     [pendingAi]
   );
 
-  // Standalone docs = документы не привязанные ни к одному визиту
+  // Standalone docs = документы не привязанные ни к одному вofиту
   const standaloneDocs = useMemo(() => {
     const linked = new Set<number>();
     for (const t of data ?? []) {
@@ -61,9 +61,9 @@ export function DocumentsPage() {
     return allDocs.filter((d) => !d.timeline_id || !linked.has(d.id));
   }, [data, allDocs]);
 
-  // Для фильтра "Все" — объединённая хронология visits + standalone docs
+  // Для фильтра "All" — объединённая хронология visits + standalone docs
   // отсортированная по дате DESC (самое свежее сверху). Иначе недавние
-  // лабораторные анализы (standalone) попадали в самый низ списка.
+  // лабораторные аналofы (standalone) попадали в самый нof списка.
   const unifiedGrouped = useMemo(() => {
     if (!data) return [];
     const visits = filterTimeline(data, 'visits');
@@ -71,14 +71,14 @@ export function DocumentsPage() {
     return groupEntriesByYear(entries);
   }, [data, standaloneDocs]);
 
-  // Для фильтра "Приёмы" — только timeline visits по годам (legacy behavior)
+  // Для фильтра "Visitы" — только timeline visits по yearsм (legacy behavior)
   const visitsGrouped = useMemo(() => {
     if (!data) return [];
     const visits = filterTimeline(data, 'visits');
     return groupByYear(visits);
   }, [data]);
 
-  // Для фильтра "Документы" — standalone docs по годам
+  // Для фильтра "Documents" — standalone docs по yearsм
   const docsGrouped = useMemo(() => {
     return groupDocsByYear(standaloneDocs);
   }, [standaloneDocs]);
@@ -114,11 +114,11 @@ export function DocumentsPage() {
       <PageContainer>
         <EmptyState
           icon={<IconAlertCircle size={48} color="var(--red)" />}
-          title="Не удалось загрузить"
+          title="Failed to load"
           text={(error as Error).message}
           action={
             <Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>
-              Повторить
+              Retry
             </Button>
           }
         />
@@ -139,7 +139,7 @@ export function DocumentsPage() {
             navigate('/documents/new');
           }}
         >
-          Новый приём
+          New Visit
         </Button>
         <Button
           size="sm"
@@ -151,7 +151,7 @@ export function DocumentsPage() {
             navigate('/documents/upload');
           }}
         >
-          Загрузить док.
+          Upload док.
         </Button>
       </div>
 
@@ -160,19 +160,19 @@ export function DocumentsPage() {
       {!hasAnyContent ? (
         <EmptyState
           icon={<IconFolderOpen size={48} color="var(--text-secondary)" />}
-          title="Пусто"
+          title="Empty"
           text={
             filter === 'visits'
-              ? 'Приёмов пока нет'
+              ? 'No visits yet'
               : filter === 'docs'
-                ? 'Отдельных документов нет'
-                : 'Добавьте приём или загрузите документ'
+                ? 'No standalone documents'
+                : 'Add a visit or upload a document'
           }
         />
       ) : filter === 'all' ? (
-        // Фильтр "Все" — объединённая хронология visits + standalone docs
+        // Filter "All" — объединённая хронология visits + standalone docs
         // отсортированная по дате DESC. Самое свежее всегда сверху,
-        // независимо от того, привязан документ к визиту или нет.
+        // независимо от того, привязан документ к вofиту или нет.
         unifiedGrouped.map((group) => (
           <div key={group.year}>
             <div className="section-subtitle">{group.year}</div>
@@ -197,7 +197,7 @@ export function DocumentsPage() {
           </div>
         ))
       ) : filter === 'visits' ? (
-        // Фильтр "Приёмы" — только timeline visits по годам
+        // Filter "Visitы" — только timeline visits по yearsм
         visitsGrouped.map((group) => (
           <div key={group.year}>
             <div className="section-subtitle">{group.year}</div>
@@ -214,7 +214,7 @@ export function DocumentsPage() {
           </div>
         ))
       ) : (
-        // Фильтр "Документы" — только standalone docs по годам, сортировка по дате
+        // Filter "Documents" — только standalone docs по yearsм, сортировка по дате
         docsGrouped.map((group) => (
           <div key={group.year}>
             <div className="section-subtitle">{group.year}</div>
@@ -240,7 +240,7 @@ export function DocumentsPage() {
             pointerEvents: 'none',
           }}
         >
-          Обновление...
+          Updating...
         </div>
       )}
 

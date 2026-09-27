@@ -3,17 +3,17 @@ import { Sheet } from './Sheet';
 import { Button } from './Button';
 
 /**
- * Промис-based подтверждение. НЕ через роутинг — локальное состояние.
+ * Промис-based подтверждение. НЕ in роутинг — локальное состояние.
  *
- * Использование через хук:
+ * Использование in хук:
  * ```tsx
  * const { confirm, dialog } = useConfirm();
  *
  * const handleDelete = async () => {
  *   const ok = await confirm({
- *     title: 'Удалить визит?',
- *     message: 'Действие нельзя отменить',
- *     confirmText: 'Удалить',
+ *     title: 'Delete вofит?',
+ *     message: 'Action нельзя отменить',
+ *     confirmText: 'Delete',
  *     confirmVariant: 'danger',
  *   });
  *   if (ok) { await deleteVisit(); }
@@ -21,7 +21,7 @@ import { Button } from './Button';
  *
  * return (
  *   <>
- *     <Button onClick={handleDelete}>Удалить</Button>
+ *     <Button onClick={handleDelete}>Delete</Button>
  *     {dialog}
  *   </>
  * );
@@ -63,18 +63,18 @@ export function useConfirm() {
     <Sheet
       open
       onClose={() => handleResolve(false)}
-      title={pending.title ?? 'Подтверждение'}
+      title={pending.title ?? 'Confirmation'}
       footer={
         <div style={{ display: 'flex', gap: 8 }}>
           <Button variant="secondary" block onClick={() => handleResolve(false)}>
-            {pending.cancelText ?? 'Отмена'}
+            {pending.cancelText ?? 'Cancel'}
           </Button>
           <Button
             variant={pending.confirmVariant ?? 'primary'}
             block
             onClick={() => handleResolve(true)}
           >
-            {pending.confirmText ?? 'Подтвердить'}
+            {pending.confirmText ?? 'Confirm'}
           </Button>
         </div>
       }

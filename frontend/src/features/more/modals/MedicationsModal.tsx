@@ -20,10 +20,10 @@ export default function MedicationsModal() {
 
   return (
     <>
-      <Modal title="Препараты" desktopStyle="page">
+      <Modal title="Medications" desktopStyle="page">
         {isLoading && <SkeletonList count={3} height={64} />}
         {!isLoading && all.length === 0 && (
-          <EmptyState icon={<IconPill size={48} color="var(--text-secondary)" />} text="Нет препаратов" />
+          <EmptyState icon={<IconPill size={48} color="var(--text-secondary)" />} text="No препаратов" />
         )}
 
         {active.length > 0 && (
@@ -39,7 +39,7 @@ export default function MedicationsModal() {
 
         {completed.length > 0 && (
           <>
-            <div className="section-subtitle">Завершённые ({completed.length})</div>
+            <div className="section-subtitle">Completedные ({completed.length})</div>
             {completed.map((m) => (
               <MedicationRow key={m.id} med={m} onClick={() => { haptic('light'); setSelected(m); }} />
             ))}
@@ -98,12 +98,12 @@ function MedicationDetails({ m }: { m: Medication }) {
         <div style={{ background: 'var(--bg)', borderRadius: 12, padding: '14px 16px', marginBottom: 16 }}>
           {m.dosage && (
             <div style={{ fontSize: 14, marginBottom: 4 }}>
-              Дозировка: <strong>{m.dosage}</strong>
+              Dosage: <strong>{m.dosage}</strong>
             </div>
           )}
           {m.frequency && (
             <div style={{ fontSize: 14 }}>
-              Приём: <strong>{m.frequency}</strong>
+              Visit: <strong>{m.frequency}</strong>
             </div>
           )}
         </div>
@@ -111,14 +111,14 @@ function MedicationDetails({ m }: { m: Medication }) {
 
       {m.start_date && (
         <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>
-          Период: {formatDate(m.start_date)}
+          Period: {formatDate(m.start_date)}
           {m.end_date ? ` — ${formatDate(m.end_date)}` : ' — ...'}
         </div>
       )}
 
       {m.detail && (
         <div style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Подробная информация</div>
+          <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Detailed information</div>
           <div
             style={{
               background: 'var(--bg)',
@@ -146,7 +146,7 @@ function MedicationDetails({ m }: { m: Medication }) {
               marginBottom: 8,
             }}
           >
-            Независимая оценка AI
+            Independent AI assessment
           </div>
           <div
             style={{

@@ -1,7 +1,7 @@
 /**
  * Haptic feedback — тактильная вибрация на мобилах.
  *
- * Использует стандартный `navigator.vibrate` API. На iOS Safari работает частично
+ * Использует стандартный `navigator.vibrate` API. На iOS Safari работает hourтично
  * (только в PWA / standalone), на Android Chrome работает всегда. Десктопы игнорируют.
  *
  * КОГДА ИСПОЛЬЗОВАТЬ:

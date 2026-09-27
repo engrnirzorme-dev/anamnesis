@@ -10,10 +10,10 @@ export default function GrowthModal() {
   const all = data ?? [];
 
   return (
-    <Modal title="Рост и вес" desktopStyle="page">
+    <Modal title="Growth & Weight" desktopStyle="page">
       {isLoading && <SkeletonList count={3} height={56} />}
       {!isLoading && all.length === 0 && (
-        <EmptyState icon={<IconRuler2 size={48} color="var(--text-secondary)" />} text="Нет измерений" />
+        <EmptyState icon={<IconRuler2 size={48} color="var(--text-secondary)" />} text="No ofмерений" />
       )}
       {all.length > 0 && (
         <div
@@ -27,9 +27,9 @@ export default function GrowthModal() {
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
             <thead>
               <tr style={{ background: 'var(--bg)' }}>
-                <th style={{ padding: '10px 8px', textAlign: 'left', fontWeight: 600 }}>Дата</th>
-                <th style={{ padding: '10px 8px', textAlign: 'right', fontWeight: 600 }}>Рост</th>
-                <th style={{ padding: '10px 8px', textAlign: 'right', fontWeight: 600 }}>Вес</th>
+                <th style={{ padding: '10px 8px', textAlign: 'left', fontWeight: 600 }}>Date</th>
+                <th style={{ padding: '10px 8px', textAlign: 'right', fontWeight: 600 }}>Growth</th>
+                <th style={{ padding: '10px 8px', textAlign: 'right', fontWeight: 600 }}>Weight</th>
                 <th style={{ padding: '10px 8px', textAlign: 'right', fontWeight: 600 }}>Голова</th>
                 <th style={{ padding: '10px 8px', textAlign: 'right', fontWeight: 600, width: 40 }}>#</th>
               </tr>

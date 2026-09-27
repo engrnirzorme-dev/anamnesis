@@ -7,28 +7,28 @@ import { useIsDesktop } from '@/shared/hooks/useMediaQuery';
  *
  * На мобилке — фиксированный сверху, с заголовком и patient switcher справа.
  * На десктопе — упрощённый хедер внутри main area (не фиксированный),
- * т.к. навигация полностью делается через sidebar. Patient switcher уже
+ * т.к. навигация полностью делается in sidebar. Patient switcher уже
  * есть в sidebar, но оставляем и в хедере как задел на будущее.
  */
 
-// Карта соответствия роут → заголовок
+// Map соответствия роут → заголовок
 const TITLES: Record<string, string> = {
-  '/dashboard': 'Сводка',
-  '/plan': 'План',
-  '/errors': 'Ошибки',
-  '/documents': 'Приёмы',
-  '/diagnoses': 'Диагнозы',
-  '/more': 'Ещё',
-  '/more/specialists': 'Специалисты',
-  '/more/medications': 'Препараты',
-  '/more/vaccinations': 'Прививки',
-  '/more/growth': 'Рост и вес',
-  '/more/labs': 'Анализы',
-  '/more/reminders': 'Напоминания',
-  '/more/ai-chat': 'AI чат',
-  '/more/search': 'Поиск',
-  '/more/history': 'История изменений',
-  '/graph': 'Карта здоровья',
+  '/dashboard': 'Dashboard',
+  '/plan': 'Plan',
+  '/errors': 'Errors',
+  '/documents': 'Visits',
+  '/diagnoses': 'Diagnoses',
+  '/more': 'More',
+  '/more/specialists': 'Specialists',
+  '/more/medications': 'Medications',
+  '/more/vaccinations': 'Vaccinations',
+  '/more/growth': 'Growth & Weight',
+  '/more/labs': 'Lab Results',
+  '/more/reminders': 'Reminders',
+  '/more/ai-chat': 'AI Chat',
+  '/more/search': 'Search',
+  '/more/history': 'History',
+  '/graph': 'Health Graph',
 };
 
 function getTitleForPath(pathname: string): string {
@@ -37,7 +37,7 @@ function getTitleForPath(pathname: string): string {
   for (const [route, title] of sorted) {
     if (pathname === route || pathname.startsWith(`${route}/`)) return title;
   }
-  return 'Здоровье';
+  return 'Health';
 }
 
 export function Header() {

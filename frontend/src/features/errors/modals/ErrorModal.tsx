@@ -27,7 +27,7 @@ export default function ErrorModal() {
 
   if (!error) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -42,22 +42,22 @@ export default function ErrorModal() {
     <IconInfoCircle size={12} />;
 
   const handleToggle = async () => {
-    const action = error.status === 'resolved' ? 'открыть заново' : 'отметить решённым';
+    const action = error.status === 'resolved' ? 'reopen' : 'mark as resolved';
     const ok = await confirm({
       message: `${action[0]!.toUpperCase() + action.slice(1)}?`,
-      confirmText: error.status === 'resolved' ? 'Открыть' : 'Отметить решённым',
+      confirmText: error.status === 'resolved' ? 'Open' : 'Mark as resolved',
     });
     if (ok) toggle.mutate(error);
   };
 
   return (
-    <Modal title={error.title ?? 'Ошибка'}>
+    <Modal title={error.title ?? 'Error'}>
       <div style={{ marginBottom: 16, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
         <Badge color={SEVERITY_BADGE[sev]} icon={sevIcon}>
           {SEVERITY_LABELS[sev]}
         </Badge>
         <Badge color={error.status === 'resolved' ? 'green' : 'red'}>
-          {error.status === 'resolved' ? 'Решено' : 'Открыто'}
+          {error.status === 'resolved' ? 'Resolved' : 'Open'}
         </Badge>
       </div>
 
@@ -70,19 +70,19 @@ export default function ErrorModal() {
       </div>
 
       {error.detail && (
-        <Block color="var(--text)" icon={<IconInfoCircle size={14} />} title="Подробное описание">
+        <Block color="var(--text)" icon={<IconInfoCircle size={14} />} title="Detailed description">
           {error.detail}
         </Block>
       )}
 
       {error.advice && (
-        <Block color="var(--green)" icon={<IconStethoscope size={14} />} title="Рекомендации специалиста" bg="#F3FBF5">
+        <Block color="var(--green)" icon={<IconStethoscope size={14} />} title="Specialist recommendations" bg="#F3FBF5">
           {error.advice}
         </Block>
       )}
 
       {error.ai_assessment && (
-        <Block color="var(--purple)" icon={<IconBrain size={14} />} title="Независимая оценка AI" bg="#F8F1FC">
+        <Block color="var(--purple)" icon={<IconBrain size={14} />} title="Independent AI assessment" bg="#F8F1FC">
           {error.ai_assessment}
         </Block>
       )}
@@ -117,7 +117,7 @@ export default function ErrorModal() {
           loading={toggle.isPending}
           icon={error.status === 'resolved' ? <IconRotateClockwise size={14} /> : <IconCircleCheck size={14} />}
         >
-          {error.status === 'resolved' ? 'Открыть заново' : 'Отметить решённым'}
+          {error.status === 'resolved' ? 'Reopen' : 'Mark as resolved'}
         </Button>
       </div>
 

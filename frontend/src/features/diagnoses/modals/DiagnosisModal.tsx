@@ -9,9 +9,9 @@ import type { Diagnosis, DiagnosisStatus } from '@/shared/types';
 import type { BadgeColor } from '@/shared/ui';
 
 const STATUS_LABELS: Record<DiagnosisStatus, string> = {
-  active: 'Активный',
-  resolved: 'Закрыт',
-  suspected: 'Под вопросом',
+  active: 'Active',
+  resolved: 'Closed',
+  suspected: 'Suspected',
 };
 
 const STATUS_BADGE: Record<DiagnosisStatus, BadgeColor> = {
@@ -30,7 +30,7 @@ export default function DiagnosisModal() {
 
   if (!diag) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -50,13 +50,13 @@ export default function DiagnosisModal() {
       {diag.source && (
         <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>
           <IconStethoscope size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-          Источник: {diag.source}
+          Source: {diag.source}
         </div>
       )}
       {diag.diagnosed_date && (
         <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>
           <IconCalendar size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-          Дата: {formatDate(diag.diagnosed_date)}
+          Date: {formatDate(diag.diagnosed_date)}
         </div>
       )}
 
@@ -83,7 +83,7 @@ export default function DiagnosisModal() {
               gap: 6,
             }}
           >
-            <IconBrain size={14} /> AI-анализ диагноза
+            <IconBrain size={14} /> AI-аналof диагноза
           </div>
           <div
             style={{

@@ -11,13 +11,13 @@ interface Props {
 /**
  * Императивная обёртка над Cytoscape.
  *
- * Правила (из §11 ресёрч-отчёта Context7-агента):
+ * Правила (of §11 ресёрч-отчёта Context7-агента):
  * - НЕ использовать `react-cytoscapejs` (он не поддерживает React 19)
- * - Мы сами управляем жизненным циклом `cy` через useEffect
+ * - Mы сами управляем жofненным циклом `cy` in useEffect
  * - React только контейнер, cytoscape работает императивно
  * - `cy.destroy()` в cleanup — обязательно
  *
- * Порт поведения из vanilla `health-graph.js:237-421`.
+ * Порт поведения of vanilla `health-graph.js:237-421`.
  */
 export function CytoscapeCanvas({ elements, activeTypes, onSelectNode }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);

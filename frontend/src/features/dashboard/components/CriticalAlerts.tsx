@@ -10,8 +10,8 @@ interface Props {
 }
 
 /**
- * Критические ошибки. Показываются только со `severity === 'critical'`.
- * Порт из vanilla `dashboard.js:260-280` (renderAlerts).
+ * Critical Errors. Показываются только со `severity === 'critical'`.
+ * Порт of vanilla `dashboard.js:260-280` (renderAlerts).
  */
 export function CriticalAlerts({ errors, onSelect }: Props) {
   const critical = errors.filter((e) => e.severity === 'critical');

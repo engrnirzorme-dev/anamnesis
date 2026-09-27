@@ -1,6 +1,6 @@
 /**
- * Типизированная ошибка API — бросается из `client.ts` при non-2xx ответе.
- * Код компонентов должен проверять `instanceof ApiError` или просто `err.status`.
+ * Typeofированная ошибка API — бросается of `client.ts` при non-2xx ответе.
+ * Code компонентов должен проверять `instanceof ApiError` или просто `err.status`.
  */
 export class ApiError extends Error {
   status: number;
@@ -27,7 +27,7 @@ export class ApiError extends Error {
 }
 
 /**
- * Type guard для отличия ApiError от обычных ошибок.
+ * Type guard for отличия ApiError от обычных ошибок.
  */
 export function isApiError(err: unknown): err is ApiError {
   return err instanceof ApiError;

@@ -29,21 +29,21 @@ import { getSession } from '@/shared/auth/session';
 import { PatientSwitcher } from './PatientSwitcher';
 
 /**
- * Боковая панель для десктопа. Содержит ВСЁ: разделы из «Основного», из «Ещё»
+ * Боковая панель for десктопа. Содержит ВСЁ: разделы of «Основного», of «More»
  * и инструменты — одним списком с группировкой.
  *
- * На мобиле Sidebar скрыт через CSS (`display: none`), вместо него TabBar снизу.
+ * На мобиле Sidebar скрыт in CSS (`display: none`), вместо него TabBar снofу.
  *
- * Бейджи с количеством (План/Ошибки/Диагнозы/Приёмы/Препараты) берутся из
+ * Бейджи с количеством (Plan/Errors/Diagnoses/Visitы/Medications) берутся of
  * `useDashboard()` — кэш разделяется с самой страницей Dashboard, повторный
- * запрос не делается.
+ * зAprос не делается.
  */
 
 interface NavItemDef {
   to: string;
   label: string;
   icon: Icon;
-  /** Ключ в dashboard.stats для badge-цифры. Берутся реальные поля бэкенда. */
+  /** Ключ в dashboard.stats for badge-цифры. Берутся реальные поля бэкенда. */
   badgeKey?: 'plan_total' | 'errors_open' | 'diagnoses' | 'specialists' | 'documents' | 'reminders';
   badgeColor?: 'red' | 'orange' | 'green' | 'purple' | 'default';
   /** Если true — активна когда pathname начинается с to (а не совпадает точно) */
@@ -54,30 +54,30 @@ interface NavItemDef {
 
 // Фиксированные навигационные элементы — разбитые по группам.
 const MAIN_GROUP: NavItemDef[] = [
-  { to: '/dashboard', label: 'Сводка', icon: IconLayoutDashboard, prefix: true },
-  { to: '/plan', label: 'План', icon: IconListCheck, badgeKey: 'plan_total', badgeColor: 'orange', prefix: true },
-  { to: '/errors', label: 'Ошибки', icon: IconAlertTriangle, badgeKey: 'errors_open', badgeColor: 'red', prefix: true },
-  { to: '/documents', label: 'Приёмы', icon: IconStethoscope, badgeKey: 'documents', prefix: true },
-  { to: '/diagnoses', label: 'Диагнозы', icon: IconClipboardList, badgeKey: 'diagnoses', badgeColor: 'purple', prefix: true },
+  { to: '/dashboard', label: 'Dashboard', icon: IconLayoutDashboard, prefix: true },
+  { to: '/plan', label: 'Plan', icon: IconListCheck, badgeKey: 'plan_total', badgeColor: 'orange', prefix: true },
+  { to: '/errors', label: 'Errors', icon: IconAlertTriangle, badgeKey: 'errors_open', badgeColor: 'red', prefix: true },
+  { to: '/documents', label: 'Visitы', icon: IconStethoscope, badgeKey: 'documents', prefix: true },
+  { to: '/diagnoses', label: 'Diagnoses', icon: IconClipboardList, badgeKey: 'diagnoses', badgeColor: 'purple', prefix: true },
 ];
 
 const CATALOG_GROUP: NavItemDef[] = [
-  { to: '/more/specialists', label: 'Специалисты', icon: IconUserHeart, badgeKey: 'specialists' },
-  { to: '/more/medications', label: 'Препараты', icon: IconPill, badgeColor: 'green' },
-  { to: '/more/vaccinations', label: 'Прививки', icon: IconVaccine },
-  { to: '/more/growth', label: 'Рост и вес', icon: IconRuler2 },
-  { to: '/more/labs', label: 'Анализы', icon: IconTestPipe },
-  { to: '/more/reminders', label: 'Напоминания', icon: IconBell },
+  { to: '/more/specialists', label: 'Specialists', icon: IconUserHeart, badgeKey: 'specialists' },
+  { to: '/more/medications', label: 'Medications', icon: IconPill, badgeColor: 'green' },
+  { to: '/more/vaccinations', label: 'Vaccinations', icon: IconVaccine },
+  { to: '/more/growth', label: 'Growth & Weight', icon: IconRuler2 },
+  { to: '/more/labs', label: 'Lab Results', icon: IconTestPipe },
+  { to: '/more/reminders', label: 'Reminders', icon: IconBell },
 ];
 
 const TOOLS_GROUP: NavItemDef[] = [
-  { to: '/more/nirzor', label: 'NIRZOR ИИ', icon: IconBrain },
-  { to: '/more/ai-chat', label: 'AI чат', icon: IconMessageChatbot },
-  { to: '/more/search', label: 'Поиск', icon: IconSearch },
-  { to: '/graph', label: 'Карта здоровья', icon: IconTopologyStar3, prefix: true },
-  { to: '/more/history', label: 'История изменений', icon: IconHistory },
-  { to: '/more/security', label: 'Безопасность', icon: IconShieldLock },
-  { to: '/more/export', label: 'Экспорт PDF', icon: IconFileExport, action: 'export-pdf' },
+  { to: '/more/nirzor', label: 'NIRZOR AI', icon: IconBrain },
+  { to: '/more/ai-chat', label: 'AI Chat', icon: IconMessageChatbot },
+  { to: '/more/search', label: 'Search', icon: IconSearch },
+  { to: '/graph', label: 'Health Graph', icon: IconTopologyStar3, prefix: true },
+  { to: '/more/history', label: 'History', icon: IconHistory },
+  { to: '/more/security', label: 'Security', icon: IconShieldLock },
+  { to: '/more/export', label: 'Export PDF', icon: IconFileExport, action: 'export-pdf' },
 ];
 
 export function Sidebar() {
@@ -89,7 +89,7 @@ export function Sidebar() {
   const location = useLocation();
   const stats = dashboard?.stats;
 
-  // Вычисляем badge для каждого пункта
+  // Вычисляем badge for каждого пункта
   const getBadge = (key?: NavItemDef['badgeKey']) => {
     if (!key || !stats) return null;
     const raw = stats[key];
@@ -125,7 +125,7 @@ export function Sidebar() {
           <img src="/icons/icon.svg" alt="Anamnesis" className="ds-brand-logo" />
           <div style={{ minWidth: 0 }}>
             <div className="ds-brand-title">Anamnesis</div>
-            <div className="ds-brand-subtitle">Медицинский трекер</div>
+            <div className="ds-brand-subtitle">Medical Tracker</div>
           </div>
         </div>
 
@@ -137,17 +137,17 @@ export function Sidebar() {
 
       {/* Nav */}
       <nav className="ds-nav">
-        <div className="ds-nav-section-title">Основное</div>
+        <div className="ds-nav-section-title">Main</div>
         {MAIN_GROUP.map((item) => (
           <NavItem key={item.to} item={item} active={isActive(item)} badge={getBadge(item.badgeKey)} />
         ))}
 
-        <div className="ds-nav-section-title">Картотека</div>
+        <div className="ds-nav-section-title">Records</div>
         {CATALOG_GROUP.map((item) => (
           <NavItem key={item.to} item={item} active={isActive(item)} badge={getBadge(item.badgeKey)} />
         ))}
 
-        <div className="ds-nav-section-title">Инструменты</div>
+        <div className="ds-nav-section-title">Tools</div>
         {TOOLS_GROUP.map((item) => {
           if (item.action === 'export-pdf') {
             return (
@@ -173,7 +173,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="ds-sidebar-footer">Версия 2.0</div>
+      <div className="ds-sidebar-footer">Version 2.0</div>
     </aside>
   );
 }
@@ -191,7 +191,7 @@ function NavItem({
   return (
     <NavLink
       to={item.to}
-      // Мгновенный переход без transition-анимации — клик по навигации
+      // Mгновенный переход без transition-анимации — клик по навигации
       // в sidebar должен открывать страницу сразу, как в любом desktop app
       state={{ instant: true }}
       className={clsx('ds-nav-item', active && 'active')}

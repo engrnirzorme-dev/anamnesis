@@ -7,8 +7,8 @@ import { useUpdateVisit, useDeleteVisit } from '../hooks/useVisitMutations';
 import { useTimeline } from '../hooks/useTimeline';
 
 /**
- * Модалка редактирования визита. Route: `/documents/visit/:visitId/edit`
- * Показывает все поля, включая AI assessment. Внизу — кнопка удаления.
+ * Mодалка редактирования вofита. Route: `/documents/visit/:visitId/edit`
+ * Показывает все поля, включая AI assessment. Внofу — кнопка удаления.
  */
 export default function VisitEditModal() {
   const { visitId } = useParams();
@@ -25,7 +25,7 @@ export default function VisitEditModal() {
 
   if (!visit) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -35,9 +35,9 @@ export default function VisitEditModal() {
 
   const handleDelete = async () => {
     const ok = await confirm({
-      title: 'Удалить приём?',
-      message: 'Привязанные документы останутся. Действие нельзя отменить.',
-      confirmText: 'Удалить',
+      title: 'Delete visit?',
+      message: 'Linked documents will remain. This action cannot be undone.',
+      confirmText: 'Delete',
       confirmVariant: 'danger',
     });
     if (!ok) return;
@@ -46,12 +46,12 @@ export default function VisitEditModal() {
   };
 
   return (
-    <Modal title="Редактирование">
+    <Modal title="Edit Visit">
       <VisitForm
         initial={visit}
         showAiField
         submitting={update.isPending}
-        submitLabel="Сохранить изменения"
+        submitLabel="Save changes"
         onSubmit={async (data) => {
           await update.mutateAsync({ id, data });
           closeModal();
@@ -71,7 +71,7 @@ export default function VisitEditModal() {
               onClick={() => void handleDelete()}
               loading={del.isPending}
             >
-              Удалить приём
+              Delete приём
             </Button>
           </div>
         }

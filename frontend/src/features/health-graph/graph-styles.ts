@@ -1,8 +1,8 @@
 import type { StylesheetStyle } from 'cytoscape';
 
 /**
- * Стили Cytoscape для карты здоровья.
- * Точный порт из vanilla `frontend/js/pages/health-graph.js:240-345`.
+ * Стили Cytoscape for карты здоровья.
+ * Точный порт of vanilla `frontend/js/pages/health-graph.js:240-345`.
  */
 export const GRAPH_STYLES: StylesheetStyle[] = [
   {

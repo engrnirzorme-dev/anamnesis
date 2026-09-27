@@ -3,7 +3,7 @@ import type { Document, Timeline } from '@/shared/types';
 /**
  * Конвертирует `doc.file_path` в публичный URL.
  * В БД путь хранится как `/var/lib/.../uploads/xxx.pdf` или с обратными слэшами — берём basename.
- * Порт из vanilla `documents.js:13` (getFileUrl).
+ * Порт of vanilla `documents.js:13` (getFileUrl).
  */
 export function docFileUrl(doc: Document): string | null {
   if (!doc.file_path) return null;
@@ -22,21 +22,21 @@ export function isPdf(doc: Document): boolean {
 }
 
 export const CATEGORY_LABELS: Record<string, string> = {
-  visit: 'Приём',
-  test: 'Обследование',
-  diagnosis: 'Диагноз',
-  milestone: 'Событие',
+  visit: 'Visit',
+  test: 'Examination',
+  diagnosis: 'Diagnosis',
+  milestone: 'Event',
 };
 
 export const DOC_CATEGORY_LABELS: Record<string, string> = {
-  lab: 'Анализы',
-  imaging: 'Снимки',
-  prescription: 'Рецепт',
-  report: 'Заключение',
-  other: 'Другое',
+  lab: 'Lab Results',
+  imaging: 'Images',
+  prescription: 'Prescription',
+  report: 'Report',
+  other: 'Other',
 };
 
-const MONTHS = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export function parseEventDate(dateStr: string | null | undefined): { day: number; month: string; year: number } | null {
   if (!dateStr) return null;
@@ -55,17 +55,17 @@ export function getSpecialistInfo(t: Timeline): { name: string | null; type: str
 }
 
 /**
- * Фильтры списка в Documents (порт из vanilla documents.js:897).
+ * Filterы списка в Documents (порт of vanilla documents.js:897).
  */
 export type DocumentsFilter = 'all' | 'visits' | 'docs';
 
 /**
- * Условие "это визит/приём" — совпадает с vanilla:
+ * Условие "это вofит/приём" — совпадает с vanilla:
  * `isVisit = i.category === 'visit' || i.specialist_id || i.specialist_name || i.specialist_type`
  *
- * Важно: milestone-события с привязанным специалистом (например "Рождение —
- * выписной эпикриз" → Перевозникова Л.В., неонатолог) ТОЖЕ считаются визитами
- * и показываются в фильтре «Приёмы». Раньше в React я проверял только
+ * Important: milestone-события с привязанным специалистом (e.g. "Рождение —
+ * выписной эпикрof" → Перевозникова Л.В., неонатолог) ТОЖЕ считаются вofитами
+ * и показываются в фильтре «Visitы». Раньше в React я проверял только
  * `category === 'visit' || null`, и такие события пропадали при фильтрации.
  */
 function isVisitLike(t: Timeline): boolean {
@@ -84,7 +84,7 @@ export function filterTimeline(items: Timeline[], filter: DocumentsFilter): Time
 }
 
 /**
- * Группировка таймлайна по годам для рендера секций.
+ * Group таймлайна по yearsм for рендера секций.
  */
 export function groupByYear(items: Timeline[]): Array<{ year: number; items: Timeline[] }> {
   const groups = new Map<number, Timeline[]>();
@@ -99,23 +99,23 @@ export function groupByYear(items: Timeline[]): Array<{ year: number; items: Tim
     .map(([year, items]) => ({ year, items }));
 }
 
-// ─── Unified timeline + standalone docs для фильтра «Все» ──────────
+// ─── Unified timeline + standalone docs for фильтра «All» ──────────
 //
 // Проблема которая решается: раньше standalone documents рендерились
-// отдельной секцией "Документы без привязки" внизу списка, независимо
-// от дат. В результате свежий документ (например анализы от 10.04.2026)
+// отдельной секцией "Documents без привязки" внofу списка, независимо
+// от дат. В результате свежий документ (e.g. аналofы от 10.04.2026)
 // оказывался ВНИЗУ, хотя хронологически он самый недавний.
 //
 // Решение: объединить timeline visits и standalone docs в единый
-// список, отсортированный по дате DESC, затем группировать по годам.
+// список, отсортированный по дате DESC, затем группировать по yearsм.
 
 export type UnifiedEntry =
   | { kind: 'visit'; visit: Timeline; sortDate: string }
   | { kind: 'doc'; doc: Document; sortDate: string };
 
 /**
- * Возвращает дату для сортировки документа.
- * Предпочитаем document_date (дата СОБЫТИЯ — когда сдали анализ, когда
+ * Возвращает дату for сортировки документа.
+ * Предпочитаем document_date (дата СОБЫТИЯ — когда сдали аналof, когда
  * выписал врач), fallback на created_at (дата загрузки в систему).
  */
 function getDocSortDate(doc: Document): string {
@@ -161,7 +161,7 @@ export function groupEntriesByYear(
 }
 
 /**
- * Сортировать и группировать standalone docs по годам (для фильтра «Документы»).
+ * Сортировать и группировать standalone docs по yearsм (for фильтра «Documents»).
  * Использует document_date или created_at fallback.
  */
 export function groupDocsByYear(

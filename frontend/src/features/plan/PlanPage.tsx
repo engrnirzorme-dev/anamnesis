@@ -12,7 +12,7 @@ import type { PlanItem, Priority } from '@/shared/types';
 /**
  * Plan page — список задач с табами pending/done + route-based детали.
  *
- * Чтение url `?tab=done` поддерживается (для клика со StatCard на Dashboard).
+ * Чтение url `?tab=done` поддерживается (for клика со StatCard на Dashboard).
  */
 export function PlanPage() {
   const { data, isLoading, error, refetch } = usePlan();
@@ -48,9 +48,9 @@ export function PlanPage() {
       <PageContainer>
         <EmptyState
           icon={<IconAlertCircle size={48} color="var(--red)" />}
-          title="Не удалось загрузить"
+          title="Failed to load"
           text={(error as Error).message}
-          action={<Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>Повторить</Button>}
+          action={<Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>Retry</Button>}
         />
       </PageContainer>
     );
@@ -70,7 +70,7 @@ export function PlanPage() {
           icon={tab === 'pending'
             ? <IconCircleCheck size={48} color="var(--text-secondary)" />
             : <IconList size={48} color="var(--text-secondary)" />}
-          text={tab === 'pending' ? 'Все задачи выполнены!' : 'Нет выполненных задач'}
+          text={tab === 'pending' ? 'All tasks completed!' : 'No completed tasks'}
         />
       ) : (
         PRIORITY_ORDER.map((priority: Priority) => {

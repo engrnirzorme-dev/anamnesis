@@ -2,14 +2,14 @@ import { ApiError } from './errors';
 import { getSession } from '@/shared/auth/session';
 
 /**
- * Базовый fetch-клиент для всех запросов к `/api/*`.
+ * Базовый fetch-клиент for всех зAprосов к `/api/*`.
  *
  * Отвечает за:
  * - Базовый URL `/api`
- * - Auth headers (Bearer, Session, Patient-Id) из session store
- * - JSON <-> string сериализация
+ * - Auth headers (Bearer, Session, Patient-Id) of session store
+ * - JSON <-> string сериалofация
  * - Корректный обработчик ошибок (ApiError с кодом статуса)
- * - Поддержка FormData для upload-запросов
+ * - Поддержка FormData for upload-зAprосов
  *
  * НЕ отвечает за:
  * - Кэширование (это делает React Query)
@@ -49,7 +49,7 @@ async function request<T>(
   if (session.patientId !== null && session.patientId !== undefined) {
     headers['X-Patient-Id'] = String(session.patientId);
   }
-  // X-Device-Id: стабильный UUID устройства для device trust
+  // X-Device-Id: стабильный UUID устройства for device trust
   // (бэкенд запоминает known devices, спрашивает secret question на новых)
   if (session.deviceId) {
     headers['X-Device-Id'] = session.deviceId;
@@ -88,7 +88,7 @@ async function request<T>(
     }
 
     // Глобальный обработчик 401/403 — если сессия недействительна
-    // (например устройство было отозвано владельцем), диспатчим
+    // (e.g. устройство было отозвано владельцем), диспатчим
     // событие которое AuthContext подхватит и сделает auto-logout.
     // Это срабатывает на ЛЮБОЙ endpoint кроме самих auth-эндпоинтов.
     if (

@@ -7,19 +7,19 @@ import type { VisitInput } from '../api';
 import type { Timeline } from '@/shared/types';
 
 /**
- * Универсальная форма создания/редактирования визита.
- * Порт из vanilla `documents.js` showCreateVisitModal / showEditVisitModal.
+ * Универсальная форма создания/редактирования вofита.
+ * Порт of vanilla `documents.js` showCreateVisitModal / showEditVisitModal.
  *
  * Использует контролируемые useState (без react-hook-form — форма простая,
  * не хочется тащить лишнюю абстракцию).
  */
 
 const SPECIALIST_TYPES = [
-  'Невролог', 'Педиатр', 'Логопед', 'Психолог', 'Психиатр',
-  'Ортопед', 'ЛОР', 'Офтальмолог', 'Стоматолог', 'Хирург',
-  'Аллерголог', 'Дерматолог', 'Гастроэнтеролог', 'Кардиолог',
-  'Эндокринолог', 'Уролог', 'Нефролог', 'Остеопат', 'Реабилитолог',
-  'Другой специалист',
+  'Neurologist', 'Pediatrician', 'Speech Therapist', 'Psychologist', 'Psychiatrist',
+  'Orthopedist', 'ENT', 'Ophthalmologist', 'Dentist', 'Surgeon',
+  'Allergist', 'Dermatologist', 'Gastroenterologist', 'Cardiologist',
+  'Endocrinologist', 'Urologist', 'Nephrologist', 'Osteopath', 'Rehabilitation Specialist',
+  'Other Specialist',
 ];
 
 interface Props {
@@ -35,7 +35,7 @@ export function VisitForm({
   initial,
   onSubmit,
   submitting = false,
-  submitLabel = 'Сохранить',
+  submitLabel = 'Save',
   showAiField = false,
   extraFooter,
 }: Props) {
@@ -81,16 +81,16 @@ export function VisitForm({
 
   return (
     <form onSubmit={(e) => void handleSubmit(e)}>
-      <Field label="Название приёма *">
+      <Field label="Visit name *">
         <Input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Например: Приём невролога"
+          placeholder="E.g.: Neurology appointment"
           required
         />
       </Field>
 
-      <Field label="Дата *">
+      <Field label="Date *">
         <Input
           type="date"
           value={eventDate}
@@ -99,28 +99,28 @@ export function VisitForm({
         />
       </Field>
 
-      <Field label="Специалист">
+      <Field label="Specialist">
         <Select value={specialistId} onChange={(e) => setSpecialistId(e.target.value)}>
-          <option value="">— Выберите из списка —</option>
+          <option value="">— Select from list —</option>
           {specialists.map((s) => (
             <option key={s.id} value={s.id}>
-              {s.full_name ?? '(без имени)'} — {s.specialization ?? ''}
+              {s.full_name ?? '((no name))'} — {s.specialization ?? ''}
             </option>
           ))}
         </Select>
       </Field>
 
-      <Field label="Или вручную: имя врача">
+      <Field label="Or manually: doctor name">
         <Input
           value={specialistName}
           onChange={(e) => setSpecialistName(e.target.value)}
-          placeholder="ФИО врача (если нет в списке)"
+          placeholder="Doctor name (if not in list)"
         />
       </Field>
 
-      <Field label="Специализация">
+      <Field label="Specialization">
         <Select value={specialistType ?? ''} onChange={(e) => setSpecialistType(e.target.value)}>
-          <option value="">— Выберите —</option>
+          <option value="">— Select —</option>
           {SPECIALIST_TYPES.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -129,36 +129,36 @@ export function VisitForm({
         </Select>
       </Field>
 
-      <Field label="Категория">
+      <Field label="Category">
         <Select value={category ?? 'visit'} onChange={(e) => setCategory(e.target.value)}>
-          <option value="visit">Приём</option>
-          <option value="test">Обследование</option>
-          <option value="diagnosis">Диагноз</option>
-          <option value="milestone">Событие</option>
+          <option value="visit">Visit</option>
+          <option value="test">Examination</option>
+          <option value="diagnosis">Diagnosis</option>
+          <option value="milestone">Event</option>
         </Select>
       </Field>
 
-      <Field label="Описание / заключение">
+      <Field label="Description / Conclusion">
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Краткое описание визита или заключение врача"
+          placeholder="Brief description or doctor's conclusion"
           rows={3}
         />
       </Field>
 
-      <Field label="Расшифровка (из NotebookLM)">
+      <Field label="Transcription (of NotebookLM)">
         <Textarea
           value={transcription}
           onChange={(e) => setTranscription(e.target.value)}
-          placeholder="Вставьте сюда расшифровку аудиозаписи приёма..."
+          placeholder="Вставьте сюда расшифровку аудиоrecords приёма..."
           rows={5}
           style={{ fontSize: 13 }}
         />
       </Field>
 
       {showAiField && (
-        <Field label="Анализ AI">
+        <Field label="AI Analysis">
           <Textarea
             value={aiAssessment}
             onChange={(e) => setAiAssessment(e.target.value)}
@@ -168,11 +168,11 @@ export function VisitForm({
         </Field>
       )}
 
-      <Field label="Заметки">
+      <Field label="Notes">
         <Textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Дополнительные заметки"
+          placeholder="Additional notes"
           rows={2}
         />
       </Field>

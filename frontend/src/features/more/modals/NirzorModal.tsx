@@ -68,7 +68,7 @@ export default function NirzorModal() {
     });
 
     const handleRunAnalysis = () => {
-        const q = prompt("Введите клинический вопрос (например, 'Какова тактика лечения при текущих симптомах?'):");
+        const q = prompt("Enter clinical question (e.g., 'Какова тактика лечения при текущих симптомах?'):");
         if (q) {
             analyzeMutation.mutate(q);
         }
@@ -96,14 +96,14 @@ export default function NirzorModal() {
                         disabled={analyzeMutation.isPending}
                     >
                         <IconBrain size={16} /> 
-                        {analyzeMutation.isPending ? 'Анализ...' : 'Новый анализ'}
+                        {analyzeMutation.isPending ? 'Analyzing...' : 'New analysis'}
                     </button>
                 </div>
 
                 <div style={{ flex: 1, overflowY: 'auto' }}>
                     {activeTab === 'queue' && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            {draftsLoading ? <p>Загрузка...</p> : draftsData?.drafts.length === 0 ? <p>Нет данных в очереди</p> : null}
+                            {draftsLoading ? <p>Loading...</p> : draftsData?.drafts.length === 0 ? <p>No data в очереди</p> : null}
                             {draftsData?.drafts.map(draft => (
                                 <div key={draft.id} style={{ background: 'var(--card)', padding: '16px', borderRadius: '12px', border: '1px solid var(--border)' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
@@ -169,7 +169,7 @@ export default function NirzorModal() {
 
                     {activeTab === 'ledger' && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            {ledgerLoading ? <p>Загрузка...</p> : ledgerData?.ledger.length === 0 ? <p>Нет записей в леджере</p> : null}
+                            {ledgerLoading ? <p>Loading...</p> : ledgerData?.ledger.length === 0 ? <p>No records в леджере</p> : null}
                             {ledgerData?.ledger.map(entry => (
                                 <div key={entry.id} style={{ background: 'var(--card)', padding: '12px', borderRadius: '12px', border: '1px solid var(--border)' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>

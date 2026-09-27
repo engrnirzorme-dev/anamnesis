@@ -5,8 +5,8 @@ import { docFileUrl, isImage, isPdf, DOC_CATEGORY_LABELS, parseEventDate } from 
 import type { Document } from '@/shared/types';
 
 /**
- * Карточка отдельного документа (не привязан к визиту).
- * Порт из vanilla `documents.js` renderStandaloneDocCard.
+ * Card отдельного документа (не привязан к вofиту).
+ * Порт of vanilla `documents.js` renderStandaloneDocCard.
  */
 interface Props {
   doc: Document;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function StandaloneDocCard({ doc, onClick }: Props) {
-  // Приоритет — document_date (дата события, например когда сдали анализ),
+  // Priority — document_date (дата события, e.g. когда сдали аналof),
   // fallback на created_at (дата загрузки в систему).
   // Так документ попадает в нужное место хронологии.
   const dateSource = doc.document_date || doc.created_at;
@@ -70,7 +70,7 @@ export function StandaloneDocCard({ doc, onClick }: Props) {
 
         <div style={{ flex: 1, minWidth: 0 }}>
           <div className="timeline-title" style={{ fontSize: 14 }}>
-            {doc.title ?? doc.original_name ?? 'Документ'}
+            {doc.title ?? doc.original_name ?? 'Document'}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 4, alignItems: 'center' }}>
             {doc.category && (

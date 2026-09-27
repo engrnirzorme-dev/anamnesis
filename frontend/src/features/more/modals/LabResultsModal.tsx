@@ -13,23 +13,23 @@ import { motion, AnimatePresence } from 'motion/react';
 import type { LabResult, LabResultStatus } from '@/shared/types';
 
 /**
- * Лабораторные анализы.
+ * Лабораторные аналofы.
  *
- * Группировка по (test_name + test_date), внутри — список параметров.
+ * Group по (test_name + test_date), внутри — список параметров.
  * Для каждого показываем:
- * - Параметр
- * - Значение (цветное по статусу + жирное)
- * - Норма из полей ref_min / ref_max
- * - Подпись статуса (Норма / Ниже / Выше / Критично) справа цветом
+ * - Parameter
+ * - Value (цветное по статусу + жирное)
+ * - Normal of полей ref_min / ref_max
+ * - Подпись статуса (Normal / Ниже / Выше / Critical) справа цветом
  *
- * Порт из vanilla more.js:451-515 (renderLabResultsList).
+ * Порт of vanilla more.js:451-515 (renderLabResultsList).
  */
 
 const STATUS_LABELS: Record<LabResultStatus, string> = {
-  normal: 'Норма',
-  low: 'Ниже нормы',
-  high: 'Выше нормы',
-  critical: 'Критично',
+  normal: 'Normal',
+  low: 'Below normal',
+  high: 'Above normal',
+  critical: 'Critical',
 };
 
 const STATUS_COLORS: Record<LabResultStatus, string> = {
@@ -58,10 +58,10 @@ export default function LabResultsModal() {
   }, [data]);
 
   return (
-    <Modal title="Анализы" desktopStyle="page">
+    <Modal title="Lab Results" desktopStyle="page">
       {isLoading && <SkeletonList count={3} height={64} />}
       {!isLoading && groups.length === 0 && (
-        <EmptyState icon={<IconTestPipe size={48} color="var(--text-secondary)" />} text="Нет анализов" />
+        <EmptyState icon={<IconTestPipe size={48} color="var(--text-secondary)" />} text="No аналofов" />
       )}
 
       {groups.map((g) => {
@@ -177,7 +177,7 @@ function LabRow({ row }: { row: LabResult }) {
       >
         <div style={{ flex: 1, color: 'var(--text)', minWidth: 0 }}>{row.parameter}</div>
 
-        {/* Значение (цветное) */}
+        {/* Value (цветное) */}
         <div
           style={{
             fontWeight: isAnomaly ? 700 : 500,
@@ -191,7 +191,7 @@ function LabRow({ row }: { row: LabResult }) {
           {row.unit && ` ${row.unit}`}
         </div>
 
-        {/* Норма */}
+        {/* Normal */}
         <div
           style={{
             fontSize: 11,
@@ -204,7 +204,7 @@ function LabRow({ row }: { row: LabResult }) {
           {rangeText}
         </div>
 
-        {/* Статус-лейбл */}
+        {/* Status-лейбл */}
         {label && (
           <div
             style={{

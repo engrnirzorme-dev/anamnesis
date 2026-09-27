@@ -6,9 +6,9 @@ import { haptic } from '@/shared/lib/haptic';
  * Навигация к/от route-based модалок.
  *
  * Паттерн: модалка — это child-роут. Открытие = navigate на child-путь.
- * Закрытие = navigate на родительский путь (back up one level).
+ * Closedие = navigate на родительский путь (back up one level).
  *
- * Пример использования из страницы:
+ * Пример использования of страницы:
  * ```tsx
  * function PlanPage() {
  *   const { openModal } = useRouteModal();
@@ -25,7 +25,7 @@ import { haptic } from '@/shared/lib/haptic';
  * }
  * ```
  *
- * Пример из модалки:
+ * Пример of модалки:
  * ```tsx
  * function PlanItemModal() {
  *   const { closeModal } = useRouteModal();
@@ -40,7 +40,7 @@ export function useRouteModal() {
   const openModal = useCallback(
     (relativePath: string) => {
       haptic('light');
-      // Относительная навигация вниз от текущего пути
+      // Относительная навигация внof от текущего пути
       navigate(`${location.pathname.replace(/\/$/, '')}/${relativePath}`);
     },
     [navigate, location.pathname]
@@ -49,7 +49,7 @@ export function useRouteModal() {
   const closeModal = useCallback(() => {
     haptic('light');
     // navigate('..') с дефолтным `relative: 'route'` поднимается на один
-    // уровень NESTED ROUTE, а не URL-сегмент. Это критично для роутов
+    // уровень NESTED ROUTE, а не URL-сегмент. Это критично for роутов
     // с многосегментными path типа `visit/:visitId` — `relative: 'path'`
     // стрипал бы только `:visitId`, оставляя `/documents/visit` (не роут),
     // что приводило к catch-all `*` → `/dashboard`.

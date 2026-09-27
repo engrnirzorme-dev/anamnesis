@@ -40,7 +40,7 @@ export const fetchReminders = (): Promise<Reminder[]> =>
   api.get<Reminder[]>(EP.reminders);
 
 /**
- * Реальный ответ бэкенда /api/search возвращает объекты с произвольными
+ * Реальный ответ бэкенда /api/search возвращает объекты с проofвольными
  * полями в зависимости от типа сущности (name, status, и т.д.) и помечает
  * тип полем `_type`. Обёрнут в `{ results: [...] }`.
  */
@@ -57,7 +57,7 @@ interface SearchHit {
  * Defensive parsing — бэкенд может вернуть:
  * - прямой массив
  * - обёртку `{ results: [...] }` (реальный формат)
- * - что-то ещё (например HTML страницу ошибки, unexpected JSON)
+ * - что-то ещё (e.g. HTML страницу ошибки, unexpected JSON)
  * В любом случае возвращаем валидный массив, никогда не кидаем exception.
  */
 export const search = async (q: string): Promise<SearchHit[]> => {

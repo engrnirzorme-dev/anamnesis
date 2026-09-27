@@ -25,7 +25,7 @@ export function RequireAuth({ children }: { children: ReactNode }) {
           background: 'var(--bg)',
         }}
       >
-        {/* Пустой экран — избегаем flash контента перед редиректом */}
+        {/* Emptyй экран — ofбегаем flash контента перед редиректом */}
       </div>
     );
   }

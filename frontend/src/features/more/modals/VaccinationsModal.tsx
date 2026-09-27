@@ -36,9 +36,9 @@ import { CommentsSection } from '@/features/comments/CommentsSection';
 import type { Vaccination, VaccinationStatus } from '@/shared/types';
 
 const STATUS_LABELS: Record<VaccinationStatus, string> = {
-  scheduled: 'Запланирована',
+  scheduled: 'Plannedа',
   done: 'Выполнена',
-  skipped: 'Пропущена',
+  skipped: 'Missed',
   postponed: 'Отложена',
 };
 
@@ -59,12 +59,12 @@ export default function VaccinationsModal() {
 
   return (
     <>
-      <Modal title="Прививки" desktopStyle="page">
+      <Modal title="Vaccinations" desktopStyle="page">
         {isLoading && <SkeletonList count={3} height={64} />}
         {!isLoading && all.length === 0 && (
           <EmptyState
             icon={<IconVaccine size={48} color="var(--text-secondary)" />}
-            text="Нет прививок"
+            text="No прививок"
           />
         )}
 
@@ -131,7 +131,7 @@ export default function VaccinationsModal() {
           );
         })}
 
-        <CommentsSection entityType="vaccinations" entityId={0} title="Комментарии к разделу" />
+        <CommentsSection entityType="vaccinations" entityId={0} title="Comments к разделу" />
       </Modal>
 
       <VaccinationDetailSheet id={selectedId} onClose={() => setSelectedId(null)} />
@@ -240,8 +240,8 @@ function VaccinationContent({
 
   const handleDeletePhoto = async (url: string) => {
     const ok = await confirm({
-      message: 'Удалить фото?',
-      confirmText: 'Удалить',
+      message: 'Delete photo?',
+      confirmText: 'Delete',
       confirmVariant: 'danger',
     });
     if (ok) deleteMutation.mutate(url);
@@ -255,7 +255,7 @@ function VaccinationContent({
         <Badge color={STATUS_COLORS[vac.status]} icon={<IconVaccine size={12} />}>
           {STATUS_LABELS[vac.status]}
         </Badge>
-        {vac.dose_number != null && <Badge color="blue">Доза {vac.dose_number}</Badge>}
+        {vac.dose_number != null && <Badge color="blue">Dose {vac.dose_number}</Badge>}
       </div>
 
       {vac.vaccine_name && (
@@ -272,16 +272,16 @@ function VaccinationContent({
               size={14}
               style={{ verticalAlign: 'middle', marginRight: 4 }}
             />
-            Вакцина: <strong>{vac.vaccine_name}</strong>
+            Vaccine: <strong>{vac.vaccine_name}</strong>
           </div>
           {vac.batch_number && (
             <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 4 }}>
-              Серия: {vac.batch_number}
+              Batch: {vac.batch_number}
             </div>
           )}
           {vac.administered_by && (
             <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 4 }}>
-              Врач: {vac.administered_by}
+              Doctor: {vac.administered_by}
             </div>
           )}
         </div>
@@ -291,7 +291,7 @@ function VaccinationContent({
         {vac.scheduled_date && (
           <div>
             <IconCalendar size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-            Запланировано: {formatDate(vac.scheduled_date)}
+            Scheduled: {formatDate(vac.scheduled_date)}
           </div>
         )}
         {vac.actual_date && (
@@ -300,7 +300,7 @@ function VaccinationContent({
               size={13}
               style={{ verticalAlign: 'middle', marginRight: 4 }}
             />
-            Выполнено: {formatDate(vac.actual_date)}
+            Completed: {formatDate(vac.actual_date)}
           </div>
         )}
       </div>
@@ -327,7 +327,7 @@ function VaccinationContent({
               size={13}
               style={{ verticalAlign: 'middle', marginRight: 4 }}
             />
-            Реакция
+            Reaction
           </div>
           <div style={{ fontSize: 13, color: 'var(--text)' }}>{vac.reaction}</div>
         </div>
@@ -356,7 +356,7 @@ function VaccinationContent({
             gap: 6,
           }}
         >
-          <IconPhoto size={14} /> Фото документов {photos.length > 0 && `(${photos.length})`}
+          <IconPhoto size={14} /> Photo документов {photos.length > 0 && `(${photos.length})`}
         </div>
 
         {photos.length > 0 ? (
@@ -407,7 +407,7 @@ function VaccinationContent({
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
-                  aria-label="Удалить фото"
+                  aria-label="Delete photo"
                 >
                   <IconX size={12} />
                 </button>
@@ -416,7 +416,7 @@ function VaccinationContent({
           </div>
         ) : (
           <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 8 }}>
-            Нет загруженных фото
+            No загруженных фото
           </div>
         )}
 
@@ -427,7 +427,7 @@ function VaccinationContent({
           loading={uploadMutation.isPending}
           onClick={() => fileInputRef.current?.click()}
         >
-          Загрузить фото
+          Upload фото
         </Button>
         <input
           ref={fileInputRef}

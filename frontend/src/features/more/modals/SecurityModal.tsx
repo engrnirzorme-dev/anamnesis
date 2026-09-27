@@ -20,7 +20,7 @@ import { ApiError } from '@/shared/api/errors';
 import WebAuthnSection from './SecurityWebAuthnSection';
 
 /**
- * Страница Безопасность — управление устройствами, PIN, контрольным словом
+ * Page Security — управление устройствами, PIN, контрольным словом
  * и биометрией (WebAuthn).
  *
  * Endpoints используемые этой страницей:
@@ -29,7 +29,7 @@ import WebAuthnSection from './SecurityWebAuthnSection';
  * - POST /api/auth/logout-all        — разлогинить все кроме текущего
  * - POST /api/auth/change-pin        — смена PIN
  * - POST /api/auth/set-security-question — смена контрольного слова (reuses setup endpoint)
- * - WebAuthn endpoints для биометрии (см. SecurityWebauthnSection)
+ * - WebAuthn endpoints for биометрии (см. SecurityWebauthnSection)
  */
 
 interface SecurityStatus {
@@ -62,11 +62,11 @@ function formatRelative(iso: string): string {
   const sec = Math.floor(diffMs / 1000);
   if (sec < 60) return 'только что';
   const min = Math.floor(sec / 60);
-  if (min < 60) return `${min} мин назад`;
+  if (min < 60) return `${min} мин ago`;
   const h = Math.floor(min / 60);
-  if (h < 24) return `${h} ч назад`;
+  if (h < 24) return `${h} ч ago`;
   const d = Math.floor(h / 24);
-  if (d < 30) return `${d} дн назад`;
+  if (d < 30) return `${d} дн ago`;
   return date.toLocaleDateString('ru-RU');
 }
 
@@ -114,7 +114,7 @@ export default function SecurityModal() {
   const activeDevices = (data?.devices ?? []).filter((d) => !d.revoked);
 
   return (
-    <Modal title="Безопасность" desktopStyle="page">
+    <Modal title="Security" desktopStyle="page">
       <div style={{ padding: '0 16px', paddingBottom: 40 }}>
         {feedback && (
           <div
@@ -150,7 +150,7 @@ export default function SecurityModal() {
             <div style={{ fontSize: 18, fontWeight: 700 }}>Защита данных</div>
           </div>
           <div style={{ fontSize: 13, opacity: 0.95, lineHeight: 1.4 }}>
-            PIN + контрольное слово + доверенные устройства. Все сессии переживают рестарт
+            PIN + контрольное слово + доверенные устройства. All сессии переживают рестарт
             сервера, все попытки входа логируются.
           </div>
         </div>
@@ -184,7 +184,7 @@ export default function SecurityModal() {
           >
             <div>
               <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--text)' }}>
-                Сменить PIN
+                Change PIN
               </div>
               <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 2 }}>
                 6 цифр. Старые сессии будут разлогинены.
@@ -215,7 +215,7 @@ export default function SecurityModal() {
           >
             <div>
               <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--text)' }}>
-                Контрольное слово
+                Security word
               </div>
               <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 2 }}>
                 {data?.has_security_question
@@ -227,20 +227,20 @@ export default function SecurityModal() {
           </button>
         </div>
 
-        {/* Список устройств */}
+        {/* List устройств */}
         <div
           className="section-subtitle"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <span>
-            <IconDevices size={14} style={{ marginRight: 4 }} /> Доверенные устройства
+            <IconDevices size={14} style={{ marginRight: 4 }} /> Trusted devices
             {activeDevices.length > 0 && ` (${activeDevices.length})`}
           </span>
         </div>
 
         {isLoading && (
           <div style={{ padding: 20, textAlign: 'center', color: 'var(--text-secondary)' }}>
-            Загрузка…
+            Loading…
           </div>
         )}
 
@@ -280,7 +280,7 @@ export default function SecurityModal() {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                       <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--text)' }}>
-                        {device.label || 'Без названия'}
+                        {device.label || 'Untitled'}
                       </div>
                       {isCurrent && (
                         <span
@@ -308,7 +308,7 @@ export default function SecurityModal() {
                     >
                       {deviceBrowser(device.user_agent)} · IP {device.last_ip || 'unknown'}
                       <br />
-                      Активно: {formatRelative(device.last_seen_at)} · Добавлено: {formatRelative(device.first_seen_at)}
+                      Active: {formatRelative(device.last_seen_at)} · Added: {formatRelative(device.first_seen_at)}
                     </div>
                   </div>
                   {!isCurrent && (
@@ -322,7 +322,7 @@ export default function SecurityModal() {
                         cursor: 'pointer',
                         padding: 8,
                       }}
-                      aria-label="Удалить устройство"
+                      aria-label="Delete устройство"
                     >
                       <IconTrash size={18} />
                     </button>
@@ -345,13 +345,13 @@ export default function SecurityModal() {
         )}
       </div>
 
-      {/* Диалоги */}
+      {/* Dialogи */}
       {dialog.kind === 'changePin' && (
         <ChangePinDialog
           onClose={() => setDialog({ kind: 'none' })}
           onSuccess={() => {
             setDialog({ kind: 'none' });
-            showFeedback('ok', 'PIN изменён. Старые сессии ревокированы.');
+            showFeedback('ok', 'PIN changed. Старые сессии ревокированы.');
             refetch();
           }}
           onError={(msg) => showFeedback('error', msg)}
@@ -364,7 +364,7 @@ export default function SecurityModal() {
           onClose={() => setDialog({ kind: 'none' })}
           onSuccess={() => {
             setDialog({ kind: 'none' });
-            showFeedback('ok', 'Контрольное слово обновлено');
+            showFeedback('ok', 'Security word обновлено');
             refetch();
           }}
           onError={(msg) => showFeedback('error', msg)}
@@ -373,9 +373,9 @@ export default function SecurityModal() {
 
       {dialog.kind === 'confirmRevoke' && (
         <ConfirmDialog
-          title="Удалить устройство?"
-          description={`"${dialog.device.label || 'Без названия'}" больше не сможет заходить без ввода контрольного слова.`}
-          actionLabel="Удалить"
+          title="Delete устройство?"
+          description={`"${dialog.device.label || 'Untitled'}" больше не сможет заходить без ввода контрольного слова.`}
+          actionLabel="Delete"
           actionVariant="danger"
           busy={busy}
           onCancel={() => setDialog({ kind: 'none' })}
@@ -384,10 +384,10 @@ export default function SecurityModal() {
             try {
               await api.post(EP.authRevokeDevice, { device_id: dialog.device.device_id });
               setDialog({ kind: 'none' });
-              showFeedback('ok', 'Устройство удалено');
+              showFeedback('ok', 'Devicesо удалено');
               await qc.invalidateQueries({ queryKey: ['security-status'] });
             } catch (err) {
-              showFeedback('error', err instanceof ApiError ? err.message : 'Ошибка');
+              showFeedback('error', err instanceof ApiError ? err.message : 'Error');
             } finally {
               setBusy(false);
             }
@@ -398,7 +398,7 @@ export default function SecurityModal() {
       {dialog.kind === 'confirmLogoutAll' && (
         <ConfirmDialog
           title="Разлогинить все устройства?"
-          description="Все сессии на других устройствах будут закрыты. Текущее устройство остаётся залогиненным."
+          description="All сессии на других устройствах будут закрыты. Текущее устройство остаётся залогиненным."
           actionLabel="Разлогинить"
           actionVariant="danger"
           busy={busy}
@@ -408,10 +408,10 @@ export default function SecurityModal() {
             try {
               await api.post(EP.authLogoutAll);
               setDialog({ kind: 'none' });
-              showFeedback('ok', 'Все другие сессии закрыты');
+              showFeedback('ok', 'All другие сессии закрыты');
               await qc.invalidateQueries({ queryKey: ['security-status'] });
             } catch (err) {
-              showFeedback('error', err instanceof ApiError ? err.message : 'Ошибка');
+              showFeedback('error', err instanceof ApiError ? err.message : 'Error');
             } finally {
               setBusy(false);
             }
@@ -453,7 +453,7 @@ function ChangePinDialog({
       if (res.token) await login(res.token);
       onSuccess();
     } catch (err) {
-      onError(err instanceof ApiError ? err.message : 'Ошибка');
+      onError(err instanceof ApiError ? err.message : 'Error');
     } finally {
       setBusy(false);
     }
@@ -461,19 +461,19 @@ function ChangePinDialog({
 
   return (
     <DialogShell title="Смена PIN" onClose={onClose}>
-      <InlineInput label="Текущий PIN" value={oldPin} onChange={setOldPin} type="password" inputMode="numeric" />
-      <InlineInput label="Новый PIN (4-10 цифр)" value={newPin} onChange={setNewPin} type="password" inputMode="numeric" />
-      <InlineInput label="Повторите новый PIN" value={confirmPin} onChange={setConfirmPin} type="password" inputMode="numeric" />
+      <InlineInput label="Current PIN" value={oldPin} onChange={setOldPin} type="password" inputMode="numeric" />
+      <InlineInput label="New PIN (4-10 цифр)" value={newPin} onChange={setNewPin} type="password" inputMode="numeric" />
+      <InlineInput label="Repeat new PIN" value={confirmPin} onChange={setConfirmPin} type="password" inputMode="numeric" />
       <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
         <Button variant="secondary" block onClick={onClose} disabled={busy}>
-          Отмена
+          Cancel
         </Button>
         <Button
           block
           onClick={submit}
           disabled={busy || !oldPin || !newPin || !confirmPin}
         >
-          {busy ? 'Меняем…' : 'Сменить'}
+          {busy ? 'Mеняем…' : 'Сменить'}
         </Button>
       </div>
     </DialogShell>
@@ -499,18 +499,18 @@ function ChangeAnswerDialog({
   const [busy, setBusy] = useState(false);
 
   const submit = async () => {
-    if (answer.trim().length < 2) return onError('Ответ минимум 2 символа');
-    if (answer !== confirm) return onError('Ответы не совпадают');
+    if (answer.trim().length < 2) return onError('Answer минимум 2 символа');
+    if (answer !== confirm) return onError('Answerы не совпадают');
 
     setBusy(true);
     try {
       await api.post(EP.authSetSecurityQuestion, {
-        question: 'Контрольное слово',
+        question: 'Security word',
         answer: answer.trim(),
       });
       onSuccess();
     } catch (err) {
-      onError(err instanceof ApiError ? err.message : 'Ошибка');
+      onError(err instanceof ApiError ? err.message : 'Error');
     } finally {
       setBusy(false);
     }
@@ -536,10 +536,10 @@ function ChangeAnswerDialog({
       <InlineInput label="Повторите слово" value={confirm} onChange={setConfirm} type="password" />
       <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
         <Button variant="secondary" block onClick={onClose} disabled={busy}>
-          Отмена
+          Cancel
         </Button>
         <Button block onClick={submit} disabled={busy || !answer || !confirm}>
-          {busy ? 'Сохраняю…' : 'Сохранить'}
+          {busy ? 'Сохраняю…' : 'Save'}
         </Button>
       </div>
     </DialogShell>
@@ -580,7 +580,7 @@ function ConfirmDialog({
       </div>
       <div style={{ display: 'flex', gap: 8 }}>
         <Button variant="secondary" block onClick={onCancel} disabled={busy}>
-          Отмена
+          Cancel
         </Button>
         <Button
           block
@@ -596,7 +596,7 @@ function ConfirmDialog({
 }
 
 // ───────────────────────────────────────────────────────────
-// Shell для диалогов (простое фиксированное окно поверх)
+// Shell for диалогов (простое фиксированное окно поверх)
 // ───────────────────────────────────────────────────────────
 function DialogShell({
   title,

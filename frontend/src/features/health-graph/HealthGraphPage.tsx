@@ -19,19 +19,19 @@ import { CytoscapeCanvas } from './CytoscapeCanvas';
 import { buildGraphElements, type PatientContext } from './graph-elements';
 
 /**
- * Карта здоровья — граф связей всех сущностей пациента.
- * Порт из vanilla `frontend/js/pages/health-graph.js`.
+ * Health Graph — граф связей всех сущностей patientа.
+ * Порт of vanilla `frontend/js/pages/health-graph.js`.
  */
 
 const TYPE_CONFIG: Record<
   string,
   { bg: string; Icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>; label: string }
 > = {
-  diagnosis: { bg: '#AF52DE', Icon: IconHeartbeat, label: 'Диагнозы' },
-  specialist: { bg: '#007AFF', Icon: IconStethoscope, label: 'Врачи' },
-  medication: { bg: '#34C759', Icon: IconPill, label: 'Препараты' },
-  visit: { bg: '#FF9500', Icon: IconCalendar, label: 'Приёмы' },
-  error: { bg: '#FF3B30', Icon: IconAlertTriangle, label: 'Проблемы' },
+  diagnosis: { bg: '#AF52DE', Icon: IconHeartbeat, label: 'Diagnoses' },
+  specialist: { bg: '#007AFF', Icon: IconStethoscope, label: 'Doctors' },
+  medication: { bg: '#34C759', Icon: IconPill, label: 'Medications' },
+  visit: { bg: '#FF9500', Icon: IconCalendar, label: 'Visitы' },
+  error: { bg: '#FF3B30', Icon: IconAlertTriangle, label: 'Issues' },
 };
 
 export function HealthGraphPage() {
@@ -74,7 +74,7 @@ export function HealthGraphPage() {
         }}
         style={{ marginBottom: 12 }}
       >
-        Назад
+        Back
       </Button>
 
       {/* Filter chips */}

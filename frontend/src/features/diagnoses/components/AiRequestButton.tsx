@@ -7,12 +7,12 @@ interface Props {
 }
 
 /**
- * Кнопка запроса AI-анализа. Порт из vanilla `diagnoses.js:52-97`.
+ * Button зAprоса AI-аналofа. Порт of vanilla `diagnoses.js:52-97`.
  *
  * Логика:
- * - Если в pending AI-requests уже есть запись для этой сущности → показываем «Отправлено»
- * - Иначе → кнопка «Запросить AI-анализ»
- * - После клика → мутация createAiRequest → list инвалидируется → появляется «Отправлено»
+ * - Если в pending AI-requests уже есть record for этой сущности → показываем «Sent»
+ * - Иначе → кнопка «ЗAprосить AI-аналof»
+ * - After клика → мутация createAiRequest → list инвалидируется → появляется «Sent»
  */
 export function AiRequestButton({ entityType, entityId }: Props) {
   const { data: pending } = usePendingAiRequests();
@@ -41,7 +41,7 @@ export function AiRequestButton({ entityType, entityId }: Props) {
           gap: 8,
         }}
       >
-        <IconClock size={18} /> Запрос на AI-анализ отправлен
+        <IconClock size={18} /> ЗAprос на AI-аналof отправлен
       </div>
     );
   }
@@ -68,7 +68,7 @@ export function AiRequestButton({ entityType, entityId }: Props) {
         WebkitTapHighlightColor: 'transparent',
       }}
     >
-      <IconBrain size={18} /> Запросить AI-анализ
+      <IconBrain size={18} /> ЗAprосить AI-аналof
     </button>
   );
 }

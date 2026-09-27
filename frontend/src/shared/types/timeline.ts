@@ -21,10 +21,10 @@ export interface Timeline {
   ai_assessment: string | null;
   created_at: ISODateString;
   updated_at: ISODateString;
-  /** Добавляется бэкендом через JOIN со specialists */
+  /** Beforeбавляется бэкендом in JOIN со specialists */
   specialist_name_resolved?: string | null;
   specialist_specialty?: string | null;
-  /** Документы, привязанные к этому событию timeline */
+  /** Documents, привязанные к этому событию timeline */
   documents?: Document[];
 }
 

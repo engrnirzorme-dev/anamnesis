@@ -12,18 +12,18 @@ import { ApiError } from '@/shared/api/errors';
 /**
  * Двухфазный login:
  *
- * Фаза 1: ввод PIN-кода (6 цифр)
+ * Фаза 1: ввод PIN codeа (6 цифр)
  *   → POST /api/auth/login {pin, device_id в header}
  *   → либо {token} — обычный успех, либо
  *     {requires_answer: true, question, challenge_token} — переход к фазе 2
  *
- * Фаза 2: секретный вопрос (только для НОВЫХ устройств)
+ * Фаза 2: sec.етный вопрос (только for НОВЫХ устройств)
  *   → POST /api/auth/verify-device {challenge_token, answer}
  *   → {token} — успех, устройство становится trusted
  *
  * Rate limit:
  * - 5 попыток PIN → экспоненциальный локаут (клиент-сайд)
- * - 3 попытки ответа в challenge (сервер-сайд, через auth rate limit)
+ * - 3 попытки ответа в challenge (сервер-сайд, in auth rate limit)
  */
 
 const PIN_LENGTH = 6;
@@ -70,7 +70,7 @@ export function PinScreen() {
   // WebAuthn fast-path
   const [webauthnAvailable, setWebauthnAvailable] = useState(false);
 
-  // Обновление таймера локаута каждую секунду
+  // Update таймера локаута каждую sec.нду
   useEffect(() => {
     if (!lockout.locked) return;
     const t = setInterval(() => setLockout(getLockoutStatus()), 1000);
@@ -103,18 +103,18 @@ export function PinScreen() {
       haptic('light');
       const assertion = await startAuthentication({ optionsJSON: options as Parameters<typeof startAuthentication>[0]['optionsJSON'] });
       const data = await api.post<{ token: string }>(EP.webauthnLoginVerify, { response: assertion });
-      if (!data.token) throw new ApiError('Нет токена', 500);
+      if (!data.token) throw new ApiError('No token', 500);
       recordSuccess();
       await login(data.token);
       haptic('success');
       navigate(from, { replace: true });
     } catch (err) {
       if (err instanceof Error && err.name === 'NotAllowedError') {
-        // Пользователь отменил — молча, без ошибки
+        // Genderьзователь отменил — молча, без ошибки
         setPinError(null);
       } else {
         haptic('error');
-        setPinError(err instanceof ApiError ? err.message : 'Ошибка биометрии, введи PIN');
+        setPinError(err instanceof ApiError ? err.message : 'Biometry error, enter PIN');
       }
     } finally {
       setSubmitting(false);
@@ -129,7 +129,7 @@ export function PinScreen() {
         const data = await api.post<LoginResponse>(EP.authLogin, { pin: pinValue });
 
         if (data.requires_answer && data.challenge_token && data.question) {
-          // Фаза 2 — секретный вопрос
+          // Фаза 2 — sec.етный вопрос
           recordSuccess(); // PIN был правильный
           setChallengeToken(data.challenge_token);
           setQuestion(data.question);
@@ -139,7 +139,7 @@ export function PinScreen() {
         }
 
         if (!data.token) {
-          throw new ApiError('Нет токена в ответе', 500);
+          throw new ApiError('No token in response', 500);
         }
         recordSuccess();
         await login(data.token);
@@ -153,9 +153,9 @@ export function PinScreen() {
         setTimeout(() => setShake(false), 500);
         haptic('error');
         if (err instanceof ApiError && err.status === 0) {
-          setPinError('Нет соединения с сервером');
+          setPinError('No connection to server');
         } else {
-          setPinError('Неверный PIN-код');
+          setPinError('Invalid PIN code');
         }
       } finally {
         setSubmitting(false);
@@ -182,7 +182,7 @@ export function PinScreen() {
     [pin, lockout.locked, submitting, tryLogin]
   );
 
-  // Hardware keyboard для PIN-фазы
+  // Hardware keyboard for PIN-фазы
   useEffect(() => {
     if (phase !== 'pin') return;
     const onKey = (e: KeyboardEvent) => {
@@ -195,7 +195,7 @@ export function PinScreen() {
 
   // Автоматически триггерим WebAuthn при появлении экрана если доступен
   // (пользовательский жест гарантируется т.к. это reaction на открытие PIN screen —
-  // браузер требует user gesture для WebAuthn, поэтому autorun только ПОСЛЕ tap на экран)
+  // браузер требует user gesture for WebAuthn, поэтому autorun только ПОСЛЕ tap на экран)
   // По best-practice: показываем кнопку, не auto-trigger — лучше UX
 
   const submitChallenge = useCallback(async () => {
@@ -208,7 +208,7 @@ export function PinScreen() {
         answer: answer.trim(),
         device_label: deviceLabel.trim() || null,
       });
-      if (!data.token) throw new ApiError('Нет токена', 500);
+      if (!data.token) throw new ApiError('No token', 500);
       await login(data.token);
       haptic('success');
       navigate(from, { replace: true });
@@ -216,14 +216,14 @@ export function PinScreen() {
       haptic('error');
       if (err instanceof ApiError) {
         if (err.status === 401) {
-          setChallengeError('Неверный ответ. Попробуйте ещё раз.');
+          setChallengeError('Wrong answer. Try again.');
         } else if (err.status === 0) {
-          setChallengeError('Нет соединения с сервером');
+          setChallengeError('No connection to server');
         } else {
-          setChallengeError('Ошибка проверки. Повторите вход заново.');
+          setChallengeError('Verification error. Please log in again.');
         }
       } else {
-        setChallengeError('Ошибка проверки');
+        setChallengeError('Verification error');
       }
       setAnswer('');
     } finally {
@@ -280,7 +280,7 @@ export function PinScreen() {
             textAlign: 'center',
           }}
         >
-          Новое устройство
+          New Device
         </h2>
         <p
           style={{
@@ -292,7 +292,7 @@ export function PinScreen() {
             lineHeight: 1.4,
           }}
         >
-          PIN принят, но мы видим это устройство впервые. Ответь на секретный вопрос, чтобы
+          PIN принят, но мы видим это устройство впервые. Answerь на sec.етный вопрос, чтобы
           доверить ему доступ.
         </p>
 
@@ -303,7 +303,7 @@ export function PinScreen() {
             if (!submitting && answer.trim()) void submitChallenge();
           }}
         >
-          {/* Лейбл поля = то что настроил юзер. Если это простое "Контрольное слово" —
+          {/* Лейбл поля = то что настроил юзер. Если это простое "Security word" —
               показываем как плейсхолдер в инпуте. Если длиннее — как label карточку.
               Это позволяет скрывать подсказку («ответ — имя сына»), показывая
               только нейтральный ярлык. */}
@@ -326,7 +326,7 @@ export function PinScreen() {
                   letterSpacing: 0.5,
                 }}
               >
-                Подтверди
+                Confirm
               </div>
               <div
                 style={{
@@ -350,7 +350,7 @@ export function PinScreen() {
                 paddingLeft: 4,
               }}
             >
-              {question || 'Контрольное слово'}
+              {question || 'Security word'}
             </div>
           )}
 
@@ -385,7 +385,7 @@ export function PinScreen() {
             spellCheck={false}
             value={deviceLabel}
             onChange={(e) => setDeviceLabel(e.target.value)}
-            placeholder="Название устройства (необязательно)"
+            placeholder="Device name (optional)"
             style={{
               width: '100%',
               padding: '12px 16px',
@@ -432,7 +432,7 @@ export function PinScreen() {
               marginBottom: 12,
             }}
           >
-            {submitting ? 'Проверяю…' : 'Подтвердить'}
+            {submitting ? 'Checking…' : 'Confirm'}
           </button>
 
           <button
@@ -449,7 +449,7 @@ export function PinScreen() {
               cursor: 'pointer',
             }}
           >
-            ← Ввести PIN заново
+            ← Enter PIN again
           </button>
         </form>
       </div>
@@ -483,10 +483,10 @@ export function PinScreen() {
         Anamnesis
       </h2>
       <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 32 }}>
-        {lockout.locked ? 'Слишком много попыток' : 'Введите PIN-код для входа'}
+        {lockout.locked ? 'Too many attempts' : 'Enter PIN code to login'}
       </p>
 
-      {/* Dots indicator — 6 точек для 6-значного PIN */}
+      {/* Dots indicator — 6 точек for 6-значного PIN */}
       <div
         style={{
           display: 'flex',
@@ -523,7 +523,7 @@ export function PinScreen() {
           textAlign: 'center',
         }}
       >
-        {lockout.locked ? `Попробуйте через ${lockout.remainingSec} сек.` : pinError ?? ''}
+        {lockout.locked ? `Try again in ${lockout.remainingSec} sec.` : pinError ?? ''}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 72px)', gap: 12 }}>
@@ -582,7 +582,7 @@ export function PinScreen() {
           }}
         >
           <IconFingerprint size={22} />
-          Войти через биометрию
+          Log in with Biometry
         </button>
       )}
 

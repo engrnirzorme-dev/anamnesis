@@ -12,12 +12,12 @@ export default function RemindersModal() {
   const all = data ?? [];
 
   return (
-    <Modal title="Напоминания" desktopStyle="page">
+    <Modal title="Reminders" desktopStyle="page">
       {isLoading && <SkeletonList count={3} height={56} />}
       {!isLoading && all.length === 0 && (
         <EmptyState
           icon={<IconBell size={48} color="var(--text-secondary)" />}
-          text="Нет напоминаний"
+          text="No reminders"
         />
       )}
       {all.map((r) => (
@@ -40,7 +40,7 @@ export default function RemindersModal() {
         </div>
       ))}
 
-      <CommentsSection entityType="reminders" entityId={0} title="Комментарии к разделу" />
+      <CommentsSection entityType="reminders" entityId={0} title="Comments к разделу" />
     </Modal>
   );
 }

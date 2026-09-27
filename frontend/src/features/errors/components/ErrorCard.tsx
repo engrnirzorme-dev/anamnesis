@@ -12,9 +12,9 @@ interface Props {
 }
 
 const SEVERITY_LABELS: Record<Severity, string> = {
-  critical: 'Критично',
-  warning: 'Внимание',
-  info: 'Информация',
+  critical: 'Critical',
+  warning: 'Warning',
+  info: 'Information',
 };
 
 const SEVERITY_BADGE: Record<Severity, BadgeColor> = {
@@ -53,11 +53,11 @@ export function ErrorCard({ error, onClick }: Props) {
           color={error.status === 'resolved' ? 'green' : 'red'}
           icon={error.status === 'resolved' ? <IconCircleCheck size={12} /> : <IconPointFilled size={12} />}
         >
-          {error.status === 'resolved' ? 'Решено' : 'Открыто'}
+          {error.status === 'resolved' ? 'Resolved' : 'Open'}
         </Badge>
         {error.advice && (
           <Badge color="green" icon={<IconStethoscope size={11} />}>
-            Рекомендации
+            Recommendations
           </Badge>
         )}
         {error.ai_assessment && (

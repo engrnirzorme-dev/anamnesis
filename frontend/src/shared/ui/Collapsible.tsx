@@ -5,7 +5,7 @@ import { haptic } from '@/shared/lib/haptic';
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
 
 /**
- * Collapsible секция с анимацией. Используется на Dashboard для сворачивания
+ * Collapsible секция с анимацией. Используется на Dashboard for сворачивания
  * диагнозов, препаратов, AI-сводки.
  *
  * Если передан `persistKey` — состояние сохраняется в localStorage между сессиями.
@@ -13,7 +13,7 @@ import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
  * Пример:
  * ```tsx
  * <Collapsible
- *   title="Диагнозы"
+ *   title="Diagnoses"
  *   badge={<Badge color="purple">{diagnoses.length}</Badge>}
  *   persistKey="dashboard-diagnoses"
  *   defaultOpen={false}
@@ -26,12 +26,12 @@ import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
 interface CollapsibleProps {
   title: string;
   badge?: ReactNode;
-  /** Иконка слева от заголовка. React-node (например Tabler Icon). */
+  /** Иконка слева от заголовка. React-node (e.g. Tabler Icon). */
   icon?: ReactNode;
   children: ReactNode;
   /** Начальное состояние (игнорируется если задан `persistKey` и есть сохранённое значение) */
   defaultOpen?: boolean;
-  /** Ключ для сохранения состояния в localStorage */
+  /** Ключ for сохранения состояния в localStorage */
   persistKey?: string;
 }
 

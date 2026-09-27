@@ -16,30 +16,30 @@ import { useIsDesktop } from '@/shared/hooks/useMediaQuery';
  *
  * 1. `useMotionValue(y)` — только как state store
  * 2. `animate(y, target, config)` — утилита, обновляет мотион-значение
- * 3. `y.on('change', fn)` — subscription на изменения
- * 4. В subscription fn ИМПЕРАТИВНО обновляем DOM через ref:
+ * 3. `y.on('change', fn)` — subscription на ofменения
+ * 4. В subscription fn ИMПЕРАТИВНО обновляем DOM in ref:
  *    `sheetEl.style.transform = translate3d(0, v, 0)`
  *    `overlayEl.style.opacity = 1 - v/h`
  *
  * Это 100% детерминировано — никаких промежуточных слоёв.
  *
- * Initial transform устанавливается через ref callback — синхронно в момент
+ * Initial transform устанавливается in ref callback — синхронно в момент
  * присоединения элемента к DOM, до первой отрисовки.
  *
  * Drag:
  * - Handle (полоска) — всегда drag
- * - Scroll body — scroll-aware: drag только если scrollTop===0 и dy>5 вниз
- * - Velocity tracking: последние pointer события для расчёта px/s
+ * - Scroll body — scroll-aware: drag только если scrollTop===0 и dy>5 внof
+ * - Velocity tracking: последние pointer события for расчёта px/s
  * - Close threshold: **25% высоты sheet** ИЛИ **velocity > 600 px/s**
  */
 
 const DRAG_START_THRESHOLD = 5;
 const CLOSE_PERCENT = 0.25;
 const VELOCITY_CLOSE = 600;
-// Spring для enter и snap-back (драматичнее, с небольшим overshoot)
+// Spring for enter и snap-back (драматичнее, с небольшим overshoot)
 const SPRING_CONFIG = { type: 'spring' as const, damping: 30, stiffness: 300 };
-// Spring для exit — жёстче, чтобы быстро уйти без bounce, но с плавной кривой
-// (передача velocity из drag делает переход незаметным)
+// Spring for exit — жёстче, чтобы быстро уйти без bounce, но с плавной кривой
+// (передача velocity of drag делает переход незаметным)
 const EXIT_SPRING = { type: 'spring' as const, damping: 40, stiffness: 400 } as const;
 
 interface SheetProps {
@@ -73,10 +73,10 @@ export function Sheet({
   const handleElRef = useRef<HTMLDivElement | null>(null);
   const scrollElRef = useRef<HTMLDivElement | null>(null);
 
-  // Скорость drag на момент release — передаётся в exit-анимацию для
+  // Скорость drag на момент release — передаётся в exit-анимацию for
   // непрерывного перехода от ручного drag к spring-closure.
   const exitVelocityRef = useRef(0);
-  // Guard для .then() колбэка exit-анимации: если пока анимация идёт,
+  // Guard for .then() колбэка exit-анимации: если пока анимация идёт,
   // пользователь заново открыл модалку — мы не должны unmount-ить.
   const isClosingRef = useRef(false);
 
@@ -84,7 +84,7 @@ export function Sheet({
 
   /** Императивно применить текущее значение y к DOM (transform + opacity).
    *  На мобиле — translateY(y).
-   *  На десктопе — fade+scale через progress (y/viewportHeight).
+   *  На десктопе — fade+scale in progress (y/viewportHeight).
    */
   const applyToDom = useCallback(
     (v: number) => {
@@ -112,7 +112,7 @@ export function Sheet({
   );
 
   /**
-   * Ref callback для sheet — применяет initial transform СИНХРОННО при
+   * Ref callback for sheet — применяет initial transform СИНХРОННО при
    * mount элемента в DOM, до первой отрисовки. Это убирает flash,
    * который был бы при useLayoutEffect.
    */
@@ -155,7 +155,7 @@ export function Sheet({
     }
   }, [open, mounted]);
 
-  // === Подписка на изменения motion value → DOM update ===
+  // === Подписка на ofменения motion value → DOM update ===
   useEffect(() => {
     if (!mounted) return;
     // Применяем текущее значение сразу (на случай если подписка пропустит)
@@ -174,8 +174,8 @@ export function Sheet({
   }, [mounted, open, y]);
 
   // === Exit animation → setMounted(false) ===
-  // Spring с передачей velocity из drag (если user закрыл свайпом).
-  // Для закрытия через overlay/X/escape velocity=0 — просто spring.
+  // Spring с передачей velocity of drag (если user закрыл свайпом).
+  // Для закрытия in overlay/X/escape velocity=0 — просто spring.
   useEffect(() => {
     if (!mounted || open) return;
     isClosingRef.current = true;
@@ -189,7 +189,7 @@ export function Sheet({
       velocity: startVelocity,
     });
 
-    // Пытаемся поймать конец анимации через promise
+    // Пытаемся поймать конец анимации in promise
     let cancelled = false;
     controls.then(
       () => {
@@ -298,7 +298,7 @@ export function Sheet({
 
       if (currentY > closeThreshold || velocity > VELOCITY_CLOSE) {
         haptic('medium');
-        // Прокидываем velocity в exit-анимацию для бесшовного перехода
+        // Прокидываем velocity в exit-анимацию for бесшовного перехода
         exitVelocityRef.current = Math.max(velocity, 0);
         onClose();
       } else {
@@ -321,7 +321,7 @@ export function Sheet({
 
   // === Scroll-aware drag-anywhere (мобилка) ===
   // Паттерн "drag в любом месте модалки, но только когда контент в верху":
-  // scrollTop проверяется ДИНАМИЧЕСКИ в pointermove (не статически в pointerdown).
+  // scrollTop проверяется ДИНАMИЧЕСКИ в pointermove (не статически в pointerdown).
   // Это ключевое отличие — теперь пользователь может в одном жесте скроллить
   // контент вверх и продолжить тянуть модалку, когда достиг верха.
   useEffect(() => {
@@ -346,7 +346,7 @@ export function Sheet({
 
     const onMove = (e: PointerEvent) => {
       // Если ещё не в режиме drag — смотрим можно ли его начать.
-      // Условие: контент в самом верху (scrollTop === 0) И палец идёт вниз.
+      // Условие: контент в самом верху (scrollTop === 0) И палец идёт внof.
       if (!dragging) {
         const atTop = scrollEl.scrollTop <= 0;
         const dy = e.clientY - startClientY;
@@ -441,7 +441,7 @@ export function Sheet({
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-label={title ?? 'Диалог'}
+        aria-label={title ?? 'Dialog'}
       >
         {!isDesktop && (
           <div className="modal-handle-area" ref={handleElRef}>
@@ -456,7 +456,7 @@ export function Sheet({
               <button
                 type="button"
                 className="modal-close"
-                aria-label="Закрыть"
+                aria-label="Close"
                 onClick={(e) => {
                   e.stopPropagation();
                   haptic('light');

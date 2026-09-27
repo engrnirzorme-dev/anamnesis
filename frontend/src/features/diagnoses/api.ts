@@ -5,13 +5,13 @@ import type { Diagnosis, AiRequest } from '@/shared/types';
 export const fetchDiagnoses = (): Promise<Diagnosis[]> => api.get<Diagnosis[]>(EP.diagnoses);
 
 /**
- * Список pending AI-запросов (используется для отображения «отправлено»)
+ * List pending AI-зAprосов (используется for отображения «отправлено»)
  */
 export const fetchPendingAiRequests = (): Promise<AiRequest[]> =>
   api.get<AiRequest[]>(`${EP.aiRequests}?status=pending`);
 
 /**
- * Создать AI-запрос для сущности (диагноз, препарат, визит, ...)
+ * Create AI-зAprос for сущности (диагноз, препарат, вofит, ...)
  */
 export const createAiRequest = (entity_type: string, entity_id: number): Promise<AiRequest> =>
   api.post<AiRequest>(EP.aiRequests, { entity_type, entity_id });

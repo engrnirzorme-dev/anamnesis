@@ -2,15 +2,15 @@ import { useSyncExternalStore } from 'react';
 import { getSession, setPatientId as setPatientIdInStorage } from './session';
 
 /**
- * Реактивный хук для активного patient_id.
+ * Реactive хук for активного patient_id.
  *
  * Проблема: сессия хранится в localStorage (см. session.ts), чтобы API-клиент
- * мог читать её синхронно при каждом запросе. Но localStorage — не React state,
- * изменения не триггерят ре-рендер.
+ * мог читать её синхронно при каждом зAprосе. Но localStorage — не React state,
+ * ofменения не триггерят ре-рендер.
  *
  * Решение: простой in-memory event bus + useSyncExternalStore. Когда
  * `changePatient(id)` вызывается — обновляется localStorage И триггерится
- * событие, на которое подписаны все компоненты через этот хук.
+ * событие, на которое подписаны все компоненты in этот хук.
  */
 
 type Listener = () => void;
@@ -32,7 +32,7 @@ export function usePatientId(): number {
   return useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 }
 
-/** Меняет активного пациента — обновляет localStorage + уведомляет подписчиков. */
+/** Mеняет активного patientа — обновляет localStorage + уведомляет подписчиков. */
 export function changePatient(id: number): void {
   setPatientIdInStorage(id);
   // Notify all subscribers

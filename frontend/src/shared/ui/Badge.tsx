@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import type { HTMLAttributes, ReactNode } from 'react';
 
 /**
- * Цветной бейдж. Применяет классы `.badge` + `.badge-{color}` из app.css.
+ * Цветной бейдж. Применяет классы `.badge` + `.badge-{color}` of app.css.
  * Цвета те же что и в vanilla: blue, green, orange, red, purple, gray.
  */
 

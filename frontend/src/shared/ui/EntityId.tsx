@@ -6,7 +6,7 @@ interface Props {
 }
 
 /**
- * Мелкая подпись #N для записей из БД (plan.id, timeline.id, medical_errors.id и т.д.).
+ * Mелкая подпись #N for records of БД (plan.id, timeline.id, medical_errors.id и т.д.).
  * Используется на карточках списков, чтобы можно было быстро сослаться на конкретную
  * сущность в чате с AI-координатором («закрой план 61»).
  *

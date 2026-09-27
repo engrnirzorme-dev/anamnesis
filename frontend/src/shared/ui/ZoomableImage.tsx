@@ -3,7 +3,7 @@ import { haptic } from '@/shared/lib/haptic';
 
 /**
  * Картинка с toggle zoom 100% ↔ 250% по клику.
- * Порт из vanilla `documents.js` .doc-preview-img обработчика.
+ * Порт of vanilla `documents.js` .doc-preview-img обработчика.
  */
 interface Props {
   src: string;

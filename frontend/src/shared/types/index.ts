@@ -1,4 +1,4 @@
-// Барреловский re-export для типов.
+// Барреловский re-export for типов.
 // Sonnet: импортируй как `import type { Diagnosis, Medication } from '@/shared/types';`.
 
 export type * from './common';

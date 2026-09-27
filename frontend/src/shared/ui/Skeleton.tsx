@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 /**
- * Skeleton-плейсхолдер для загрузки. Применяет `.skeleton` из app.css
+ * Skeleton-плейсхолдер for загрузки. Применяет `.skeleton` of app.css
  * (уже содержит shimmer-анимацию).
  *
  * Использование:
@@ -10,7 +10,7 @@ import clsx from 'clsx';
  * ```
  *
  * При включённом persist-кэше React Query skeleton виден только при самом первом
- * открытии — дальше данные достаются из localStorage мгновенно.
+ * открытии — дальше данные достаются of localStorage мгновенно.
  */
 
 interface SkeletonProps {

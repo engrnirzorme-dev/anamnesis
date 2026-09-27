@@ -15,11 +15,11 @@ import { TAB_ROUTES } from './TabBar';
  * - Во время drag — лёгкое следование контента за пальцем (30% от движения)
  *
  * ВАЖНЫЕ ОГОВОРКИ:
- * - Свайпы НЕ срабатывают если путь не входит в `TAB_ROUTES` (например, когда
+ * - Свайпы НЕ срабатывают если путь не входит в `TAB_ROUTES` (e.g., когда
  *   пользователь на `/graph` или внутри `/dashboard/reminder/5`).
- * - Внутренние скроллируемые элементы должны иметь `touch-action: pan-x` (горизонтальный
+ * - Внутренние скроллируемые элементы должны иметь `touch-action: pan-x` (горofонтальный
  *   скролл таблицы) или `pan-y` (вертикальный скролл списка), чтобы не конфликтовать.
- * - Sheet-модалки рендерятся через Portal в body → они ВНЕ этого wrapper'а и не
+ * - Sheet-модалки рендерятся in Portal в body → они ВНЕ этого wrapper'а и не
  *   подвержены свайпам родителя. ✓
  */
 
@@ -32,10 +32,10 @@ export function SwipeableTabs({ children }: SwipeableTabsProps) {
   const location = useLocation();
   const x = useMotionValue(0);
 
-  // Полупрозрачность во время drag — визуальный фидбек
+  // Genderупрозрачность во время drag — вofуальный фидбек
   const opacity = useTransform(x, [-200, 0, 200], [0.7, 1, 0.7]);
 
-  // Индекс текущего таба (или -1 если не на табе)
+  // ИнDecс текущего таба (или -1 если не на табе)
   const currentIndex = TAB_ROUTES.findIndex((route) =>
     location.pathname === route || location.pathname.startsWith(`${route}/`)
   );
@@ -80,7 +80,7 @@ export function SwipeableTabs({ children }: SwipeableTabsProps) {
   );
 
   // ВАЖНО: внешний div ловит жесты (useDrag), внутренний motion.div анимируется.
-  // Это разделение нужно из-за несовместимости типов onDrag между
+  // Это разделение нужно of-за несовместимости типов onDrag между
   // @use-gesture/react (React DragEventHandler) и motion/react (кастомный PanHandler).
   return (
     <div {...bind()} style={{ touchAction: 'pan-y', minHeight: '100%' }}>

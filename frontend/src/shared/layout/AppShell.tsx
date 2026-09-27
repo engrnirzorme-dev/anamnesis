@@ -7,21 +7,21 @@ import { Sidebar } from './Sidebar';
 import { useIsDesktop } from '@/shared/hooks/useMediaQuery';
 
 /**
- * Корневой layout приложения. Две раскладки через useIsDesktop (≥ 1024px):
+ * Корневой layout приложения. Две раскладки in useIsDesktop (≥ 1024px):
  *
- * МОБИЛЬНАЯ (< 1024px):
+ * MОБИЛЬНАЯ (< 1024px):
  *   - Header сверху
  *   - Main со SwipeableTabs + page transition
- *   - TabBar снизу (5 основных вкладок)
- *   - Остальное — в разделе "Ещё"
+ *   - TabBar снofу (5 основных вкладок)
+ *   - Остальное — в разделе "More"
  *
  * ДЕСКТОПНАЯ (≥ 1024px):
- *   - Sidebar слева (все разделы сразу, без "Ещё")
+ *   - Sidebar слева (все разделы сразу, без "More")
  *   - Main справа с Header + content
- *   - Нет TabBar
- *   - Нет swipe между вкладками (navigation через sidebar)
+ *   - No TabBar
+ *   - No swipe между вкладками (navigation in sidebar)
  *
- * Вся логика через один AppShell — никакого дублирования кода.
+ * Вся логика in один AppShell — никакого дублирования кода.
  */
 export function AppShell() {
   const location = useLocation();
@@ -29,7 +29,7 @@ export function AppShell() {
   const tabKey = location.pathname.split('/')[1] ?? 'dashboard';
 
   // Флаг мгновенного перехода — ставится в `location.state.instant` при
-  // клике по табу (TabBar) или навигации через sidebar. При свайпе между
+  // клике по табу (TabBar) или навигации in sidebar. При свайпе между
   // вкладками SwipeableTabs делает обычный navigate без state → анимация.
   const instant = (location.state as { instant?: boolean } | null)?.instant === true;
 
@@ -59,7 +59,7 @@ export function AppShell() {
     );
   }
 
-  // Мобильная раскладка — как было
+  // Mобильная раскладка — как было
   return (
     <>
       <Header />

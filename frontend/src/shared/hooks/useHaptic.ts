@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { haptic, type HapticKind } from '@/shared/lib/haptic';
 
 /**
- * React-обёртка над `haptic()` из `shared/lib/haptic.ts`.
- * Возвращает мемоизированную функцию, удобно передавать в onClick.
+ * React-обёртка над `haptic()` of `shared/lib/haptic.ts`.
+ * Возвращает мемоofированную функцию, удобно передавать в onClick.
  *
  * Пример:
  * ```tsx
@@ -11,8 +11,8 @@ import { haptic, type HapticKind } from '@/shared/lib/haptic';
  * <button onClick={() => { hap('light'); doSomething(); }}>
  * ```
  *
- * Для самых частых случаев (Button, TabBar) haptic уже встроен — используй этот
- * хук только когда нужно вызвать тактильную вибрацию из кастомного кода.
+ * Для самых hourтых случаев (Button, TabBar) haptic уже встроен — используй этот
+ * хук только когда нужно вызвать тактильную вибрацию of кастомного кода.
  */
 export function useHaptic(): (kind?: HapticKind) => void {
   return useCallback((kind?: HapticKind) => haptic(kind), []);

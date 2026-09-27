@@ -14,12 +14,12 @@ export default function SpecialistsModal() {
 
   return (
     <>
-      <Modal title="Специалисты" desktopStyle="page">
+      <Modal title="Specialists" desktopStyle="page">
         {isLoading && <SkeletonList count={3} height={72} />}
         {!isLoading && (data ?? []).length === 0 && (
           <EmptyState
             icon={<IconStethoscope size={48} color="var(--text-secondary)" />}
-            text="Нет специалистов"
+            text="No специалистов"
           />
         )}
         {(data ?? []).map((s) => (
@@ -59,11 +59,11 @@ export default function SpecialistsModal() {
         ))}
       </Modal>
 
-      {/* Sub-sheet для деталей выбранного специалиста */}
+      {/* Sub-sheet for деталей выбранного специалиста */}
       <Sheet
         open={!!selected}
         onClose={() => setSelected(null)}
-        title={selected?.specialization ?? 'Специалист'}
+        title={selected?.specialization ?? 'Specialist'}
       >
         {selected && (
           <>

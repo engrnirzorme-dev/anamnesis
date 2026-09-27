@@ -8,8 +8,8 @@ import { formatDate, calcAge } from '@/shared/lib/date';
 import type { Patient } from '@/shared/types';
 
 /**
- * Карточка пациента на Dashboard. Порт из vanilla `dashboard.js:210-235`.
- * Использует класс `.patient-card` из app.css.
+ * Card patientа на Dashboard. Порт of vanilla `dashboard.js:210-235`.
+ * Использует класс `.patient-card` of app.css.
  */
 export function PatientCard({ patient }: { patient: Patient | null }) {
   if (!patient) return null;
@@ -17,7 +17,7 @@ export function PatientCard({ patient }: { patient: Patient | null }) {
 
   return (
     <div className="patient-card">
-      <div className="patient-name">{patient.full_name ?? 'Пациент'}</div>
+      <div className="patient-name">{patient.full_name ?? 'Patient'}</div>
       <div className="patient-info">
         {patient.date_of_birth && formatDate(patient.date_of_birth)}
         {age && ` (${age})`}
@@ -28,19 +28,19 @@ export function PatientCard({ patient }: { patient: Patient | null }) {
         {patient.current_height_cm != null && (
           <span>
             <IconRuler2 size={14} style={{ marginRight: 4 }} />
-            {patient.current_height_cm} см
+            {patient.current_height_cm} cm
           </span>
         )}
         {patient.current_weight_kg != null && (
           <span>
             <IconScale size={14} style={{ marginRight: 4 }} />
-            {patient.current_weight_kg} кг
+            {patient.current_weight_kg} kg
           </span>
         )}
         {patient.birth_weight_g != null && (
           <span>
             <IconBabyCarriage size={14} style={{ marginRight: 4 }} />
-            {patient.birth_weight_g} г
+            {patient.birth_weight_g} g
           </span>
         )}
       </div>
@@ -48,7 +48,7 @@ export function PatientCard({ patient }: { patient: Patient | null }) {
         <div className="patient-meta" style={{ marginTop: 8 }}>
           <span>
             <IconAlertCircle size={14} style={{ marginRight: 4 }} />
-            Аллергии: {patient.allergies}
+            Allergies: {patient.allergies}
           </span>
         </div>
       )}

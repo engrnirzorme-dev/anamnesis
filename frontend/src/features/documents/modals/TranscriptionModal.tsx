@@ -8,24 +8,24 @@ import { useUpdateVisit } from '../hooks/useVisitMutations';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Модалка добавления/редактирования расшифровки приёма.
+ * Mодалка добавления/редактирования расшифровки приёма.
  * Route: `/documents/visit/:visitId/transcription`
  *
- * Порт из vanilla `documents.js` showTranscriptionModal.
- * Содержит промпт для NotebookLM с копированием в clipboard.
+ * Порт of vanilla `documents.js` showTranscriptionModal.
+ * Содержит промпт for NotebookLM с копированием в clipboard.
  */
 
-const NOTEBOOK_LM_PROMPT = `Задача: Ты — медицинский транскрибатор. Расшифруй аудиозапись приёма врача максимально точно и подробно.
+const NOTEBOOK_LM_PROMPT = `Задача: Ты — медицинский транскрибатор. Расшифруй аудиоrecord приёма врача максимально точно и подробно.
 
 Правила:
-1. Транскрибируй ВСЁ сказанное, включая побочные комментарии врача — именно они часто содержат важную информацию, не попавшую в заключение.
-2. Обозначай говорящих: Врач: и Родитель: (или Мама:/Папа:).
-3. Медицинские термины записывай точно, в скобках можно дать расшифровку.
+1. Транскрибируй ВСЁ сказанное, включая побочные комментарии врача — именно они hourто содержат важную информацию, не попавшую в заключение.
+2. Обозначай говорящих: Doctor: и Parent: (или Mама:/Папа:).
+3. Mедицинские термины записывай точно, в скобках можно дать расшифровку.
 4. Если слово неразборчиво — пиши [неразборчиво].
 5. Сохраняй хронологический порядок разговора.
-6. В конце добавь раздел "КЛЮЧЕВЫЕ МОМЕНТЫ" — краткий список самого важного из разговора (диагнозы, назначения, рекомендации, что врач сказал между делом).
+6. В конце добавь раздел "KEY POINTS" — краткий список самого важного of разговора (диагнозы, prescribedия, рекомендации, что врач сказал между делом).
 7. Язык: русский.
-8. Контекст пациента: см. карточку в приложении.`;
+8. Контекст patientа: см. карточку в приложении.`;
 
 export default function TranscriptionModal() {
   const { visitId } = useParams();
@@ -42,7 +42,7 @@ export default function TranscriptionModal() {
 
   if (!visit) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -82,7 +82,7 @@ export default function TranscriptionModal() {
   };
 
   return (
-    <Modal title="Расшифровка приёма">
+    <Modal title="Visit Transcription">
       <div
         style={{
           marginBottom: 12,
@@ -91,7 +91,7 @@ export default function TranscriptionModal() {
           lineHeight: 1.6,
         }}
       >
-        Вставьте расшифровку аудиозаписи из NotebookLM или другого сервиса транскрипции.
+        Paste transcription from NotebookLM or another transcription service.
       </div>
 
       <div
@@ -121,7 +121,7 @@ export default function TranscriptionModal() {
               gap: 4,
             }}
           >
-            <IconClipboardText size={13} /> Промпт для NotebookLM
+            <IconClipboardText size={13} /> NotebookLM Prompt
           </span>
           <button
             type="button"
@@ -143,7 +143,7 @@ export default function TranscriptionModal() {
             }}
           >
             {copied ? <IconCheck size={12} /> : <IconCopy size={12} />}
-            {copied ? 'Скопировано' : 'Скопировать промпт'}
+            {copied ? 'Copied' : 'Copy prompt'}
           </button>
         </div>
         <div style={{ fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -168,7 +168,7 @@ export default function TranscriptionModal() {
         loading={update.isPending}
         style={{ marginTop: 8 }}
       >
-        Сохранить расшифровку
+        Save расшифровку
       </Button>
     </Modal>
   );

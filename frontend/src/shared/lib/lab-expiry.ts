@@ -1,11 +1,11 @@
 /**
- * Срок годности лабораторных анализов по названию.
- * Порт из vanilla `frontend/js/pages/more.js` (функция getLabExpiry).
+ * Due date yearности лабораторных аналofов по названию.
+ * Порт of vanilla `frontend/js/pages/more.js` (функция getLabExpiry).
  *
- * ВАЖНО: точная карта срока годности должна совпадать с vanilla. Если найдёшь
+ * ВАЖНО: точная карта срока yearности должна совпадать с vanilla. Если найдёшь
  * расхождение — читай vanilla-источник как истину.
  *
- * Возвращает количество месяцев валидности для данного типа анализа.
+ * Возвращает количество months валидности for данного типа аналofа.
  */
 
 interface ExpiryRule {
@@ -19,7 +19,7 @@ const RULES: ExpiryRule[] = [
   { patterns: ['ээг'], months: 12 },
   { patterns: ['экг'], months: 3 },
   { patterns: ['эхо', 'узи'], months: 12 },
-  { patterns: ['общий анализ крови', 'оак', 'кровь общ'], months: 1 },
+  { patterns: ['общий аналof крови', 'оак', 'кровь общ'], months: 1 },
   { patterns: ['биохим'], months: 1 },
   { patterns: ['моч'], months: 1 },
   { patterns: ['паразит', 'гельминт', 'энтеробиоз'], months: 3 },
@@ -44,15 +44,15 @@ export function getLabExpiryMonths(testName: string | null | undefined): number 
 
 export interface ExpiryStatus {
   status: 'valid' | 'expiring' | 'expired';
-  /** Сколько осталось / просрочено, в днях. Отрицательное = просрочено. */
+  /** Сколько осталось / просрочено, в daysх. Отрицательное = просрочено. */
   daysLeft: number;
   label: string;
 }
 
 /**
- * Рассчитывает статус годности анализа по дате сдачи и названию.
- * - valid   — больше 30 дней до окончания
- * - expiring — осталось < 30 дней
+ * Рассчитывает статус yearности аналofа по дате сдачи и названию.
+ * - valid   — больше 30 days до окончания
+ * - expiring — осталось < 30 days
  * - expired  — уже просрочен
  */
 export function calcExpiryStatus(
@@ -69,11 +69,11 @@ export function calcExpiryStatus(
   const daysLeft = Math.floor(msLeft / (1000 * 60 * 60 * 24));
 
   if (daysLeft < 0) {
-    return { status: 'expired', daysLeft, label: `Просрочен на ${Math.abs(daysLeft)} дн.` };
+    return { status: 'expired', daysLeft, label: `Expired by ${Math.abs(daysLeft)} days` };
   }
   if (daysLeft < 30) {
-    return { status: 'expiring', daysLeft, label: `Осталось ${daysLeft} дн.` };
+    return { status: 'expiring', daysLeft, label: `Left ${daysLeft} days` };
   }
   const monthsLeft = Math.floor(daysLeft / 30);
-  return { status: 'valid', daysLeft, label: `Годен ещё ${monthsLeft} мес.` };
+  return { status: 'valid', daysLeft, label: `Valid for ${monthsLeft} months` };
 }

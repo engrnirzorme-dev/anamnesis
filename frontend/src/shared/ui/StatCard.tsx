@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Карточка статистики на Dashboard. Применяет классы `.stat-card.{color}` из app.css.
+ * Card статистики на Dashboard. Применяет классы `.stat-card.{color}` of app.css.
  *
- * Используется в Dashboard для 4 главных цифр: Осталось / Выполнено / Ошибки / Диагнозы.
+ * Используется в Dashboard for 4 главных цифр: Left / Completed / Errors / Diagnoses.
  *
- * Принимает либо `to` (для навигации через Router) либо `onClick` для кастомной обработки.
+ * Принимает либо `to` (for навигации in Router) либо `onClick` for кастомной обработки.
  */
 
 export type StatColor = 'blue' | 'green' | 'orange' | 'red' | 'purple';

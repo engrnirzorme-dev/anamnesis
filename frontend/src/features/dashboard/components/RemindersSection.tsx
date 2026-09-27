@@ -11,7 +11,7 @@ interface Props {
 
 /**
  * Ближайшие напоминания. НЕ collapsible (всегда видны, т.к. самое срочное).
- * Порт из vanilla `dashboard.js:318-333`.
+ * Порт of vanilla `dashboard.js:318-333`.
  */
 export function RemindersSection({ reminders, onSelect }: Props) {
   if (reminders.length === 0) return null;
@@ -19,7 +19,7 @@ export function RemindersSection({ reminders, onSelect }: Props) {
   return (
     <>
       <div className="section-subtitle">
-        <IconBell size={14} style={{ marginRight: 4 }} /> Ближайшие напоминания
+        <IconBell size={14} style={{ marginRight: 4 }} /> UPCOMING REMINDERS
       </div>
       {reminders.map((r) => (
         <div

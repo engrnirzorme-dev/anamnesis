@@ -10,15 +10,15 @@ interface Props {
 }
 
 /**
- * Текущие препараты. СВЁРНУТАЯ секция.
- * Порт из vanilla `dashboard.js:300-316`.
+ * Current Medications. СВЁРНУТАЯ секция.
+ * Порт of vanilla `dashboard.js:300-316`.
  */
 export function MedicationsSection({ medications, onSelect }: Props) {
   if (medications.length === 0) return null;
 
   return (
     <Collapsible
-      title="Текущие препараты"
+      title="Current Medications"
       icon={<IconPill size={18} color="var(--green)" />}
       persistKey="dashboard-medications"
       defaultOpen={false}

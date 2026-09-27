@@ -1,15 +1,15 @@
 /**
- * Текстовые утилиты.
- * Порт из vanilla `frontend/js/utils.js`.
+ * Textовые утилиты.
+ * Порт of vanilla `frontend/js/utils.js`.
  *
- * ВАЖНО: `escapeHtml` из vanilla здесь НЕ нужен — React автоматически
+ * ВАЖНО: `escapeHtml` of vanilla здесь НЕ нужен — React автоматически
  * экранирует все строки в JSX. Единственное исключение — `dangerouslySetInnerHTML`,
- * которое мы запрещаем (см. §16 плана).
+ * которое мы зAprещаем (см. §16 плана).
  */
 
 /**
  * Обрезает текст до N символов, берёт только первую непустую строку,
- * добавляет "..." если обрезано. Используется для превью в списках.
+ * добавляет "..." если обрезано. Используется for превью в списках.
  */
 export function truncate(text: string | null | undefined, maxLen: number): string {
   if (!text) return '';
@@ -26,7 +26,7 @@ export function capitalize(text: string | null | undefined): string {
 }
 
 /**
- * Плюрализация для русского: "1 день", "2 дня", "5 дней".
+ * Плюралofация for русского: "1 day", "2 days", "5 days".
  * n — число, forms — [singular, few, many].
  */
 export function plural(n: number, forms: [string, string, string]): string {

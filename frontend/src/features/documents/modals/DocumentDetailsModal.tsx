@@ -5,7 +5,7 @@ import { DocumentBlock } from '../components/DocumentBlock';
 import { CommentsSection } from '@/features/comments/CommentsSection';
 
 /**
- * Модалка деталей standalone-документа (не привязан к визиту).
+ * Mодалка деталей standalone-документа (не привязан к вofиту).
  * Route: `/documents/doc/:docId`
  */
 export default function DocumentDetailsModal() {
@@ -18,7 +18,7 @@ export default function DocumentDetailsModal() {
 
   if (!doc) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -27,7 +27,7 @@ export default function DocumentDetailsModal() {
   }
 
   return (
-    <Modal title={doc.title ?? doc.original_name ?? 'Документ'}>
+    <Modal title={doc.title ?? doc.original_name ?? 'Document'}>
       <DocumentBlock doc={doc} />
       <CommentsSection entityType="document" entityId={doc.id} />
     </Modal>

@@ -14,12 +14,12 @@ import type { Comment } from '@/shared/types';
  * UI:
  * - Inline-пояснение показывается ТОЛЬКО пока чат пустой.
  * - Инпут нового вопроса вверху — не надо скроллить до него.
- * - Сообщения отсортированы REVERSE CHRONO: свежие сверху, старые снизу.
- * - Внутри одного дня — свежие пары (вопрос + ответ) сверху.
+ * - Сообщения отсортированы REVERSE CHRONO: свежие сверху, старые снofу.
+ * - Внутри одного days — свежие пары (вопрос + ответ) сверху.
  * - Внутри пары — вопрос выше ответа (нормальный порядок чтения).
- * - Группировка по дням: «Сегодня», «Вчера», «N дн. назад», «21 апреля».
- * - AI-ответ: IconBrain + «Ответ AI» (жирным, var(--purple)), фон #F8F1FC.
- * - Вопрос пользователя: var(--card) белый, без подписи.
+ * - Group по daysм: «Сеyearня», «Вчера», «N days ago», «21 Aprеля».
+ * - AI-ответ: IconBrain + «Answer AI» (жирным, var(--purple)), фон #F8F1FC.
+ * - Question пользователя: var(--card) белый, без подписи.
  */
 
 // ─── Утилиты ─────────────────────────────────────────────────
@@ -38,9 +38,9 @@ function formatDayLabel(iso: string): string {
   const now = new Date();
   const startOfDay = (x: Date) => new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime();
   const diffDays = Math.floor((startOfDay(now) - startOfDay(d)) / (1000 * 60 * 60 * 24));
-  if (diffDays === 0) return 'Сегодня';
+  if (diffDays === 0) return 'Сеyearня';
   if (diffDays === 1) return 'Вчера';
-  if (diffDays < 7) return `${diffDays} дн. назад`;
+  if (diffDays < 7) return `${diffDays} days ago`;
   return d.toLocaleDateString('ru-RU', {
     day: 'numeric',
     month: 'long',
@@ -53,8 +53,8 @@ function formatTime(iso: string): string {
 }
 
 /**
- * Пара «вопрос + ответ». Ответ может отсутствовать если AI ещё не отвечал.
- * Время пары = время вопроса (не ответа), чтобы группировка по дням была стабильной.
+ * Пара «вопрос + ответ». Answer может отсутствовать если AI ещё не отвечал.
+ * Time пары = время вопроса (не ответа), чтобы группировка по daysм была стабильной.
  */
 interface Pair {
   question: Comment;
@@ -63,7 +63,7 @@ interface Pair {
 }
 
 function buildPairs(comments: Comment[]): Pair[] {
-  // Старые первые — нужно для правильной привязки AI-ответов к вопросам
+  // Старые первые — нужно for правильной привязки AI-ответов к вопросам
   const asc = [...comments].sort(
     (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
   );
@@ -73,7 +73,7 @@ function buildPairs(comments: Comment[]): Pair[] {
     if (author === 'user') {
       pairs.push({ question: msg, answer: null, at: msg.created_at });
     } else {
-      // AI-ответ прикрепляем к последней паре без ответа
+      // AI-ответ прикрепляем к послеdays паре без ответа
       const openPair = [...pairs].reverse().find((p) => p.answer === null);
       if (openPair) {
         openPair.answer = msg;
@@ -140,7 +140,7 @@ function AnswerBlock({ c }: { c: Comment }) {
         }}
       >
         <IconBrain size={16} />
-        Ответ AI
+        Answer AI
       </div>
       <div
         style={{
@@ -190,7 +190,7 @@ export default function AiChatSheet() {
 
   const pairs = useMemo(() => buildPairs(comments), [comments]);
 
-  // Группировка пар по дням (ключ = YYYY-MM-DD времени вопроса)
+  // Group пар по daysм (ключ = YYYY-MM-DD времени вопроса)
   const groups = useMemo(() => {
     const byDay = new Map<string, Pair[]>();
     for (const p of pairs) {
@@ -213,7 +213,7 @@ export default function AiChatSheet() {
   };
 
   return (
-    <Modal title="Чат с AI" desktopStyle="page">
+    <Modal title="AI Chat" desktopStyle="page">
       {/* Инпут — всегда вверху, чтобы к нему не надо было скроллить */}
       <div style={{ marginBottom: 16 }}>
         <Textarea
@@ -231,7 +231,7 @@ export default function AiChatSheet() {
           icon={<IconSend size={14} />}
           style={{ marginTop: 8 }}
         >
-          Отправить
+          Send
         </Button>
       </div>
 
@@ -271,7 +271,7 @@ export default function AiChatSheet() {
         />
       )}
 
-      {/* Группы по дням → пары (reverse chrono сверху) */}
+      {/* Группы по daysм → пары (reverse chrono сверху) */}
       {groups.map(([key, dayPairs]) => (
         <div key={key} style={{ marginBottom: 8 }}>
           <div

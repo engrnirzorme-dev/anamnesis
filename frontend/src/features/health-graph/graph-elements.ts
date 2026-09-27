@@ -1,8 +1,8 @@
 import type { ElementDefinition } from 'cytoscape';
 
 /**
- * Построение узлов и рёбер графа из patient-context.
- * Точный порт из vanilla `health-graph.js:22-154`.
+ * Построение узлов и рёбер графа of patient-context.
+ * Точный порт of vanilla `health-graph.js:22-154`.
  *
  * Логика связей:
  * - diagnoses, specialists, medications, timeline (visits), errors → узлы
@@ -10,7 +10,7 @@ import type { ElementDefinition } from 'cytoscape';
  * - medication → diagnosis (prescription.diagnosis_id) — "for-diagnosis"
  * - specialist → visit (t.specialist_id) — "visited"
  * - visit → medication (prescription.timeline_id + medication_id) — "visit-med"
- * - specialist → visit (prescription.timeline_id + specialist_id) — "visited" (дубль через prescription)
+ * - specialist → visit (prescription.timeline_id + specialist_id) — "visited" (дубль in prescription)
  * - visit → diagnosis (visit_diagnoses) — "visit-diag"
  * - error → diagnosis (keyword matching) — "error-diag"
  *
@@ -92,10 +92,10 @@ export function buildGraphElements(ctx: PatientContext): ElementDefinition[] {
 
   // Medications
   (ctx.medications ?? []).forEach((m) => {
-    const label = m.status === 'completed' ? `${m.name} [завершён]` : m.name;
+    const label = m.status === 'completed' ? `${m.name} [completed]` : m.name;
     addNode(`med-${m.id}`, label, 'medication', { status: m.status, stopReason: m.stop_reason });
     if (m.specialist_id) {
-      addEdge(`spec-${m.specialist_id}`, `med-${m.id}`, 'назначил', 'prescribed');
+      addEdge(`spec-${m.specialist_id}`, `med-${m.id}`, 'prescribed', 'prescribed');
     }
   });
 
@@ -115,10 +115,10 @@ export function buildGraphElements(ctx: PatientContext): ElementDefinition[] {
   // Prescriptions → med→diag, visit→med, spec→visit
   (ctx.prescriptions ?? []).forEach((p) => {
     if (p.diagnosis_id) {
-      addEdge(`med-${p.medication_id}`, `diag-${p.diagnosis_id}`, 'для', 'for-diagnosis');
+      addEdge(`med-${p.medication_id}`, `diag-${p.diagnosis_id}`, 'for', 'for-diagnosis');
     }
     if (p.timeline_id && p.medication_id) {
-      addEdge(`visit-${p.timeline_id}`, `med-${p.medication_id}`, 'назначен', 'visit-med');
+      addEdge(`visit-${p.timeline_id}`, `med-${p.medication_id}`, 'prescribed', 'visit-med');
     }
     if (p.timeline_id && p.specialist_id) {
       addEdge(`spec-${p.specialist_id}`, `visit-${p.timeline_id}`, '', 'visited');

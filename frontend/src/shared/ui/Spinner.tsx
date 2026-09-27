@@ -4,7 +4,7 @@ interface SpinnerProps {
 }
 
 /**
- * Inline-спиннер. Размер задаётся числом (px).
+ * Inline-спиннер. Size задаётся числом (px).
  * Использует CSS-анимацию `spin` — должна быть определена в app.css (есть там как `.loading`).
  */
 export function Spinner({ size = 20, color = 'currentColor' }: SpinnerProps) {

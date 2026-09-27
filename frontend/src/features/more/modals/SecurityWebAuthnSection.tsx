@@ -12,15 +12,15 @@ import { ApiError } from '@/shared/api/errors';
  * Секция биометрии в SecurityModal.
  *
  * Поток регистрации:
- * 1. Кнопка "Включить Face ID / Touch ID"
+ * 1. Button "Включить Face ID / Touch ID"
  * 2. GET /api/webauthn/register/options → challenge + rp info
- * 3. startRegistration() из @simplewebauthn/browser — показывает системный диалог
+ * 3. startRegistration() of @simplewebauthn/browser — показывает системный диалог
  * 4. POST /api/webauthn/register/verify с attestation
- * 5. Успех → Telegram уведомление + credential в списке
+ * 5. Success → Telegram уведомление + credential в списке
  *
- * Поток входа (реализован в PinScreen.tsx, не здесь):
- * 1. PinScreen видит что для device_id есть credentials
- * 2. Показывает кнопку "Войти через Face ID" поверх PIN клавиатуры
+ * Поток входа (реалofован в PinScreen.tsx, не здесь):
+ * 1. PinScreen видит что for device_id есть credentials
+ * 2. Показывает кнопку "Login in Face ID" поверх PIN клавиатуры
  * 3. navigator.credentials.get() → assertion
  * 4. POST /api/webauthn/login/verify → session token
  */
@@ -72,7 +72,7 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
     return platformOk;
   }, [supportChecked, supported]);
 
-  // Список зарегистрированных credentials
+  // List зарегистрированных credentials
   const { data, isLoading } = useQuery({
     queryKey: ['webauthn-credentials'],
     queryFn: () => api.get<CredentialsResponse>(EP.webauthnCredentials),
@@ -86,42 +86,42 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
     try {
       const ok = await checkSupport();
       if (!ok) {
-        onFeedback('error', 'Биометрия недоступна на этом устройстве');
+        onFeedback('error', 'Biometry недоступна на этом устройстве');
         return;
       }
 
       haptic('light');
-      // Запрос предлагаемого имени
+      // ЗAprос предлагаемого имени
       const defaultName =
         /iphone/i.test(navigator.userAgent) ? 'Face ID / Touch ID iPhone' :
         /ipad/i.test(navigator.userAgent) ? 'Face ID / Touch ID iPad' :
-        /android/i.test(navigator.userAgent) ? 'Биометрия Android' :
+        /android/i.test(navigator.userAgent) ? 'Biometry Android' :
         /mac/i.test(navigator.userAgent) ? 'Touch ID Mac' :
         /windows/i.test(navigator.userAgent) ? 'Windows Hello' :
-        'Биометрия';
+        'Biometry';
 
-      const nickname = window.prompt('Название устройства для списка (можно пропустить):', defaultName) || defaultName;
+      const nickname = window.prompt('Name устройства for списка (можно пропустить):', defaultName) || defaultName;
 
-      // 1. Получить options с challenge
+      // 1. Genderучить options с challenge
       const options = await api.get(EP.webauthnRegisterOptions);
-      // 2. Показать системный диалог биометрии
+      // 2. Show системный диалог биометрии
       const attResp = await startRegistration({ optionsJSON: options as Parameters<typeof startRegistration>[0]['optionsJSON'] });
-      // 3. Отправить attestation на сервер
+      // 3. Send attestation на сервер
       await api.post(EP.webauthnRegisterVerify, {
         response: attResp,
         nickname,
       });
       haptic('success');
-      onFeedback('ok', 'Биометрия настроена! При следующем входе будет быстрее.');
+      onFeedback('ok', 'Biometry настроена! При следующем входе будет быстрее.');
       await qc.invalidateQueries({ queryKey: ['webauthn-credentials'] });
     } catch (err) {
       haptic('error');
       if (err instanceof ApiError) {
-        onFeedback('error', err.message || 'Ошибка регистрации');
+        onFeedback('error', err.message || 'Error регистрации');
       } else if (err instanceof Error && err.name === 'NotAllowedError') {
         onFeedback('error', 'Отменено пользователем');
       } else {
-        onFeedback('error', err instanceof Error ? err.message : 'Ошибка');
+        onFeedback('error', err instanceof Error ? err.message : 'Error');
       }
     } finally {
       setBusy(false);
@@ -129,7 +129,7 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
   }, [checkSupport, onFeedback, qc]);
 
   const revokeCredential = useCallback(async (id: number) => {
-    if (!window.confirm('Удалить этот passkey? Вход через биометрию перестанет работать.')) return;
+    if (!window.confirm('Delete этот passkey? Вход in биометрию перестанет работать.')) return;
     setBusy(true);
     try {
       await api.del(EP.webauthnCredentialItem(id));
@@ -138,7 +138,7 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
       await qc.invalidateQueries({ queryKey: ['webauthn-credentials'] });
     } catch (err) {
       haptic('error');
-      onFeedback('error', err instanceof ApiError ? err.message : 'Ошибка');
+      onFeedback('error', err instanceof ApiError ? err.message : 'Error');
     } finally {
       setBusy(false);
     }
@@ -147,7 +147,7 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
   return (
     <div style={{ marginBottom: 20 }}>
       <div className="section-subtitle">
-        <IconFingerprint size={14} style={{ marginRight: 4 }} /> Биометрия (Face ID / Touch ID)
+        <IconFingerprint size={14} style={{ marginRight: 4 }} /> Biometry (Face ID / Touch ID)
       </div>
 
       {credentials.length === 0 ? (
@@ -160,11 +160,11 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
           }}
         >
           <div style={{ fontSize: 14, color: 'var(--text)', marginBottom: 8, lineHeight: 1.4 }}>
-            Войди быстрее через Face ID, Touch ID или Windows Hello. При неудаче всегда остаётся fallback на PIN.
+            Войди быстрее in Face ID, Touch ID или Windows Hello. При неудаче всегда остаётся fallback на PIN.
           </div>
           <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginBottom: 12, lineHeight: 1.4 }}>
             Biometric ключ создаётся и хранится в Secure Enclave твоего устройства. Сервер
-            хранит только публичный ключ — подделать подпись можно только имея физический
+            хранит только публичный ключ — подделать подпись можно только имея фofический
             доступ к твоему разблокированному устройству.
           </div>
           <Button
@@ -193,11 +193,11 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
               <IconFingerprint size={24} color="var(--green)" />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 600, fontSize: 15, color: 'var(--text)' }}>
-                  {cred.nickname || 'Без названия'}
+                  {cred.nickname || 'Untitled'}
                 </div>
                 <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 2 }}>
-                  Добавлен: {formatDate(cred.created_at)}
-                  {cred.backed_up ? ' · синхронизируется' : ''}
+                  Beforeбавлен: {formatDate(cred.created_at)}
+                  {cred.backed_up ? ' · синхронofируется' : ''}
                   {cred.last_used_at ? ` · использован ${formatDate(cred.last_used_at)}` : ''}
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
                   cursor: busy ? 'not-allowed' : 'pointer',
                   padding: 8,
                 }}
-                aria-label="Удалить passkey"
+                aria-label="Delete passkey"
               >
                 <IconTrash size={18} />
               </button>
@@ -220,7 +220,7 @@ export default function SecurityWebAuthnSection({ onFeedback }: Props) {
           ))}
           <div style={{ padding: '8px 16px', background: 'var(--card)', borderTop: '1px solid var(--border)' }}>
             <Button variant="secondary" block icon={<IconPlus size={14} />} onClick={registerNew} disabled={busy}>
-              Добавить ещё
+              Add ещё
             </Button>
           </div>
         </div>

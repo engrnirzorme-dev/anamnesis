@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Chip (фильтр-таб). Применяет `.chip` из app.css.
- * Если `active` — подсвечивается (через `.chip-active`).
+ * Chip (фильтр-таб). Применяет `.chip` of app.css.
+ * Если `active` — подсвечивается (in `.chip-active`).
  */
 
 interface ChipProps {

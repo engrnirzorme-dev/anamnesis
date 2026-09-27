@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import type { InputHTMLAttributes } from 'react';
 
 /**
- * Текстовый input. Применяет класс `.form-input` из app.css.
+ * Textовый input. Применяет класс `.form-input` of app.css.
  *
  * Работает и с react-hook-form, и с контролируемыми useState:
  * ```tsx
  * // RHF:
- * <Input {...register('name')} placeholder="Имя" />
+ * <Input {...register('name')} placeholder="Name" />
  * // Контролируемый:
  * <Input value={query} onChange={e => setQuery(e.target.value)} />
  * ```

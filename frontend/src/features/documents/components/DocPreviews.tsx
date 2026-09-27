@@ -3,8 +3,8 @@ import { docFileUrl, isImage, isPdf } from '../lib/doc-helpers';
 import type { Document } from '@/shared/types';
 
 /**
- * Строка превью документов под карточкой визита — иконки PDF/изображения.
- * Порт из vanilla `documents.js:196-222`.
+ * Строка превью документов под карточкой вofита — иконки PDF/ofображения.
+ * Порт of vanilla `documents.js:196-222`.
  */
 export function DocPreviews({ docs }: { docs: Document[] | undefined }) {
   if (!docs || docs.length === 0) return null;

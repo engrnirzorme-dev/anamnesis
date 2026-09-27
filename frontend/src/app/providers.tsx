@@ -12,7 +12,7 @@ import { AuthProvider } from '@/shared/auth/AuthContext';
  *    ДО того, как RouterProvider начнёт рендерить страницы (иначе увидим flash).
  * 2. AuthProvider — должен быть выше RouterProvider, чтобы `RequireAuth` внутри
  *    роутера мог читать контекст.
- * 3. RouterProvider — создаёт Router из `router.tsx`.
+ * 3. RouterProvider — создаёт Router of `router.tsx`.
  */
 export function AppProviders() {
   return (
@@ -20,7 +20,7 @@ export function AppProviders() {
       client={queryClient}
       persistOptions={{
         persister,
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 дней
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         buster: 'v1', // сменить при мажорном обновлении схемы данных
       }}
     >

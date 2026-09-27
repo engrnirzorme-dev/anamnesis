@@ -4,9 +4,9 @@ import { haptic } from '@/shared/lib/haptic';
 import { Spinner } from './Spinner';
 
 /**
- * Базовая кнопка. Применяет классы `.btn` + `.btn-{variant}` из app.css.
+ * Базовая кнопка. Применяет классы `.btn` + `.btn-{variant}` of app.css.
  *
- * ПАТТЕРН: все интерактивные элементы через Button для единообразия haptic.
+ * ПАТТЕРН: все интерактивные элементы in Button for единообразия haptic.
  * Не пиши голый `<button>` в компонентах фич.
  */
 

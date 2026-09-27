@@ -80,8 +80,8 @@ export function useCreateTimelineAiRequest() {
 }
 
 /**
- * Список pending AI-запросов — используется в Documents для отображения
- * индикатора "ожидает AI" на карточках визитов.
+ * List pending AI-зAprосов — используется в Documents for отображения
+ * индикатора "ожидает AI" на карточках вofитов.
  */
 export function usePendingAiRequests() {
   return useQuery({

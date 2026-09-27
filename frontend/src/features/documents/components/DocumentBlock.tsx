@@ -19,8 +19,8 @@ import { CommentsSection } from '@/features/comments/CommentsSection';
 import type { Document } from '@/shared/types';
 
 /**
- * Хук для PDF превью страниц. Backend генерирует PNG через pdftoppm
- * в /uploads/previews/{basename}-{page}.png и отдаёт список через
+ * Хук for PDF превью страниц. Backend генерирует PNG in pdftoppm
+ * в /uploads/previews/{basename}-{page}.png и отдаёт список in
  * `GET /api/documents/:id/previews`.
  */
 interface PreviewsResponse {
@@ -34,19 +34,19 @@ function usePdfPreviews(docId: number, enabled: boolean) {
     enabled,
     retry: false,
     // Previews статические — не нужно рефетчить постоянно
-    staleTime: 1000 * 60 * 60, // 1 час
+    staleTime: 1000 * 60 * 60, // 1 hour
   });
 }
 
 /**
- * Блок одного документа внутри деталей визита.
- * Порт из vanilla `documents.js:226-285` (renderDocumentBlock).
+ * Block одного документа внутри деталей вofита.
+ * Порт of vanilla `documents.js:226-285` (renderDocumentBlock).
  */
 export function DocumentBlock({ doc }: { doc: Document }) {
   const url = docFileUrl(doc);
   const img = isImage(doc);
   const pdf = isPdf(doc);
-  // Запрашиваем PNG-превью страниц только для PDF документов
+  // ЗAprашиваем PNG-превью страниц только for PDF документов
   const { data: previewsData } = usePdfPreviews(doc.id, pdf);
   const pdfPreviews = previewsData?.previews ?? [];
 
@@ -77,7 +77,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
         ) : (
           <IconFile size={16} color="var(--text-secondary)" />
         )}
-        {doc.title ?? doc.original_name ?? 'Документ'}
+        {doc.title ?? doc.original_name ?? 'Document'}
       </div>
 
       {url && img && (
@@ -96,7 +96,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
       )}
 
       {/* PDF — показываем PNG превью страниц (генерируются на бэке
-          через pdftoppm). iOS Safari не рендерит PDF в iframe, поэтому
+          in pdftoppm). iOS Safari не рендерит PDF в iframe, поэтому
           используем превью везде. Каждая страница — отдельная картинка
           с zoom по клику. */}
       {pdf && pdfPreviews.length > 0 && (
@@ -118,7 +118,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
             <div key={idx} style={{ textAlign: 'center' }}>
               <ZoomableImage
                 src={src}
-                alt={`${doc.title ?? 'PDF'} — стр. ${idx + 1}`}
+                alt={`${doc.title ?? 'PDF'} — p. ${idx + 1}`}
                 style={{ maxWidth: '100%', display: 'block', margin: '0 auto' }}
               />
               {pdfPreviews.length > 1 && (
@@ -129,7 +129,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
                     marginTop: 4,
                   }}
                 >
-                  стр. {idx + 1} из {pdfPreviews.length}
+                  p. {idx + 1} of {pdfPreviews.length}
                 </div>
               )}
             </div>
@@ -139,8 +139,8 @@ export function DocumentBlock({ doc }: { doc: Document }) {
 
       {url && (
         <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
-          {/* Открываем через window.open а не <a target="_blank">, потому
-              что в PWA standalone <a target="_blank"> часто открывается в
+          {/* Открываем in window.open а не <a target="_blank">, потому
+              что в PWA standalone <a target="_blank"> hourто открывается в
               том же окне → React Router ловит /uploads/xxx.pdf → catch-all
               → /dashboard. window.open пробивает в системный браузер. */}
           <Button
@@ -152,10 +152,10 @@ export function DocumentBlock({ doc }: { doc: Document }) {
               window.open(url, '_blank', 'noopener,noreferrer');
             }}
           >
-            Открыть
+            Open
           </Button>
           {/* Для скачивания используем временный якорь — download работает
-              через прямую ссылку. Тоже не должен навигировать в PWA. */}
+              in прямую ссылку. Тоже не должен навигировать в PWA. */}
           <Button
             size="sm"
             variant="secondary"
@@ -171,7 +171,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
               document.body.removeChild(a);
             }}
           >
-            Скачать
+            Download
           </Button>
         </div>
       )}
@@ -191,7 +191,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
             }}
           >
             <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <IconFileText size={13} /> Расшифровка
+              <IconFileText size={13} /> Transcription
             </span>
             <CopyButton text={doc.transcription} />
           </div>
@@ -275,7 +275,7 @@ export function DocumentBlock({ doc }: { doc: Document }) {
         )}
       </div>
 
-      {/* Комментарии к конкретному документу внутри визита.
+      {/* Comments к конкретному документу внутри вofита.
           Раньше отсутствовали — если у документа были пользовательские
           комменты и ответы AI (entity_type='document'), они не показывались
           и выглядели как "потерянные". */}

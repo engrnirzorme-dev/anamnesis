@@ -9,7 +9,7 @@ interface Props {
 }
 
 /**
- * Карточка диагноза в списке. Порт из vanilla `diagnoses.js:104-130`.
+ * Card диагноза в списке. Порт of vanilla `diagnoses.js:104-130`.
  */
 export function DiagnosisCard({ diagnosis: d, onClick }: Props) {
   const active = d.status === 'active';

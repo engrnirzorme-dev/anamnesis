@@ -1,6 +1,6 @@
 /**
- * Форматирование дат и возраста.
- * Порт из vanilla `frontend/js/utils.js`.
+ * Formтирование дат и возраста.
+ * Порт of vanilla `frontend/js/utils.js`.
  */
 
 export function formatDate(d: string | Date | null | undefined): string {
@@ -28,8 +28,8 @@ export function formatShortDate(d: string | Date | null | undefined): string {
 }
 
 /**
- * Возраст с учётом месяцев для детей младше 2 лет.
- * Примеры: "5 мес.", "18 мес.", "3 г.", "12 г."
+ * Age с учётом months for детей младше 2 years.
+ * Примеры: "5 months", "18 months", "3 г.", "12 г."
  */
 export function calcAge(dob: string | Date | null | undefined): string {
   if (!dob) return '';
@@ -41,13 +41,13 @@ export function calcAge(dob: string | Date | null | undefined): string {
   if (years < 2) {
     let months = (now.getFullYear() - birth.getFullYear()) * 12 + now.getMonth() - birth.getMonth();
     if (now.getDate() < birth.getDate()) months--;
-    return `${months} мес.`;
+    return `${months} months`;
   }
   return `${years} г.`;
 }
 
 /**
- * ISO-дата без времени в локальной таймзоне (для <input type="date">).
+ * ISO-дата без времени в локальной таймзоне (for <input type="date">).
  */
 export function toDateInput(d: string | Date | null | undefined): string {
   if (!d) return '';
@@ -59,15 +59,15 @@ export function toDateInput(d: string | Date | null | undefined): string {
 }
 
 /**
- * Относительное время ("сегодня", "вчера", "3 дня назад") для списков.
+ * Относительное время ("today", "yesterday", "3 days ago") for списков.
  */
 export function relativeDate(d: string | Date | null | undefined): string {
   if (!d) return '';
   const dt = new Date(d);
   const now = new Date();
   const diffDays = Math.floor((now.getTime() - dt.getTime()) / (1000 * 60 * 60 * 24));
-  if (diffDays === 0) return 'сегодня';
-  if (diffDays === 1) return 'вчера';
-  if (diffDays < 7) return `${diffDays} дн. назад`;
+  if (diffDays === 0) return 'today';
+  if (diffDays === 1) return 'yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
   return formatDate(d);
 }

@@ -9,8 +9,8 @@ import { useQueryClient } from '@tanstack/react-query';
  *
  * Отвечает за:
  * - Проверку валидности session_token на старте приложения
- * - Обновление состояния после успешного PIN-login
- * - Logout (очистка session + перенаправление на /pin)
+ * - Update состояния после успешного PIN-login
+ * - Logout (очистка session + перенAprавление на /pin)
  *
  * Используется в RequireAuth, Header (показать имя пользователя), PinScreen.
  */
@@ -56,8 +56,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [recheck]);
 
   // Глобальный слушатель 401/403 от api/client.ts.
-  // Срабатывает когда любой запрос упал с "Требуется авторизация" или
-  // "Устройство отозвано владельцем". В этом случае немедленно чистим
+  // Срабатывает когда любой зAprос упал с "Требуется авторofация" или
+  // "Devicesо отозвано владельцем". В этом случае немедленно чистим
   // локальную сессию и переводим в unauthenticated → RequireAuth
   // редиректит на /pin. Это и есть то что выкидывает жену с её телефона
   // после того как муж нажал "удалить устройство" в /more/security.
@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSessionToken(token);
       setSession(getSession());
       setStatus('authenticated');
-      // После успешного логина нужно инвалидировать все queries которые могли
+      // After успешного логина нужно инвалидировать все queries которые могли
       // упасть с 401 пока пользователь был на экране PIN. React Query не
       // ретраит 401 ошибки автоматически, поэтому без invalidate они
       // останутся в error state и dashboard/timeline/... будут пустыми.
@@ -97,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setSession(getSession());
     setStatus('unauthenticated');
     // Очищаем весь кэш React Query — не хотим чтобы следующий пользователь
-    // увидел данные предыдущего из persist cache
+    // увидел данные предыдущего of persist cache
     queryClient.clear();
     try {
       localStorage.removeItem('anamnesis-query-cache-v1');

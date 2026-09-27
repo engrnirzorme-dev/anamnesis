@@ -19,7 +19,7 @@ export interface Medication {
   ai_assessment: string | null;
   created_at: ISODateString;
   updated_at: ISODateString;
-  /** Добавляется бэкендом при JOIN со specialists */
+  /** Beforeбавляется бэкендом при JOIN со specialists */
   prescribed_by_name?: string | null;
   prescribed_by_spec?: string | null;
 }

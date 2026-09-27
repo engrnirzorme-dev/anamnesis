@@ -13,7 +13,7 @@ interface Props {
 }
 
 /**
- * Одна строка плана. Порт из vanilla `plan.js:92-109` (renderChecklist).
+ * Одна строка плана. Порт of vanilla `plan.js:92-109` (renderChecklist).
  * Клик на круглую галочку → toggle status.
  * Клик на всю карточку → открыть детали.
  */

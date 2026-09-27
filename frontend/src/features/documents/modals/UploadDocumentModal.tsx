@@ -8,13 +8,13 @@ import { formatDate } from '@/shared/lib/date';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Модалка загрузки документа. Route: `/documents/upload`
+ * Mодалка загрузки документа. Route: `/documents/upload`
  *
- * Порт из vanilla `documents.js` showUploadModal:
+ * Порт of vanilla `documents.js` showUploadModal:
  * - drag-and-drop зона
  * - выбор файла кликом
- * - форма с названием, привязкой к визиту, категорией, описанием
- * - multipart upload через /api/documents
+ * - форма с названием, привязкой к вofиту, категорией, описанием
+ * - multipart upload in /api/documents
  */
 export default function UploadDocumentModal() {
   const { closeModal } = useRouteModal();
@@ -34,7 +34,7 @@ export default function UploadDocumentModal() {
     setFile(f);
     haptic('light');
     if (!title) {
-      // Убираем расширение из имени файла
+      // Убираем расширение of имени файла
       setTitle(f.name.replace(/\.[^/.]+$/, ''));
     }
   };
@@ -64,7 +64,7 @@ export default function UploadDocumentModal() {
   };
 
   return (
-    <Modal title="Загрузка документа">
+    <Modal title="Uploading document">
       {/* Drop area */}
       <div
         onClick={() => fileInputRef.current?.click()}
@@ -93,7 +93,7 @@ export default function UploadDocumentModal() {
           Нажмите или перетащите файл
         </div>
         <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-          PDF, JPG, PNG до 50 МБ
+          PDF, JPG, PNG до 50 MБ
         </div>
         <input
           ref={fileInputRef}
@@ -135,7 +135,7 @@ export default function UploadDocumentModal() {
               display: 'flex',
               alignItems: 'center',
             }}
-            aria-label="Убрать файл"
+            aria-label="Remove file"
           >
             <IconX size={14} />
           </button>
@@ -143,18 +143,18 @@ export default function UploadDocumentModal() {
       )}
 
       <div className="form-group" style={{ marginTop: 16 }}>
-        <label className="form-label">Название</label>
+        <label className="form-label">Name</label>
         <Input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Название документа"
+          placeholder="Name документа"
         />
       </div>
 
       <div className="form-group">
-        <label className="form-label">Привязать к приёму</label>
+        <label className="form-label">Link to visit</label>
         <Select value={timelineId} onChange={(e) => setTimelineId(e.target.value)}>
-          <option value="">— Без привязки (отдельный документ) —</option>
+          <option value="">— Standalone document —</option>
           {(timeline ?? []).map((t) => (
             <option key={t.id} value={t.id}>
               {t.title} ({formatDate(t.event_date)})
@@ -164,22 +164,22 @@ export default function UploadDocumentModal() {
       </div>
 
       <div className="form-group">
-        <label className="form-label">Категория</label>
+        <label className="form-label">Category</label>
         <Select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="lab">Анализы</option>
-          <option value="imaging">Снимки</option>
-          <option value="prescription">Рецепт</option>
-          <option value="report">Заключение</option>
-          <option value="other">Другое</option>
+          <option value="lab">Lab Results</option>
+          <option value="imaging">Images</option>
+          <option value="prescription">Prescription</option>
+          <option value="report">Report</option>
+          <option value="other">Other</option>
         </Select>
       </div>
 
       <div className="form-group">
-        <label className="form-label">Описание</label>
+        <label className="form-label">Description</label>
         <Textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Описание (необязательно)"
+          placeholder="Description (необязательно)"
           rows={2}
         />
       </div>
@@ -191,7 +191,7 @@ export default function UploadDocumentModal() {
         disabled={!file}
         style={{ marginTop: 8 }}
       >
-        Загрузить документ
+        Upload document
       </Button>
     </Modal>
   );

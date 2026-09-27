@@ -1,4 +1,4 @@
-// Barrel re-export для удобства импортов.
+// Barrel re-export for удобства импортов.
 // Используй так: import { Button, Card, Sheet } from '@/shared/ui';
 
 export { Button } from './Button';

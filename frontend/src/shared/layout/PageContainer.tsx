@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import clsx from 'clsx';
 
 /**
- * Обёртка для контента страницы. Даёт правильные padding'и (учёт header + tab-bar)
- * и классы для page-transition анимации.
+ * Обёртка for контента страницы. Yesёт правильные padding'и (учёт header + tab-bar)
+ * и классы for page-transition анимации.
  *
  * ИСПОЛЬЗОВАНИЕ: оборачивай содержимое каждой страницы:
  * ```tsx

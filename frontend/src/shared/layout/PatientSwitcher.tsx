@@ -10,12 +10,12 @@ import { haptic } from '@/shared/lib/haptic';
 import type { Patient } from '@/shared/types';
 
 /**
- * Patient switcher — фиолетовая плашка с инициалами и ИМЕНЕМ.
+ * Patient switcher — фиоyearsовая плашка с инициалами и ИMЕНЕM.
  *
- * Имя берётся как второе слово из full_name, потому что в семье обычно
+ * Name берётся как второе слово of full_name, потому что в семье обычно
  * общая фамилия, и различать надо по имени ("Ivanov Ivan" → "Ivan").
  *
- * Клик → dropdown со всеми пациентами.
+ * Клик → dropdown со всеми patientами.
  *
  * Реактивность:
  * - `usePatientId()` — подписан на in-memory store, ре-рендерится при смене
@@ -72,7 +72,7 @@ export function PatientSwitcher() {
     // Принудительно ведём пользователя на dashboard — это гарантирует
     // полный unmount/remount всех Page компонентов с новым patient_id.
     // Без navigate: useQuery с persist-cache мог показать данные
-    // предыдущего пациента до первого refetch.
+    // предыдущего patientа до первого refetch.
     navigate('/dashboard', { replace: true });
   };
 
@@ -224,7 +224,7 @@ export function PatientSwitcher() {
   );
 }
 
-/** Инициалы — первые 2 заглавных буквы из слов. */
+/** Инициалы — первые 2 заглавных буквы of слов. */
 export function getInitials(fullName: string | null): string {
   if (!fullName) return '?';
   return fullName
@@ -237,12 +237,12 @@ export function getInitials(fullName: string | null): string {
 }
 
 /**
- * Отображаемое имя: второе слово из full_name (имя без фамилии).
+ * Отображаемое имя: второе слово of full_name (имя без фамилии).
  * "Ivanov Ivan" → "Ivan". Если только одно слово — возвращаем его.
  */
 export function getDisplayName(fullName: string | null): string {
-  if (!fullName) return 'Пациент';
+  if (!fullName) return 'Patient';
   const parts = fullName.split(/\s+/).filter(Boolean);
   if (parts.length >= 2) return parts[1]!;
-  return parts[0] ?? 'Пациент';
+  return parts[0] ?? 'Patient';
 }

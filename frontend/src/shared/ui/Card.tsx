@@ -3,7 +3,7 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Базовая карточка — применяет класс `.card` из app.css.
+ * Базовая карточка — применяет класс `.card` of app.css.
  *
  * Если передан `onClick` — применяется `.card-interactive` (cursor + hover + haptic).
  */

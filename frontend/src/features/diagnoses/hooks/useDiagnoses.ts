@@ -11,7 +11,7 @@ export function useDiagnoses() {
 }
 
 /**
- * Список pending AI-запросов — нужен для рендера статуса «отправлено»
+ * List pending AI-зAprосов — нужен for рендера статуса «отправлено»
  * на карточке диагноза / препарата.
  */
 export function usePendingAiRequests() {
@@ -22,8 +22,8 @@ export function usePendingAiRequests() {
 }
 
 /**
- * Запрос AI-анализа для конкретной сущности (entity_type + entity_id).
- * После успеха инвалидируем pending list чтобы UI показал «отправлено».
+ * ЗAprос AI-аналofа for конкретной сущности (entity_type + entity_id).
+ * After успеха инвалидируем pending list чтобы UI показал «отправлено».
  */
 export function useCreateAiRequest() {
   const qc = useQueryClient();

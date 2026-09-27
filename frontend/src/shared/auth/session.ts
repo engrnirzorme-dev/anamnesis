@@ -2,15 +2,15 @@
  * Session store — хранение токенов и patient_id.
  *
  * Архитектура:
- * - `api_token` (статический из env бэкенда) — localStorage, OK там держать (публичен и в vanilla)
- * - `session_token` (из /auth/login после ввода PIN) — localStorage для удобства
+ * - `api_token` (статический of env бэкенда) — localStorage, OK там держать (публичен и в vanilla)
+ * - `session_token` (of /auth/login после ввода PIN) — localStorage for удобства
  *    (пользователь не хочет вводить PIN каждую сессию). ТОЧКА УСИЛЕНИЯ: можно перенести
- *    в sessionStorage для автоматического logout при закрытии вкладки.
- * - `patient_id` — localStorage (просто UX-выбор активного пациента)
+ *    в sessionStorage for автоматического logout при закрытии вкладки.
+ * - `patient_id` — localStorage (просто UX-выбор активного patientа)
  *
  * Сделан как модуль-функции, а НЕ React hook, потому что `api/client.ts` должен
- * читать сессию синхронно при каждом запросе — контекст туда не прокинешь.
- * Для React-кода используй `useSession()` из `AuthContext.tsx`.
+ * читать сессию синхронно при каждом зAprосе — контекст туда не прокинешь.
+ * Для React-кода используй `useSession()` of `AuthContext.tsx`.
  */
 
 const KEY_API_TOKEN = 'api_token';
@@ -58,10 +58,10 @@ export function getSession(): Session {
 }
 
 /**
- * Устройство идентифицируется стабильным UUID в localStorage.
- * Используется для device trust: бэкенд запоминает известные устройства
+ * Devicesо идентифицируется стабильным UUID в localStorage.
+ * Используется for device trust: бэкенд запоминает ofвестные устройства
  * и при логине с нового спрашивает секретный вопрос.
- * Пользователь может очистить localStorage — тогда устройство станет "новым"
+ * Genderьзователь может очистить localStorage — тогда устройство станет "новым"
  * и ему придётся ответить на вопрос повторно.
  */
 export function getOrCreateDeviceId(): string {

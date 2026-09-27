@@ -2,40 +2,40 @@ import { useState, useLayoutEffect, useRef, type CSSProperties } from 'react';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * ExpandableText — текстовый блок с ограничением высоты и fade внизу.
+ * ExpandableText — текстовый блок с ограничением высоты и fade внofу.
  *
- * ПРОБЛЕМА, которую решает: в модалках было много блоков с внутренним скроллом
+ * ПРОБЛЕMА, которую решает: в модалках было много блоков с внутренним скроллом
  * (`max-height: 400px; overflow-y: auto`). Это мешало скроллить саму модалку —
  * палец попадал на блок и скроллил только его содержимое, а не модалку целиком.
  *
- * РЕШЕНИЕ: при маунте измеряем реальную высоту текста. Если она больше
- * `maxLines` строк — показываем clamped-версию с fade-gradient внизу и
- * кнопкой «Показать полностью». Клик разворачивает полностью, без скролла.
+ * РЕШЕНИЕ: при маунте ofмеряем реальную высоту текста. Если она больше
+ * `maxLines` строк — показываем clamped-версию с fade-gradient внofу и
+ * кнопкой «Show all». Клик разворачивает полностью, без скролла.
  * При повторном клике — сворачивается обратно.
  *
- * Важно: передавай правильный `bg` (цвет фона контейнера, в котором лежит
+ * Important: передавай правильный `bg` (цвет фона контейнера, в котором лежит
  * блок), иначе fade-градиент будет некрасивым.
  *
- * Применяется для:
- * - AI-анализ
+ * Применяется for:
+ * - AI-аналof
  * - Оценка AI
- * - Расшифровка приёма / документа
- * - Подробное описание
- * - Рекомендации специалиста
+ * - Visit Transcription / документа
+ * - Detailed description
+ * - Specialist recommendations
  * - Длинные notes / детали
  */
 
 interface Props {
   text: string;
-  /** Цвет фона контейнера (для gradient fade). По умолчанию var(--bg). */
+  /** Цвет фона контейнера (for gradient fade). По умолчанию var(--bg). */
   bg?: string;
   /** Количество строк в свёрнутом состоянии. */
   maxLines?: number;
-  /** Доп. стили для текстового блока (цвет, размер и т.п.). */
+  /** Beforeп. стили for текстового блока (цвет, размер и т.п.). */
   textStyle?: CSSProperties;
   /**
-   * Цвет кнопки «Показать полностью» / «Свернуть». По умолчанию синий.
-   * Передавай цвет секции: AI-блок → var(--purple), Рекомендации → var(--green)
+   * Цвет кнопки «Show all» / «Collapse». По умолчанию синий.
+   * Передавай цвет секции: AI-блок → var(--purple), Recommendations → var(--green)
    * и т.д. — чтобы кнопка выглядела естественно в контексте своего блока.
    */
   actionColor?: string;
@@ -54,7 +54,7 @@ export function ExpandableText({
   const [fullHeight, setFullHeight] = useState<number>(0);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Измеряем реальную высоту текста при mount и при изменении содержимого
+  // Измеряем реальную высоту текста при mount и при ofменении содержимого
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -75,7 +75,7 @@ export function ExpandableText({
 
     setFullHeight(full);
     setCollapsedHeight(targetCollapsed);
-    // +4px — буфер, чтобы не считать overflow на 1-2 пикселя из-за округления
+    // +4px — буфер, чтобы не считать overflow на 1-2 пикселя of-за округления
     setOverflows(full > targetCollapsed + 4);
 
     el.style.maxHeight = prev;
@@ -146,7 +146,7 @@ export function ExpandableText({
             WebkitTapHighlightColor: 'transparent',
           }}
         >
-          {expanded ? 'Свернуть' : 'Показать полностью'}
+          {expanded ? 'Collapse' : 'Show all'}
         </button>
       )}
     </div>

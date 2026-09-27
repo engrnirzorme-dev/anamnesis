@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 
 /**
- * Пустое состояние списка — иконка + текст + опциональный CTA.
- * Применяет класс `.empty-state` из app.css.
+ * Emptyе состояние списка — иконка + текст + опциональный CTA.
+ * Применяет класс `.empty-state` of app.css.
  */
 
 interface EmptyStateProps {

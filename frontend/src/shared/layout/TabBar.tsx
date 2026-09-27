@@ -12,8 +12,8 @@ import { haptic } from '@/shared/lib/haptic';
 
 /**
  * Нижняя навигация — 5 главных вкладок.
- * Применяет классы `.tab-bar` и `.tab-item` из app.css.
- * Визуально совпадает с vanilla `frontend/index.html:42-63`.
+ * Применяет классы `.tab-bar` и `.tab-item` of app.css.
+ * Вofуально совпадает с vanilla `frontend/index.html:42-63`.
  */
 
 interface Tab {
@@ -23,11 +23,11 @@ interface Tab {
 }
 
 const TABS: Tab[] = [
-  { to: '/dashboard', label: 'Сводка', icon: IconLayoutDashboard },
-  { to: '/plan', label: 'План', icon: IconListCheck },
-  { to: '/errors', label: 'Ошибки', icon: IconAlertTriangle },
-  { to: '/documents', label: 'Приёмы', icon: IconStethoscope },
-  { to: '/more', label: 'Ещё', icon: IconDots },
+  { to: '/dashboard', label: 'Dashboard', icon: IconLayoutDashboard },
+  { to: '/plan', label: 'Plan', icon: IconListCheck },
+  { to: '/errors', label: 'Errors', icon: IconAlertTriangle },
+  { to: '/documents', label: 'Visits', icon: IconStethoscope },
+  { to: '/more', label: 'More', icon: IconDots },
 ];
 
 export function TabBar() {
@@ -38,7 +38,7 @@ export function TabBar() {
     haptic('light');
     // Передаём state с флагом instant: true — AppShell прочитает его
     // и пропустит transition-анимацию (клик по табу — моментально).
-    // Свайпы идут через обычный navigate без state → анимация играет.
+    // Свайпы идут in обычный navigate без state → анимация играет.
     navigate(to, { state: { instant: true } });
   };
 
@@ -46,8 +46,8 @@ export function TabBar() {
     <nav className="tab-bar" id="tab-bar">
       {TABS.map((tab) => {
         const IconComp = tab.icon;
-        // Активная вкладка — если текущий путь совпадает или начинается с `/tab/`
-        // (для child-роутов модалок: `/documents/visit/42` → «Приёмы» активен)
+        // Activeя вкладка — если текущий путь совпадает или начинается с `/tab/`
+        // (for child-роутов модалок: `/documents/visit/42` → «Visitы» активен)
         const isActive =
           location.pathname === tab.to || location.pathname.startsWith(`${tab.to}/`);
         return (
@@ -66,5 +66,5 @@ export function TabBar() {
   );
 }
 
-// Экспортируем список вкладок — используется в SwipeableTabs для определения соседей
+// Exportируем список вкладок — используется в SwipeableTabs for определения соседей
 export const TAB_ROUTES = TABS.map((t) => t.to);

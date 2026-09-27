@@ -27,8 +27,8 @@ import { getSession } from '@/shared/auth/session';
 import { useIsDesktop } from '@/shared/hooks/useMediaQuery';
 
 /**
- * Главная страница раздела «Ещё» — меню со всеми подразделами.
- * Все подэкраны открываются как route-based модалки (URL /more/<name>).
+ * Dashboard страница раздела «More» — меню со всеми подразделами.
+ * All подэкраны открываются как route-based модалки (URL /more/<name>).
  */
 
 interface MenuItem {
@@ -41,20 +41,20 @@ interface MenuItem {
 }
 
 const MENU: MenuItem[] = [
-  { id: 'search', label: 'Поиск', icon: IconSearch, iconBg: 'var(--purple)', action: 'route', target: '/more/search' },
-  { id: 'nirzor', label: 'NIRZOR ИИ', icon: IconBrain, iconBg: 'linear-gradient(135deg,#007AFF,#5AC8FA)', action: 'route', target: '/more/nirzor' },
-  { id: 'ai-chat', label: 'Чат с AI', icon: IconMessageChatbot, iconBg: 'linear-gradient(135deg,#007AFF,#5AC8FA)', action: 'route', target: '/more/ai-chat' },
-  { id: 'specialists', label: 'Специалисты', icon: IconStethoscope, iconBg: 'var(--blue)', action: 'route', target: '/more/specialists' },
-  { id: 'medications', label: 'Все препараты', icon: IconPill, iconBg: 'var(--green)', action: 'route', target: '/more/medications' },
-  { id: 'vaccinations', label: 'Прививки', icon: IconVaccine, iconBg: '#5AC8FA', action: 'route', target: '/more/vaccinations' },
-  { id: 'growth', label: 'Рост и вес', icon: IconRuler2, iconBg: '#FF9500', action: 'route', target: '/more/growth' },
-  { id: 'labs', label: 'Анализы', icon: IconTestPipe, iconBg: '#FF3B30', action: 'route', target: '/more/labs' },
-  { id: 'reminders', label: 'Напоминания', icon: IconBell, iconBg: 'var(--orange)', action: 'route', target: '/more/reminders' },
-  { id: 'export', label: 'Экспорт отчёта', icon: IconFileExport, iconBg: 'var(--red)', action: 'export', target: '' },
-  { id: 'diagnoses', label: 'Диагнозы', icon: IconStethoscope, iconBg: 'var(--red)', action: 'navigate', target: '/diagnoses' },
-  { id: 'graph', label: 'Карта здоровья', icon: IconTopologyStar3, iconBg: 'linear-gradient(135deg,#AF52DE,#007AFF)', action: 'navigate', target: '/graph' },
-  { id: 'history', label: 'История изменений', icon: IconHistory, iconBg: 'var(--blue)', action: 'route', target: '/more/history' },
-  { id: 'security', label: 'Безопасность', icon: IconShieldLock, iconBg: 'linear-gradient(135deg,#FF3B30,#FF9500)', action: 'route', target: '/more/security' },
+  { id: 'search', label: 'Search', icon: IconSearch, iconBg: 'var(--purple)', action: 'route', target: '/more/search' },
+  { id: 'nirzor', label: 'NIRZOR AI', icon: IconBrain, iconBg: 'linear-gradient(135deg,#007AFF,#5AC8FA)', action: 'route', target: '/more/nirzor' },
+  { id: 'ai-chat', label: 'AI Chat', icon: IconMessageChatbot, iconBg: 'linear-gradient(135deg,#007AFF,#5AC8FA)', action: 'route', target: '/more/ai-chat' },
+  { id: 'specialists', label: 'Specialists', icon: IconStethoscope, iconBg: 'var(--blue)', action: 'route', target: '/more/specialists' },
+  { id: 'medications', label: 'All medications', icon: IconPill, iconBg: 'var(--green)', action: 'route', target: '/more/medications' },
+  { id: 'vaccinations', label: 'Vaccinations', icon: IconVaccine, iconBg: '#5AC8FA', action: 'route', target: '/more/vaccinations' },
+  { id: 'growth', label: 'Growth & Weight', icon: IconRuler2, iconBg: '#FF9500', action: 'route', target: '/more/growth' },
+  { id: 'labs', label: 'Lab Results', icon: IconTestPipe, iconBg: '#FF3B30', action: 'route', target: '/more/labs' },
+  { id: 'reminders', label: 'Reminders', icon: IconBell, iconBg: 'var(--orange)', action: 'route', target: '/more/reminders' },
+  { id: 'export', label: 'Export отчёта', icon: IconFileExport, iconBg: 'var(--red)', action: 'export', target: '' },
+  { id: 'diagnoses', label: 'Diagnoses', icon: IconStethoscope, iconBg: 'var(--red)', action: 'navigate', target: '/diagnoses' },
+  { id: 'graph', label: 'Health Graph', icon: IconTopologyStar3, iconBg: 'linear-gradient(135deg,#AF52DE,#007AFF)', action: 'navigate', target: '/graph' },
+  { id: 'history', label: 'History', icon: IconHistory, iconBg: 'var(--blue)', action: 'route', target: '/more/history' },
+  { id: 'security', label: 'Security', icon: IconShieldLock, iconBg: 'linear-gradient(135deg,#FF3B30,#FF9500)', action: 'route', target: '/more/security' },
 ];
 
 export function MorePage() {
@@ -64,7 +64,7 @@ export function MorePage() {
   const { data: dashboard } = useDashboard();
   const { data: version } = useQuery({ queryKey: qk.version, queryFn: fetchVersion, retry: false });
 
-  // На десктопе раздел «Ещё» не нужен — всё уже в sidebar.
+  // На десктопе раздел «More» не нужен — всё уже в sidebar.
   if (isDesktop) {
     // Корневой /more → редирект на dashboard
     if (location.pathname === '/more') {
@@ -93,7 +93,7 @@ export function MorePage() {
       {dashboard?.patient && <PatientCard patient={dashboard.patient} />}
 
       <div className="section-subtitle">
-        <IconMenu2 size={14} style={{ marginRight: 4 }} /> Разделы
+        <IconMenu2 size={14} style={{ marginRight: 4 }} /> Sectionы
       </div>
 
       <div className="list-group">
@@ -138,7 +138,7 @@ export function MorePage() {
             marginTop: 20,
           }}
         >
-          Версия {version.version}
+          Version {version.version}
         </div>
       )}
 

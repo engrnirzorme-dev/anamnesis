@@ -25,7 +25,7 @@ import type { Diagnosis, Medication, MedicalError, Reminder } from '@/shared/typ
  *  6. MedicationsSection — Collapsible, свёрнута по умолчанию
  *  7. RemindersSection (не collapsible)
  *
- * Модалки деталей — локальные (не route-based). Для Dashboard это ок.
+ * Mодалки деталей — локальные (не route-based). Для Dashboard это ок.
  */
 
 type DetailEntity =
@@ -60,11 +60,11 @@ export function DashboardPage() {
       <PageContainer>
         <EmptyState
           icon={<IconAlertCircle size={48} color="var(--red)" />}
-          title="Не удалось загрузить"
+          title="Failed to load"
           text={(error as Error).message}
           action={
             <Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>
-              Повторить
+              Retry
             </Button>
           }
         />
@@ -86,7 +86,7 @@ export function DashboardPage() {
         onSelect={(e) => setDetail({ type: 'error', data: e })}
       />
 
-      {/* Напоминания — ВЫШЕ спойлеров, т.к. это самое срочное */}
+      {/* Reminders — ВЫШЕ спойлеров, т.к. это самое срочное */}
       <RemindersSection
         reminders={data.upcoming_reminders}
         onSelect={(r) => setDetail({ type: 'reminder', data: r })}
@@ -117,7 +117,7 @@ export function DashboardPage() {
             pointerEvents: 'none',
           }}
         >
-          Обновление...
+          Updating...
         </div>
       )}
 

@@ -10,11 +10,11 @@ import type { GrowthMeasurement } from './growth';
 import type { LabResult } from './lab-result';
 
 /**
- * Реальная форма ответа GET /api/dashboard (подтверждено через
+ * Реальная форма ответа GET /api/dashboard (подтверждено in
  * backend/src/routes/dashboard.js).
  *
  * ВАЖНО: `stats.plan_total` — это count «осталось» (status != 'done'),
- * а НЕ общее количество. Плохо названное поле, но не меняем для совместимости.
+ * а НЕ общее количество. Плохо названное поле, но не меняем for совместимости.
  */
 export interface DashboardResponse {
   patient: Patient | null;

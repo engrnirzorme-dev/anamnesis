@@ -13,7 +13,7 @@ export function usePlan() {
 
 /**
  * Toggle plan item status (pending ↔ done) с optimistic update.
- * Порт из vanilla `plan.js:187-193`.
+ * Порт of vanilla `plan.js:187-193`.
  */
 export function useTogglePlanStatus() {
   const qc = useQueryClient();

@@ -11,8 +11,8 @@ interface Props {
 }
 
 /**
- * Два таба План/Выполнено. Порт из vanilla `plan.js:130-146`.
- * Стили inline — в vanilla они тоже были inline, чтобы сохранить визуал 1:1.
+ * Два таба Plan/Completed. Порт of vanilla `plan.js:130-146`.
+ * Стили inline — в vanilla они тоже были inline, чтобы сохранить вofуал 1:1.
  */
 export function PlanTabs({ active, pendingCount, doneCount, onChange }: Props) {
   const mkBtn = (tab: PlanTab, label: string, count: number, color: string, shadow: string) => (
@@ -48,8 +48,8 @@ export function PlanTabs({ active, pendingCount, doneCount, onChange }: Props) {
 
   return (
     <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-      {mkBtn('pending', 'Запланировано', pendingCount, 'var(--orange)', '0 2px 8px rgba(255,149,0,0.3)')}
-      {mkBtn('done', 'Выполнено', doneCount, 'var(--green)', '0 2px 8px rgba(52,199,89,0.3)')}
+      {mkBtn('pending', 'Scheduled', pendingCount, 'var(--orange)', '0 2px 8px rgba(255,149,0,0.3)')}
+      {mkBtn('done', 'Completed', doneCount, 'var(--green)', '0 2px 8px rgba(52,199,89,0.3)')}
     </div>
   );
 }

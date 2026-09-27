@@ -23,9 +23,9 @@ export function DiagnosesPage() {
       <PageContainer>
         <EmptyState
           icon={<IconAlertCircle size={48} color="var(--red)" />}
-          title="Не удалось загрузить"
+          title="Failed to load"
           text={(error as Error).message}
-          action={<Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>Повторить</Button>}
+          action={<Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>Retry</Button>}
         />
       </PageContainer>
     );
@@ -40,7 +40,7 @@ export function DiagnosesPage() {
       <PageContainer>
         <EmptyState
           icon={<IconStethoscope size={48} color="var(--text-secondary)" />}
-          text="Нет диагнозов"
+          text="No diagnoses"
         />
         <Outlet />
       </PageContainer>
@@ -64,7 +64,7 @@ export function DiagnosesPage() {
       {other.length > 0 && (
         <>
           <div className="section-subtitle" style={{ marginTop: 16 }}>
-            <IconCircleCheck size={14} style={{ marginRight: 4 }} /> Закрытые ({other.length})
+            <IconCircleCheck size={14} style={{ marginRight: 4 }} /> Closedые ({other.length})
           </div>
           {other.map((d) => (
             <DiagnosisCard key={d.id} diagnosis={d} onClick={handleClick} />

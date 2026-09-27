@@ -1,7 +1,7 @@
 import type { ISODateString } from './common';
 
 /**
- * Статус результата анализа — совпадает с vanilla.
+ * Status результата аналofа — совпадает с vanilla.
  * - normal: в пределах нормы
  * - low: ниже нормы
  * - high: выше нормы
@@ -14,12 +14,12 @@ export interface LabResult {
   patient_id: number;
   test_name: string;
   parameter: string;
-  /** Значение может быть числом или строкой (например "положительно") */
+  /** Value может быть числом или строкой (e.g. "положительно") */
   value: string | number | null;
   unit: string | null;
-  /** Минимум нормы (числовое поле из БД) */
+  /** Mинимум нормы (числовое поле of БД) */
   ref_min: number | null;
-  /** Максимум нормы (числовое поле из БД) */
+  /** Mаксимум нормы (числовое поле of БД) */
   ref_max: number | null;
   status: LabResultStatus | null;
   test_date: ISODateString;

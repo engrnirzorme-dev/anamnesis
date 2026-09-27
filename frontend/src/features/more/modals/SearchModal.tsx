@@ -23,16 +23,16 @@ const ENTITY_ROUTES: Record<string, (id: number) => string> = {
 };
 
 const ENTITY_LABELS: Record<string, string> = {
-  diagnosis: 'Диагноз',
-  medication: 'Препарат',
-  plan: 'План',
-  error: 'Ошибка',
-  timeline: 'Визит',
-  visit: 'Визит',
-  specialist: 'Специалист',
-  document: 'Документ',
+  diagnosis: 'Diagnosis',
+  medication: 'Medication',
+  plan: 'Plan',
+  error: 'Error',
+  timeline: 'Вofит',
+  visit: 'Вofит',
+  specialist: 'Specialist',
+  document: 'Document',
   vaccination: 'Прививка',
-  reminder: 'Напоминание',
+  reminder: 'Reminder',
 };
 
 export default function SearchModal() {
@@ -55,7 +55,7 @@ export default function SearchModal() {
   };
 
   return (
-    <Modal title="Поиск" desktopStyle="page">
+    <Modal title="Search" desktopStyle="page">
       <div style={{ position: 'relative', marginBottom: 16 }}>
         <IconSearch
           size={18}
@@ -79,7 +79,7 @@ export default function SearchModal() {
 
       {debounced.length < 2 && (
         <p style={{ fontSize: 13, color: 'var(--text-secondary)', textAlign: 'center', padding: 20 }}>
-          Введите минимум 2 символа для поиска
+          Введите минимум 2 символа for поиска
         </p>
       )}
 

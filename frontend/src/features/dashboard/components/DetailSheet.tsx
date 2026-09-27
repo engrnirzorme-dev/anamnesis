@@ -22,10 +22,10 @@ import { CommentsSection } from '@/features/comments/CommentsSection';
 import type { Diagnosis, Medication, MedicalError, Reminder } from '@/shared/types';
 
 /**
- * Универсальная модалка деталей для сущностей, кликабельных с Dashboard.
+ * Универсальная модалка деталей for сущностей, кликабельных с Dashboard.
  *
  * ВАЖНО: на dashboard модалки — это локальный state (не route-based).
- * F5 их закрывает, но для Dashboard это ок — это не основные страницы.
+ * F5 их закрывает, но for Dashboard это ок — это не основные страницы.
  * Для route-based модалок (в Documents, Plan) — используется `@/shared/ui/Modal`.
  */
 
@@ -58,7 +58,7 @@ export function DetailSheet({ entity, onClose }: Props) {
 }
 
 function getTitle(type: DetailEntity['type'], data: DetailEntity['data']): string {
-  if (type === 'error') return (data as MedicalError).title ?? 'Ошибка';
+  if (type === 'error') return (data as MedicalError).title ?? 'Error';
   if (type === 'reminder') return (data as Reminder).title ?? '—';
   return (data as Diagnosis | Medication).name ?? '—';
 }
@@ -125,7 +125,7 @@ function DiagnosisContent({ diagnosis }: { diagnosis: Diagnosis }) {
           </Badge>
         )}
         <Badge color={diagnosis.status === 'active' ? 'red' : 'green'}>
-          {diagnosis.status === 'active' ? 'Активный' : 'Неактивный'}
+          {diagnosis.status === 'active' ? 'Active' : 'Inactive'}
         </Badge>
       </div>
 
@@ -138,7 +138,7 @@ function DiagnosisContent({ diagnosis }: { diagnosis: Diagnosis }) {
           }}
         >
           <IconFileText size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-          Источник: {diagnosis.source}
+          Source: {diagnosis.source}
         </div>
       )}
 
@@ -146,7 +146,7 @@ function DiagnosisContent({ diagnosis }: { diagnosis: Diagnosis }) {
         <Block
           color="var(--text)"
           icon={<IconInfoCircle size={14} />}
-          title="Подробное описание"
+          title="Detailed description"
           text={diagnosis.notes}
         />
       )}
@@ -155,7 +155,7 @@ function DiagnosisContent({ diagnosis }: { diagnosis: Diagnosis }) {
         <Block
           color="var(--purple)"
           icon={<IconBrain size={14} />}
-          title="Независимая оценка AI"
+          title="Independent AI assessment"
           text={diagnosis.ai_assessment}
           bg="#F8F1FC"
         />
@@ -173,7 +173,7 @@ function MedicationContent({ medication: m }: { medication: Medication }) {
         <Badge color={m.status === 'active' ? 'green' : 'gray'} icon={
           m.status === 'active' ? <IconPill size={12} /> : <IconCircleCheck size={12} />
         }>
-          {m.status === 'active' ? 'Активный' : 'Завершён'}
+          {m.status === 'active' ? 'Active' : 'Completed'}
         </Badge>
         {m.prescribed_by && (
           <Badge color="blue" icon={<IconUser size={12} />}>
@@ -194,13 +194,13 @@ function MedicationContent({ medication: m }: { medication: Medication }) {
           {m.dosage && (
             <div style={{ fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>
               <IconDroplet size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-              Дозировка: <strong>{m.dosage}</strong>
+              Dosage: <strong>{m.dosage}</strong>
             </div>
           )}
           {m.frequency && (
             <div style={{ fontSize: 14, color: 'var(--text)' }}>
               <IconClock size={14} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-              Приём: <strong>{m.frequency}</strong>
+              Visit: <strong>{m.frequency}</strong>
             </div>
           )}
         </div>
@@ -209,7 +209,7 @@ function MedicationContent({ medication: m }: { medication: Medication }) {
       {m.start_date && (
         <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>
           <IconCalendar size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-          Период: {formatDate(m.start_date)} {m.end_date ? `— ${formatDate(m.end_date)}` : '— ...'}
+          Period: {formatDate(m.start_date)} {m.end_date ? `— ${formatDate(m.end_date)}` : '— ...'}
         </div>
       )}
 
@@ -217,7 +217,7 @@ function MedicationContent({ medication: m }: { medication: Medication }) {
         <Block
           color="var(--text)"
           icon={<IconInfoCircle size={14} />}
-          title="Подробная информация"
+          title="Detailed information"
           text={m.detail}
         />
       )}
@@ -226,7 +226,7 @@ function MedicationContent({ medication: m }: { medication: Medication }) {
         <Block
           color="var(--purple)"
           icon={<IconBrain size={14} />}
-          title="Независимая оценка AI"
+          title="Independent AI assessment"
           text={m.ai_assessment}
           bg="#F8F1FC"
         />
@@ -254,9 +254,9 @@ function ErrorContent({ error }: { error: MedicalError }) {
     error.severity === 'warning' ? 'orange' :
     'blue';
   const severityLabel =
-    error.severity === 'critical' ? 'Критично' :
-    error.severity === 'warning' ? 'Внимание' :
-    'Информация';
+    error.severity === 'critical' ? 'Critical' :
+    error.severity === 'warning' ? 'Warning' :
+    'Information';
 
   return (
     <>
@@ -265,7 +265,7 @@ function ErrorContent({ error }: { error: MedicalError }) {
           {severityLabel}
         </Badge>
         <Badge color={error.status === 'resolved' ? 'green' : 'red'}>
-          {error.status === 'resolved' ? 'Решено' : 'Открыто'}
+          {error.status === 'resolved' ? 'Resolved' : 'Open'}
         </Badge>
       </div>
 
@@ -277,7 +277,7 @@ function ErrorContent({ error }: { error: MedicalError }) {
         <Block
           color="var(--text)"
           icon={<IconInfoCircle size={14} />}
-          title="Подробное описание"
+          title="Detailed description"
           text={error.detail}
         />
       )}
@@ -286,7 +286,7 @@ function ErrorContent({ error }: { error: MedicalError }) {
         <Block
           color="var(--green)"
           icon={<IconStethoscope size={14} />}
-          title="Рекомендации специалиста"
+          title="Specialist recommendations"
           text={error.advice}
           bg="#F3FBF5"
         />
@@ -296,7 +296,7 @@ function ErrorContent({ error }: { error: MedicalError }) {
         <Block
           color="var(--purple)"
           icon={<IconBrain size={14} />}
-          title="Независимая оценка AI"
+          title="Independent AI assessment"
           text={error.ai_assessment}
           bg="#F8F1FC"
         />
@@ -333,7 +333,7 @@ function ReminderContent({ reminder: r }: { reminder: Reminder }) {
           color={r.status === 'sent' ? 'green' : 'orange'}
           icon={r.status === 'sent' ? <IconCircleCheck size={12} /> : <IconClock size={12} />}
         >
-          {r.status === 'sent' ? 'Отправлено' : 'Ожидает'}
+          {r.status === 'sent' ? 'Sent' : 'Pending'}
         </Badge>
       </div>
 

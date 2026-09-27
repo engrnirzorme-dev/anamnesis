@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 /**
- * Хук localStorage с SSR-safe fallback и синхронизацией между вкладками.
+ * Хук localStorage с SSR-safe fallback и синхронofацией между вкладками.
  *
  * Пример:
  * ```tsx
@@ -37,7 +37,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
     [key]
   );
 
-  // Синхронизация между вкладками
+  // Синхронofация между вкладками
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key !== key || e.newValue === null) return;

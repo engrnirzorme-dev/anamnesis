@@ -1,7 +1,7 @@
 import type { ISODateString } from './common';
 
 /**
- * Patient — реальная форма из бэкенда PostgreSQL.
+ * Patient — реальная форма of бэкенда PostgreSQL.
  * ВАЖНО: поля роста/веса именуются `current_height_cm`, `current_weight_kg`
  * (не `height_cm`/`weight_kg`) и есть ещё `birth_weight_g`.
  */

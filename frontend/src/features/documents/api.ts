@@ -9,7 +9,7 @@ export const fetchTimelineItem = (id: number): Promise<Timeline> =>
 
 export const fetchAllDocuments = (): Promise<Document[]> => api.get<Document[]>(EP.documents);
 
-// ── CRUD визитов (timeline) ────────────────────────────
+// ── CRUD вofитов (timeline) ────────────────────────────
 
 export interface VisitInput {
   title: string;
@@ -33,7 +33,7 @@ export const updateVisit = (id: number, data: VisitInput): Promise<Timeline> =>
 export const deleteVisit = (id: number): Promise<void> =>
   api.del<void>(EP.timelineItem(id));
 
-// ── Upload документа ──────────────────────────────────
+// ── Document upload ──────────────────────────────────
 
 export interface UploadDocumentInput {
   file: File;
@@ -53,7 +53,7 @@ export const uploadDocument = (input: UploadDocumentInput): Promise<Document> =>
   return api.upload<Document>(EP.documents, formData);
 };
 
-// ── AI requests (для timeline и документов) ───────────
+// ── AI requests (for timeline и документов) ───────────
 
 interface AiRequestCreate {
   entity_type: 'timeline' | 'document' | 'diagnosis' | 'medication';

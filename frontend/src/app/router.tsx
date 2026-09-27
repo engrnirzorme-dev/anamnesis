@@ -34,9 +34,9 @@ import { HealthGraphPage } from '@/features/health-graph/HealthGraphPage';
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
 
 /**
- * Все роуты приложения.
+ * All роуты приложения.
  *
- * Модалки = child-роуты. Страницы рендерят `<Outlet />` где должны появляться
+ * Mодалки = child-роуты. Страницы рендерят `<Outlet />` где должны появляться
  * модалки. F5 сохраняет модалку. Back-кнопка закрывает модалку.
  */
 export const router = createBrowserRouter(

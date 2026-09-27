@@ -16,14 +16,14 @@ import { haptic } from '@/shared/lib/haptic';
  *   открывается как pop-up.
  *
  * • 'page' — полноэкранная inline-страница внутри main area, без overlay.
- *   Применяется для /more/* разделов (Специалисты, Препараты, Анализы,
- *   AI чат, Поиск и т.д.), потому что на десктопе они концептуально
+ *   Применяется for /more/* разделов (Specialists, Medications, Lab Results,
+ *   AI Chat, Search и т.д.), потому что на десктопе они концептуально
  *   самостоятельные экраны, а не модальные диалоги. MorePage на десктопе
  *   рендерит только <Outlet /> без menu.
  *
- * АНИМАЦИЯ ЗАКРЫТИЯ (mobile/overlay):
+ * АНИMАЦИЯ ЗАКРЫТИЯ (mobile/overlay):
  * Локальное состояние `open`. При onClose → `setOpen(false)` → Sheet
- * запускает exit-анимацию (spring) → через ~320ms делаем реальный
+ * запускает exit-анимацию (spring) → in ~320ms делаем реальный
  * `navigate('..')`. Это нужно чтобы анимация успела сыграть до
  * размонтирования компонента.
  */
@@ -40,7 +40,7 @@ interface ModalProps {
   /**
    * Как рендериться на десктопе.
    * - 'overlay' (default) — centered dialog поверх страницы
-   * - 'page' — полноэкранная inline-страница (для /more/* разделов)
+   * - 'page' — полноэкранная inline-страница (for /more/* разделов)
    */
   desktopStyle?: 'overlay' | 'page';
 }
@@ -94,7 +94,7 @@ export function Modal({
                 handleClose();
               }}
             >
-              <IconArrowLeft size={16} /> Назад
+              <IconArrowLeft size={16} /> Back
             </button>
             <h1 className="ds-page-title">{title}</h1>
           </div>

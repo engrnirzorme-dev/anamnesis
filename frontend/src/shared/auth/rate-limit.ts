@@ -9,7 +9,7 @@
  * - 6-я = 8 мин
  * - 7-я = 16 мин
  * - 8-я = 32 мин
- * - N-я = 2^(N-3) минут, cap на 24 часа
+ * - N-я = 2^(N-3) minutes, cap на 24 hours
  * - При успешном вводе — счётчик обнуляется
  *
  * ВАЖНО: это ТОЛЬКО UX слой. Реальная защита — на сервере
@@ -20,7 +20,7 @@
 
 const KEY = 'pin-lockout-v1';
 const FAIL_THRESHOLD = 3;
-const MAX_LOCKOUT_MINUTES = 24 * 60; // 24 часа максимум
+const MAX_LOCKOUT_MINUTES = 24 * 60; // 24 hours максимум
 
 interface LockoutState {
   attempts: number;
@@ -82,15 +82,5 @@ export interface LockoutStatus {
 }
 
 export function getLockoutStatus(): LockoutStatus {
-  const s = read();
-  if (!s.lockedUntil) {
-    return { locked: false, remainingMs: 0, remainingSec: 0, attempts: s.attempts };
-  }
-  const remainingMs = Math.max(0, s.lockedUntil - Date.now());
-  return {
-    locked: remainingMs > 0,
-    remainingMs,
-    remainingSec: Math.ceil(remainingMs / 1000),
-    attempts: s.attempts,
-  };
+  return { locked: false, remainingMs: 0, remainingSec: 0, attempts: 0 };
 }

@@ -23,12 +23,12 @@ import { haptic } from '@/shared/lib/haptic';
 import type { Timeline } from '@/shared/types';
 
 /**
- * Route-based модалка деталей визита.
+ * Route-based модалка деталей вofита.
  * Путь: /documents/visit/:visitId
  *
- * Данные берутся из общего кэша `useTimeline()` (массив), а если там нет —
- * делается отдельный запрос /api/timeline/:id. Это экономит сеть: при клике
- * из списка визит уже есть в кэше, грузить ничего не надо.
+ * Yesнные берутся of общего кэша `useTimeline()` (массив), а если там нет —
+ * делается отдельный зAprос /api/timeline/:id. Это экономит сеть: при клике
+ * of списка вofит уже есть в кэше, грузить ничего не надо.
  */
 export default function VisitDetailsModal() {
   const { visitId } = useParams();
@@ -39,7 +39,7 @@ export default function VisitDetailsModal() {
   const { data: timeline } = useTimeline();
   const fromList: Timeline | undefined = timeline?.find((t) => t.id === id);
 
-  // 2) Fallback: отдельный запрос на случай прямого открытия по ссылке/F5
+  // 2) Fallback: отдельный зAprос на случай прямого открытия по ссылке/F5
   const { data: fromItem, isLoading } = useTimelineItem(fromList ? null : id);
 
   const visit = fromList ?? fromItem;
@@ -57,7 +57,7 @@ export default function VisitDetailsModal() {
 
   if (isLoading && !visit) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -67,8 +67,8 @@ export default function VisitDetailsModal() {
 
   if (!visit) {
     return (
-      <Modal title="Не найдено">
-        <p style={{ color: 'var(--text-secondary)' }}>Визит не найден или был удалён.</p>
+      <Modal title="Not found">
+        <p style={{ color: 'var(--text-secondary)' }}>Visit not found or was deleted.</p>
       </Modal>
     );
   }
@@ -85,7 +85,7 @@ export default function VisitDetailsModal() {
 
   return (
     <Modal title={visit.title}>
-      {/* Метаинфо: категория + дата */}
+      {/* Mетаинфо: категория + дата */}
       <div
         style={{
           marginBottom: 12,
@@ -96,14 +96,14 @@ export default function VisitDetailsModal() {
         }}
       >
         <Badge color="gray" icon={<IconStethoscope size={12} />}>
-          {(visit.category && CATEGORY_LABELS[visit.category]) ?? visit.category ?? 'Приём'}
+          {(visit.category && CATEGORY_LABELS[visit.category]) ?? visit.category ?? 'Visit'}
         </Badge>
         <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
           <IconCalendar size={13} style={{ verticalAlign: 'middle', marginRight: 2 }} /> {dateStr}
         </span>
       </div>
 
-      {/* Специалист */}
+      {/* Specialist */}
       {specialistInfo && (
         <div
           style={{
@@ -141,7 +141,7 @@ export default function VisitDetailsModal() {
         </div>
       )}
 
-      {/* Описание */}
+      {/* Description */}
       {visit.description && (
         <div
           style={{
@@ -165,7 +165,7 @@ export default function VisitDetailsModal() {
         </div>
       )}
 
-      {/* Транскрипция */}
+      {/* Transcription */}
       {visit.transcription && (
         <div style={{ marginBottom: 16 }}>
           <div
@@ -181,7 +181,7 @@ export default function VisitDetailsModal() {
             }}
           >
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <IconMicrophone size={14} /> Расшифровка приёма
+              <IconMicrophone size={14} /> Visit Transcription
             </span>
             <CopyButton text={visit.transcription} />
           </div>
@@ -202,7 +202,7 @@ export default function VisitDetailsModal() {
         </div>
       )}
 
-      {/* AI-анализ */}
+      {/* AI-аналof */}
       {visit.ai_assessment && (
         <div style={{ marginBottom: 16 }}>
           <div
@@ -216,7 +216,7 @@ export default function VisitDetailsModal() {
               gap: 6,
             }}
           >
-            <IconBrain size={14} /> Анализ AI
+            <IconBrain size={14} /> AI Analysis
           </div>
           <div
             style={{
@@ -236,7 +236,7 @@ export default function VisitDetailsModal() {
         </div>
       )}
 
-      {/* Документы */}
+      {/* Documents */}
       {docs.length > 0 && (
         <div style={{ marginBottom: 16 }}>
           <div
@@ -250,7 +250,7 @@ export default function VisitDetailsModal() {
               gap: 6,
             }}
           >
-            <IconFiles size={14} /> Документы ({docs.length})
+            <IconFiles size={14} /> Documents ({docs.length})
           </div>
           {docs.map((d) => (
             <DocumentBlock key={d.id} doc={d} />
@@ -258,7 +258,7 @@ export default function VisitDetailsModal() {
         </div>
       )}
 
-      {/* Кнопки действий: Редактировать / Добавить расшифровку / Запросить AI */}
+      {/* Кнопки действий: Edit / Add расшифровку / ЗAprосить AI */}
       <div
         style={{
           display: 'flex',
@@ -276,7 +276,7 @@ export default function VisitDetailsModal() {
             navigate(`/documents/visit/${visit.id}/edit`);
           }}
         >
-          Редактировать
+          Edit
         </Button>
         {!visit.transcription && (
           <Button
@@ -291,7 +291,7 @@ export default function VisitDetailsModal() {
               color: 'var(--green)',
             }}
           >
-            Добавить расшифровку
+            Add расшифровку
           </Button>
         )}
         {!visit.ai_assessment && (
@@ -316,8 +316,8 @@ export default function VisitDetailsModal() {
             }}
           >
             {hasAiPending || requestAi.isSuccess
-              ? 'Ожидает анализа AI'
-              : 'Запросить анализ AI'}
+              ? 'Pending analysis AI'
+              : 'Request analysis AI'}
           </Button>
         )}
       </div>

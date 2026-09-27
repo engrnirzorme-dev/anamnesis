@@ -3,8 +3,8 @@ import { IconCopy, IconCheck } from '@tabler/icons-react';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Кнопка копирования текста в clipboard. Показывает «Скопировано» на 1.5 сек.
- * Порт из vanilla `.copy-btn` handler.
+ * Button копирования текста в clipboard. Показывает «Copied» на 1.5 sec.
+ * Порт of vanilla `.copy-btn` handler.
  */
 interface Props {
   text: string;
@@ -12,7 +12,7 @@ interface Props {
   size?: 'sm' | 'md';
 }
 
-export function CopyButton({ text, label = 'Копировать', size = 'sm' }: Props) {
+export function CopyButton({ text, label = 'Copy', size = 'sm' }: Props) {
   const [copied, setCopied] = useState(false);
 
   const handleClick = async (e: React.MouseEvent) => {
@@ -49,7 +49,7 @@ export function CopyButton({ text, label = 'Копировать', size = 'sm' }
       }}
     >
       {copied ? <IconCheck size={12} /> : <IconCopy size={12} />}
-      {copied ? 'Скопировано' : label}
+      {copied ? 'Copied' : label}
     </button>
   );
 }

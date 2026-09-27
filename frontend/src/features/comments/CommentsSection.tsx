@@ -5,7 +5,7 @@ import { formatDateTime } from '@/shared/lib/date';
 import { useComments, useAddComment, useDeleteComment } from './useComments';
 
 /**
- * Универсальный блок комментариев для любой сущности (diagnosis, medication,
+ * Универсальный блок комментариев for любой сущности (diagnosis, medication,
  * timeline, error, reminder, ai_chat и т.д.).
  *
  * Использование:
@@ -13,7 +13,7 @@ import { useComments, useAddComment, useDeleteComment } from './useComments';
  * <CommentsSection entityType="diagnosis" entityId={diag.id} />
  * ```
  *
- * ВАЖНО: порт логики из vanilla `frontend/js/components/comments.js`.
+ * ВАЖНО: порт логики of vanilla `frontend/js/components/comments.js`.
  * Порядок comments — `order: 'desc'` (новые сверху).
  */
 
@@ -27,7 +27,7 @@ interface Props {
 export function CommentsSection({
   entityType,
   entityId,
-  title = 'Мои комментарии',
+  title = 'Mои комментарии',
   placeholder = 'Написать комментарий...',
 }: Props) {
   const [text, setText] = useState('');
@@ -45,8 +45,8 @@ export function CommentsSection({
 
   const handleDelete = async (id: number) => {
     const ok = await confirm({
-      message: 'Удалить комментарий?',
-      confirmText: 'Удалить',
+      message: 'Delete комментарий?',
+      confirmText: 'Delete',
       confirmVariant: 'danger',
     });
     if (ok) deleteMutation.mutate(id);
@@ -117,7 +117,7 @@ export function CommentsSection({
                 display: 'flex',
                 alignItems: 'center',
               }}
-              aria-label="Удалить комментарий"
+              aria-label="Delete комментарий"
             >
               <IconTrash size={14} />
             </button>
@@ -140,7 +140,7 @@ export function CommentsSection({
         icon={<IconSend size={14} />}
         style={{ marginTop: 8 }}
       >
-        Отправить
+        Send
       </Button>
 
       {dialog}

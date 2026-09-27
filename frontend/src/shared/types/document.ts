@@ -6,10 +6,10 @@ import type { ISODateString } from './common';
 export type DocumentCategory = 'lab' | 'imaging' | 'prescription' | 'report' | 'other';
 
 /**
- * Document — как возвращает бэкенд из PostgreSQL таблицы `documents`.
+ * Document — как возвращает бэкенд of PostgreSQL таблицы `documents`.
  *
  * ВАЖНО: `file_path` это путь к файлу на диске (нужно урезать до имени файла
- * для URL). Используй `docFileUrl(doc)` из `features/documents/lib/file-url.ts`.
+ * for URL). Используй `docFileUrl(doc)` of `features/documents/lib/file-url.ts`.
  */
 export interface Document {
   id: number;

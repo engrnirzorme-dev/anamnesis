@@ -5,9 +5,9 @@ import type { DashboardAiSummary } from '@/shared/types';
 
 /**
  * AI-сводка — сверху приоритеты/план действий/предупреждения.
- * В новом layout (§9) СВЁРНУТА по умолчанию, чтобы освободить место для цифр.
+ * В новом layout (§9) СВЁРНУТА по умолчанию, чтобы освободить место for цифр.
  *
- * Порт из vanilla `dashboard.js:335-388` (renderAiSummary).
+ * Порт of vanilla `dashboard.js:335-388` (renderAiSummary).
  */
 export function AiSummarySection({ data }: { data: DashboardAiSummary | null | undefined }) {
   if (!data || !data.summary) return null;
@@ -15,7 +15,7 @@ export function AiSummarySection({ data }: { data: DashboardAiSummary | null | u
 
   return (
     <Collapsible
-      title="AI-сводка"
+      title="AI Summary"
       icon={<IconBrain size={18} color="var(--purple)" />}
       persistKey="dashboard-ai-summary"
       defaultOpen={false}
@@ -56,7 +56,7 @@ export function AiSummarySection({ data }: { data: DashboardAiSummary | null | u
             marginBottom: 12,
           }}
         >
-          <IconBrain size={20} /> Сводка
+          <IconBrain size={20} /> Summary
         </div>
 
         <div
@@ -74,7 +74,7 @@ export function AiSummarySection({ data }: { data: DashboardAiSummary | null | u
           <AiListBlock
             color="var(--red)"
             icon={<IconUrgent size={14} />}
-            title="Приоритеты"
+            title="Priorities"
             items={data.priorities}
           />
         )}
@@ -83,7 +83,7 @@ export function AiSummarySection({ data }: { data: DashboardAiSummary | null | u
           <AiListBlock
             color="var(--blue)"
             icon={<IconListCheck size={14} />}
-            title="План действий"
+            title="Action Plan"
             items={data.next_steps}
           />
         )}
@@ -92,7 +92,7 @@ export function AiSummarySection({ data }: { data: DashboardAiSummary | null | u
           <AiListBlock
             color="var(--orange)"
             icon={<IconAlertTriangle size={14} />}
-            title="На что обратить внимание"
+            title="Points of Attention"
             items={data.warnings}
           />
         )}

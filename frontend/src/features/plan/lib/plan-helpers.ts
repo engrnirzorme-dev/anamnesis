@@ -1,10 +1,10 @@
 import type { PlanItem, Priority } from '@/shared/types';
 
 export const PRIORITY_LABELS: Record<Priority, string> = {
-  urgent: 'Срочно',
-  high: 'Важно',
-  medium: 'Плановое',
-  low: 'Плановое',
+  urgent: 'Urgent',
+  high: 'Important',
+  medium: 'Routine',
+  low: 'Routine',
 };
 
 export const PRIORITY_ORDER: Priority[] = ['urgent', 'high', 'medium', 'low'];

@@ -23,9 +23,9 @@ export function ErrorsPage() {
       <PageContainer>
         <EmptyState
           icon={<IconAlertCircle size={48} color="var(--red)" />}
-          title="Не удалось загрузить"
+          title="Failed to load"
           text={(fetchError as Error).message}
-          action={<Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>Повторить</Button>}
+          action={<Button icon={<IconRefresh size={16} />} onClick={() => refetch()}>Retry</Button>}
         />
       </PageContainer>
     );
@@ -37,7 +37,7 @@ export function ErrorsPage() {
       <PageContainer>
         <EmptyState
           icon={<IconCircleCheck size={48} color="var(--green)" />}
-          text="Ошибок не обнаружено"
+          text="No errors found"
         />
         <Outlet />
       </PageContainer>

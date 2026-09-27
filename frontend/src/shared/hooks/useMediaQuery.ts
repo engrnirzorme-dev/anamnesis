@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Хук для отслеживания media query.
+ * Хук for отслеживания media query.
  *
  * Пример:
  * ```tsx

@@ -10,15 +10,15 @@ interface Props {
 }
 
 /**
- * Активные диагнозы. В новом layout (§9) — СВЁРНУТАЯ секция, в заголовке
- * показывается количество. Порт из vanilla `dashboard.js:282-298`.
+ * Active Diagnoses. В новом layout (§9) — СВЁРНУТАЯ секция, в заголовке
+ * показывается количество. Порт of vanilla `dashboard.js:282-298`.
  */
 export function DiagnosesSection({ diagnoses, onSelect }: Props) {
   if (diagnoses.length === 0) return null;
 
   return (
     <Collapsible
-      title="Активные диагнозы"
+      title="Active Diagnoses"
       icon={<IconStethoscope size={18} color="var(--purple)" />}
       persistKey="dashboard-diagnoses"
       defaultOpen={false}

@@ -25,8 +25,8 @@ interface Props {
 }
 
 /**
- * Карточка элемента timeline — визит, тест, диагноз или milestone.
- * Порт из vanilla `documents.js:81-156` (renderVisitCard + renderEventCard,
+ * Card элемента timeline — вofит, тест, диагноз или milestone.
+ * Порт of vanilla `documents.js:81-156` (renderVisitCard + renderEventCard,
  * объединённые в одну функцию с разным иконками по категории).
  */
 export function VisitCard({ item, onClick, aiPending = false }: Props) {
@@ -38,7 +38,7 @@ export function VisitCard({ item, onClick, aiPending = false }: Props) {
   const isVisit = item.category === 'visit' || !item.category;
   const categoryIcon = getCategoryIcon(item.category);
   const categoryLabel =
-    (item.category ? CATEGORY_LABELS[item.category] : undefined) ?? item.category ?? 'Приём';
+    (item.category ? CATEGORY_LABELS[item.category] : undefined) ?? item.category ?? 'Visit';
 
   return (
     <div
@@ -102,7 +102,7 @@ export function VisitCard({ item, onClick, aiPending = false }: Props) {
           )}
           {item.transcription && (
             <Badge color="green" icon={<IconMicrophone size={11} />}>
-              Запись
+              Record
             </Badge>
           )}
           {item.ai_assessment && (
@@ -112,7 +112,7 @@ export function VisitCard({ item, onClick, aiPending = false }: Props) {
           )}
           {!item.ai_assessment && aiPending && (
             <Badge color="orange" icon={<IconClock size={11} />}>
-              Ожидает AI
+              Pending AI
             </Badge>
           )}
           <EntityId id={item.id} />

@@ -1,8 +1,8 @@
 /**
- * Все эндпоинты бэкенда — единая таблица истины.
+ * All эндпоинты бэкенда — единая таблица истины.
  * Используй `EP.xxx` вместо строчных путей в коде.
  *
- * Порт из vanilla + подтверждено чтением `backend/src/routes/*`.
+ * Порт of vanilla + подтверждено чтением `backend/src/routes/*`.
  *
  * ВАЖНО: не добавляй новые эндпоинты без обновления бэкенда.
  */
@@ -51,7 +51,7 @@ export const EP = {
   // ── Documents ─────────────────────────────
   documents: '/documents',
   documentItem: (id: number) => `/documents/${id}`,
-  /** PDF page previews (PNG, генерируются pdftoppm через pdf-preview.js) */
+  /** PDF page previews (PNG, генерируются pdftoppm in pdf-preview.js) */
   documentPreviews: (id: number) => `/documents/${id}/previews`,
 
   // ── Diagnoses ─────────────────────────────

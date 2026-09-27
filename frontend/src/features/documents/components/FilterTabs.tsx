@@ -20,17 +20,17 @@ export function FilterTabs({ active, onChange }: Props) {
       }}
     >
       <Chip active={active === 'all'} onClick={() => onChange('all')} icon={<IconList size={14} />}>
-        Все
+        All
       </Chip>
       <Chip
         active={active === 'visits'}
         onClick={() => onChange('visits')}
         icon={<IconStethoscope size={14} />}
       >
-        Приёмы
+        Visitы
       </Chip>
       <Chip active={active === 'docs'} onClick={() => onChange('docs')} icon={<IconFiles size={14} />}>
-        Документы
+        Documents
       </Chip>
     </div>
   );

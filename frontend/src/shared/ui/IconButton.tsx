@@ -3,12 +3,12 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Круглая иконочная кнопка — для панелей действий, close-buttons.
+ * Круглая иконочная кнопка — for панелей действий, close-buttons.
  */
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
-  label: string; // для aria
+  label: string; // for aria
   size?: number;
 }
 

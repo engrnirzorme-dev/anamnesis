@@ -30,7 +30,7 @@ export default function PlanItemModal() {
 
   if (!item) {
     return (
-      <Modal title="Загрузка...">
+      <Modal title="Loading...">
         <div style={{ textAlign: 'center', padding: 24 }}>
           <Spinner size={24} />
         </div>
@@ -51,7 +51,7 @@ export default function PlanItemModal() {
           color={item.status === 'done' ? 'green' : 'orange'}
           icon={item.status === 'done' ? <IconCircleCheck size={12} /> : <IconClock size={12} />}
         >
-          {item.status === 'done' ? 'Выполнено' : 'В ожидании'}
+          {item.status === 'done' ? 'Completed' : 'Pending'}
         </Badge>
         <Badge color={priorityColor} icon={priorityIcon}>
           {PRIORITY_LABELS[priority]}
@@ -65,13 +65,13 @@ export default function PlanItemModal() {
       )}
 
       {item.detail && (
-        <Section color="var(--text)" icon={<IconInfoCircle size={14} />} title="Подробная информация">
+        <Section color="var(--text)" icon={<IconInfoCircle size={14} />} title="Detailed information">
           {item.detail}
         </Section>
       )}
 
       {item.advice && (
-        <Section color="var(--green)" icon={<IconBulb size={14} />} title="Совет" bg="#F3FBF5">
+        <Section color="var(--green)" icon={<IconBulb size={14} />} title="Tip" bg="#F3FBF5">
           {item.advice}
         </Section>
       )}
@@ -80,7 +80,7 @@ export default function PlanItemModal() {
         <Section
           color="var(--purple)"
           icon={<IconBrain size={14} />}
-          title="Независимая оценка AI"
+          title="Independent AI assessment"
           bg="#F8F1FC"
         >
           {item.ai_assessment}
@@ -90,7 +90,7 @@ export default function PlanItemModal() {
       {item.deadline && (
         <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 8 }}>
           <IconCalendar size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
-          Срок: {formatDate(item.deadline)}
+          Due date: {formatDate(item.deadline)}
         </div>
       )}
 

@@ -26,17 +26,17 @@ import { EP } from '@/shared/api/endpoints';
 import { haptic } from '@/shared/lib/haptic';
 
 /**
- * Автоматическая история изменений per-patient.
+ * Автоматическая история ofменений per-patient.
  *
- * Читает из /api/history который агрегирует audit_log через changelog.js
- * renderer. Каждая запись имеет icon (имя Tabler-иконки) + color + title +
+ * Читает of /api/history который агрегирует audit_log in changelog.js
+ * renderer. Каждая record имеет icon (имя Tabler-иконки) + color + title +
  * опциональный subtitle. При тапе на карточку — drill-down в сущность.
  *
- * Группировка:
- *   1. Близкие по времени правки одной сущности → одна строка (backend)
- *   2. По датам → блоки (Сегодня / Вчера / N дн назад / дата)
+ * Group:
+ *   1. Блofкие по времени правки одной сущности → одна строка (backend)
+ *   2. По датам → блоки (Сеyearня / Вчера / N дн ago / дата)
  *
- * Без эмоджи: везде Tabler icons + семантические цвета через var(--*).
+ * Без эмоджи: везде Tabler icons + семантические цвета in var(--*).
  */
 
 interface HistoryEntry {
@@ -66,7 +66,7 @@ interface HistoryResponse {
   has_more: boolean;
 }
 
-// Мапа имён иконок из бэкенда → React-компоненты
+// Mапа имён иконок of бэкенда → React-компоненты
 const ICON_MAP: Record<string, React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>> = {
   IconStethoscope,
   IconFileText,
@@ -159,14 +159,14 @@ export default function HistoryModal() {
   const hasMore = data?.has_more ?? false;
 
   return (
-    <Modal title="История изменений" desktopStyle="page">
+    <Modal title="History" desktopStyle="page">
       <div style={{ padding: '0 16px', paddingBottom: 40 }}>
         {isLoading && <SkeletonList count={4} height={72} />}
 
         {!isLoading && groups.length === 0 && (
           <EmptyState
             icon={<IconHistory size={48} color="var(--text-secondary)" />}
-            text="Пока нет изменений по этому пациенту"
+            text="Пока нет ofменений по этому patientу"
           />
         )}
 
@@ -179,7 +179,7 @@ export default function HistoryModal() {
                 marginBottom: 12,
               }}
             >
-              Всего изменений: {total}
+              Total ofменений: {total}
             </div>
 
             {groups.map((group) => (
@@ -315,7 +315,7 @@ export default function HistoryModal() {
                   cursor: 'pointer',
                 }}
               >
-                Показать ещё
+                Show ещё
               </button>
             )}
           </>
